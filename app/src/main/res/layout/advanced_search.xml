@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListSelector"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/back">
 
 
 
@@ -22,56 +23,90 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name"/>
+        android:text="Name"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Text"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <EditText
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Text"/>
+        android:text="Text"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mana Value"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <EditText
         android:id="@+id/manaValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ManaValue"/>
+        android:text="ManaValue"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Availability"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <Spinner
         android:id="@+id/availability"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="20sp"
+        android:layout_margin="5sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Color"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:padding="2sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"
         >
         <CheckBox
             android:id="@+id/colorWhite"
@@ -80,7 +115,8 @@
             android:button="@drawable/white_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="White"/>
+            android:text="White"
+            android:layout_weight="1"/>
 
         <CheckBox
             android:id="@+id/colorBlue"
@@ -89,7 +125,8 @@
             android:button="@drawable/blue_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="Blue"/>
+            android:text="Blue"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/colorBlack"
             android:layout_width="wrap_content"
@@ -97,7 +134,8 @@
             android:button="@drawable/black_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="Black"/>
+            android:text="Black"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/colorRed"
             android:layout_width="wrap_content"
@@ -105,7 +143,8 @@
             android:button="@drawable/red_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="Red"/>
+            android:text="Red"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/colorGreen"
             android:layout_width="wrap_content"
@@ -113,7 +152,8 @@
             android:button="@drawable/green_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="Green"/>
+            android:text="Green"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/colorLess"
             android:layout_width="wrap_content"
@@ -121,19 +161,27 @@
             android:button="@drawable/colorless_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="Colorless"/>
+            android:text="Colorless"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Color Identity"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:padding="5sp"
+        android:layout_margin="5sp">
         <CheckBox
             android:id="@+id/colorIdentityWhite"
             android:layout_width="wrap_content"
@@ -141,7 +189,8 @@
             android:button="@drawable/white_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="White"/>
+            android:text="White"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/colorIdentityBlue"
             android:layout_width="wrap_content"
@@ -149,7 +198,8 @@
             android:button="@drawable/blue_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="Blue"/>
+            android:text="Blue"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/colorIdentityBlack"
             android:layout_width="wrap_content"
@@ -157,7 +207,8 @@
             android:button="@drawable/black_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="Black"/>
+            android:text="Black"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/colorIdentityRed"
             android:layout_width="wrap_content"
@@ -165,7 +216,8 @@
             android:button="@drawable/red_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="Red"/>
+            android:text="Red"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/colorIdentityGreen"
             android:layout_width="wrap_content"
@@ -173,7 +225,8 @@
             android:button="@drawable/green_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="Green"/>
+            android:text="Green"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/colorIdentityLess"
             android:layout_width="wrap_content"
@@ -181,94 +234,155 @@
             android:button="@drawable/colorless_checkbox"
             android:clickable="true"
             android:focusable="true"
-            android:text="Colorless"/>
+            android:text="Colorless"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Online"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <Switch
         android:id="@+id/isOnline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       />
+        android:thumb="@drawable/letters"
+        android:padding="5sp"
+        android:layout_margin="5sp"
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Full Art"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <Switch
         android:id="@+id/isFullArt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:thumb="@drawable/letters"
+        android:padding="5sp"
+        android:layout_margin="5sp"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Reprint"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <Switch
         android:id="@+id/isReprint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:thumb="@drawable/letters"
+        android:padding="5sp"
+        android:layout_margin="5sp"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Reserved List"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <Switch
         android:id="@+id/isReserved"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:thumb="@drawable/letters"
+        android:padding="5sp"
+        android:layout_margin="5sp"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Keywords"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <EditText
         android:id="@+id/keywords"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Language"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <Spinner
         android:id="@+id/language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="20sp"
+        android:layout_margin="5sp"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Leader"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <Spinner
         android:id="@+id/leadershipSkills"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="20sp"
+        android:layout_margin="5sp"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Legalities"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <Spinner
         android:id="@+id/legalities"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="20sp"
+        android:layout_margin="5sp"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -279,7 +393,12 @@
             android:layout_height="match_parent"
             android:text="Power"
             android:gravity="center"
-            android:layout_weight="2"/>
+            android:background="@color/design_default_color_primary"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="15sp"
+            android:layout_weight="2"
+            android:padding="5sp"
+            android:layout_margin="5sp"/>
         <Spinner
             android:id="@+id/spinnerPower"
             android:layout_width="wrap_content"
@@ -296,6 +415,9 @@
             android:layout_height="match_parent"
             android:text="Toughness"
             android:gravity="center"
+            android:background="@color/design_default_color_primary"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="15sp"
             android:layout_weight="2"/>
         <Spinner
             android:id="@+id/spinnerToughness"
@@ -306,63 +428,98 @@
             android:id="@+id/toughness"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            android:padding="5sp"
+            android:layout_margin="5sp"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rarity"
-        android:gravity="center" />
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:padding="5sp"
+        android:layout_margin="5sp">
         <CheckBox
             android:id="@+id/rarityCommon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Common"/>
+            android:button="@drawable/common_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Common"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/rarityUncommon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Uncommon"/>
+            android:button="@drawable/uncommon_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Uncommon"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/rarityRare"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Rare"/>
+            android:button="@drawable/rare_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Rare"
+            android:layout_weight="1"/>
         <CheckBox
             android:id="@+id/rarityMythic"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Mythic"/>
+            android:button="@drawable/mythic_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Mythic"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sets"
-        android:gravity="center"/>
+        android:text="Set"
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <EditText
         android:id="@+id/setCode"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Type"
-        android:gravity="center"/>
+        android:gravity="left"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
     <EditText
         android:id="@+id/type"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
-
-
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
 </LinearLayout>
 
 
