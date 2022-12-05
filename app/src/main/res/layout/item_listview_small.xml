@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        >
+        <TextView
+            android:id="@+id/tvNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textColor="@color/purple_700"
+            android:textStyle="bold"
+            android:textSize="25dp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvSetNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set/Number"
+            android:gravity="right"
+            android:textStyle="italic"
+            android:textColor="#FF0000"
+            android:textSize="20dp">
+        </TextView>
+        <TextView
+            android:id="@+id/tvRarity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rarity"
+            android:gravity="center"
+            android:textStyle="italic"
+            android:textColor="#009688"
+            android:textSize="20dp">
+        </TextView>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/imgvCartaSmall"
+        android:layout_width="292px"
+        android:layout_height="408px"
+        android:scaleType="centerCrop"
+        />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+<View
+android:id="@+id/divider2"
+android:layout_width="match_parent"
+android:layout_height="3dp"
+android:layout_weight="3"
+android:background="?android:attr/listDivider"
+  android:layout_marginTop="5dp"/>
+    </LinearLayout>

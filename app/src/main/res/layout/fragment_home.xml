@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    android:orientation="vertical"
+    tools:context=".HomeFragment"
+    android:paddingTop="80sp">
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="137dp"
+        android:layout_marginVertical="30sp">
+
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/brush"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/myImageViewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/myImageView"
+            android:layout_alignTop="@id/myImageView"
+            android:layout_alignRight="@id/myImageView"
+            android:layout_alignBottom="@id/myImageView"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            android:fontFamily="@font/beleren"
+            android:gravity="center"
+            android:text="Busque su carta"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="37sp" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10sp">
+
+
+
+
+        <EditText
+            android:id="@+id/etBusqueda"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:fontFamily="@font/belerenitalic"
+            android:hint="Nombre o texto           de la carta"
+            android:textAlignment="center"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/buttonBusqueda"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/belerenbold"
+            android:text="Buscar"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonAvanzada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="50sp"
+        android:fontFamily="@font/belerenbold"
+        android:padding="20sp"
+        android:text="Busqueda avanzada"
+        android:textSize="20dp" />
+</LinearLayout>

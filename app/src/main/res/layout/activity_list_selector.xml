@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListSelector"
+    android:orientation="vertical"
+    >
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     android:layout_weight="1"
+     >
+     <TextView
+         android:id="@+id/textViewSmallList"
+         android:layout_width="0sp"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         android:text="Vista Pequeña"
+         android:textAlignment="center"
+         android:gravity="center"
+         android:textSize="28sp"
+         />
+     <TextView
+         android:id="@+id/textViewBigList"
+         android:layout_width="0sp"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         android:text="Vista Grande"
+         android:textAlignment="center"
+         android:gravity="center"
+         android:textSize="28sp"/>
+
+ </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="8">
+    <ImageButton
+        android:id="@+id/imageButtonSmall"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/ic_baseline_view_headline_24"
+        android:scaleType="fitCenter"
+        />
+    <ImageButton
+        android:id="@+id/imageButtonBig"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/ic_baseline_view_agenda_24"
+        android:scaleType="fitCenter"
+        />
+    </LinearLayout>
+</LinearLayout>

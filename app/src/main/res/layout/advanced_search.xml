@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListSelector"
+    android:orientation="vertical">
+
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:gravity="center" />
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Text"
+        android:gravity="center" />
+    <EditText
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Text"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mana Value"
+        android:gravity="center" />
+    <EditText
+        android:id="@+id/manaValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ManaValue"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Availability"
+        android:gravity="center" />
+    <Spinner
+        android:id="@+id/availability"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Color"
+        android:gravity="center" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="2sp"
+        >
+        <CheckBox
+            android:id="@+id/colorWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/white_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="White"/>
+
+        <CheckBox
+            android:id="@+id/colorBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/blue_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Blue"/>
+        <CheckBox
+            android:id="@+id/colorBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/black_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Black"/>
+        <CheckBox
+            android:id="@+id/colorRed"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/red_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Red"/>
+        <CheckBox
+            android:id="@+id/colorGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/green_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Green"/>
+        <CheckBox
+            android:id="@+id/colorLess"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/colorless_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Colorless"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Color Identity"
+        android:gravity="center" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <CheckBox
+            android:id="@+id/colorIdentityWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/white_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="White"/>
+        <CheckBox
+            android:id="@+id/colorIdentityBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/blue_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Blue"/>
+        <CheckBox
+            android:id="@+id/colorIdentityBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/black_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Black"/>
+        <CheckBox
+            android:id="@+id/colorIdentityRed"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/red_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Red"/>
+        <CheckBox
+            android:id="@+id/colorIdentityGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/green_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Green"/>
+        <CheckBox
+            android:id="@+id/colorIdentityLess"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/colorless_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Colorless"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Online"
+        android:gravity="center" />
+    <Switch
+        android:id="@+id/isOnline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Full Art"
+        android:gravity="center" />
+    <Switch
+        android:id="@+id/isFullArt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reprint"
+        android:gravity="center" />
+    <Switch
+        android:id="@+id/isReprint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reserved List"
+        android:gravity="center" />
+    <Switch
+        android:id="@+id/isReserved"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Keywords"
+        android:gravity="center" />
+    <EditText
+        android:id="@+id/keywords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Language"
+        android:gravity="center" />
+    <Spinner
+        android:id="@+id/language"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Leader"
+        android:gravity="center" />
+    <Spinner
+        android:id="@+id/leadershipSkills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Legalities"
+        android:gravity="center" />
+    <Spinner
+        android:id="@+id/legalities"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Power"
+            android:gravity="center"
+            android:layout_weight="2"/>
+        <Spinner
+            android:id="@+id/spinnerPower"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/power"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Toughness"
+            android:gravity="center"
+            android:layout_weight="2"/>
+        <Spinner
+            android:id="@+id/spinnerToughness"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/toughness"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rarity"
+        android:gravity="center" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <CheckBox
+            android:id="@+id/rarityCommon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Common"/>
+        <CheckBox
+            android:id="@+id/rarityUncommon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Uncommon"/>
+        <CheckBox
+            android:id="@+id/rarityRare"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Rare"/>
+        <CheckBox
+            android:id="@+id/rarityMythic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Mythic"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sets"
+        android:gravity="center"/>
+    <EditText
+        android:id="@+id/setCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:gravity="center"/>
+    <EditText
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+</LinearLayout>
+
+
+</ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_baseline_search_24"
+        android:contentDescription="Search"
+        android:layout_margin="16dp" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
