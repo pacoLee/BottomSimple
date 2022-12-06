@@ -12,12 +12,16 @@
         />
 
     <TextView
+        android:id="@+id/tvResultados"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Resultados de la busqueda:"
         tools:ignore="MissingConstraints"
         android:textSize="25dp"
-        android:paddingBottom="2dp"/>
+        android:paddingBottom="2dp"
+        android:gravity="center"
+        android:background="@color/design_default_color_secondary"
+        android:textColor="@color/design_default_color_on_secondary"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

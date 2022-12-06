@@ -4,4 +4,10 @@
     android:layout_height="wrap_content"
     android:background="@color/design_default_color_primary">
 
+    <Spinner
+        android:id="@+id/spinnerOrdenar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        />
 </Toolbar>

@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.jayway.jsonpath.Filter;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.Predicate;
@@ -24,6 +26,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class HomeFragment extends Fragment{
@@ -97,8 +100,7 @@ public class HomeFragment extends Fragment{
                             Predicate cardswithName = new Predicate() {
                                 @Override
                                 public boolean apply(PredicateContext ctx) {
-                                    if(ctx.item(Map.class).containsKey("name") && ctx.item(Map.class).containsValue(resultado) ) {
-
+                                    if((ctx.item(Map.class).containsKey("name") && ctx.item(Map.class).get("name").toString().toLowerCase(Locale.ROOT).contains(resultado.toLowerCase(Locale.ROOT)))||((ctx.item(Map.class).containsKey("text")&& ctx.item(Map.class).get("text").toString().toLowerCase(Locale.ROOT).contains(resultado.toLowerCase(Locale.ROOT))))) {
                                         return ctx.item(Map.class).containsKey("name");
                                     }
                                     return false;
@@ -143,16 +145,19 @@ public class HomeFragment extends Fragment{
                                 c.setImagenId(imagenId);
                                 listaCards.add(c);
                             }
-
+                        if(!listaCards.isEmpty()) {
                             Intent i = new Intent(getActivity(), ListaCartas.class);
                             //i.putExtra("list",listaCards);
                             Bundle args = new Bundle();
-                            args.putSerializable("ARRAYLIST",(Serializable)listaCards);
-                            i.putExtra("BUNDLE",args);
+                            args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+                            i.putExtra("BUNDLE", args);
                             startActivity(i);
                             //ad = new AdaptadorSmall(getApplicationContext(), listaCards);
                             //lvCards.setAdapter(ad);
-
+                        }else{
+                            Toast.makeText(getActivity(), "No hay cartas con ese nombre",
+                                    Toast.LENGTH_LONG).show();
+                        }
                         }
                     });
                 } catch (final Exception ex) {
