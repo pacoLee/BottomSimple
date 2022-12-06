@@ -50,12 +50,12 @@ public class FragmentImagen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         String imageId = getArguments().getString("imageId");
-        view= inflater.inflate(R.layout.fragment_home, container, false);
+        view= inflater.inflate(R.layout.fragment_imagen, container, false);
         imgvLarge=(ImageView) view.findViewById(R.id.imgvLarge);
         char primerCaracter = imageId.charAt(0);
         char segundoCaracter = imageId.charAt(1);
-        //Picasso.get().load("https://cards.scryfall.io/large/front/" + primerCaracter + "/" + segundoCaracter + "/" + imageId + ".jpg").into(imgvLarge);
-        return inflater.inflate(R.layout.fragment_imagen, container, false);
+        Picasso.get().load("https://cards.scryfall.io/large/front/" + primerCaracter + "/" + segundoCaracter + "/" + imageId + ".jpg").into(imgvLarge);
+        return view;
     }
 
 }

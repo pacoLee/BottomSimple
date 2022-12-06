@@ -24,13 +24,13 @@ public class Card implements Serializable {
     private String cost;
     private String type;
     private String text;
-    private float manaValue;
+    private Double manaValue;
 
     public Card(){
 
     }
     public Card(ArrayList availability, ArrayList colorIdentity, ArrayList colorIndicator, ArrayList colors, ArrayList finishes, String layout,
-                String rarity, ArrayList subTypes, ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text,float manaValue) {
+                String rarity, ArrayList subTypes, ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text,Double manaValue) {
         this.availability = availability;
         this.colorIdentity = colorIdentity;
         this.colorIndicator = colorIndicator;
@@ -53,7 +53,7 @@ public class Card implements Serializable {
 
 
     public Card(String name, String setNumber, ArrayList availability, ArrayList colorIdentity, ArrayList colorIndicator, ArrayList colors, ArrayList finishes, String layout, String rarity, ArrayList subTypes,
-                ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text,float manaValue) {
+                ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text,Double manaValue) {
         this.name = name;
         this.setNumber = setNumber;
         this.availability = availability;
@@ -76,11 +76,11 @@ public class Card implements Serializable {
         this.manaValue=manaValue;
     }
 
-    public float getManaValue() {
+    public Double getManaValue() {
         return manaValue;
     }
 
-    public void setManaValue(float manaValue) {
+    public void setManaValue(Double manaValue) {
         this.manaValue = manaValue;
     }
 

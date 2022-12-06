@@ -110,7 +110,7 @@ public class HomeFragment extends Fragment{
                             Filter cheapFictionFilter = filter(cardswithName);
 
                             List<Map<String, String>> cards = JsonPath.parse(json).read("$..cards[?]",cheapFictionFilter);
-                            List<Map<String, Float>> cardsFloat = JsonPath.parse(json).read("$..cards[?]",cheapFictionFilter);
+                            List<Map<String, Double>> cardsDouble = JsonPath.parse(json).read("$..cards[?]",cheapFictionFilter);
                             List<Map<String, Map<String, String>>> cartas = JsonPath.parse(json).read("$..cards[?]",cheapFictionFilter);
                             String name = "";
                             String rarity = "";
@@ -119,7 +119,7 @@ public class HomeFragment extends Fragment{
                             String cost="";
                             String type="";
                             String text="";
-                            float manaValue;
+                            Double manaValue;
                             Map<String, String> identifiers;
                             String imagenId="";
                             for (int i = 0; i < cards.size(); i++) {
@@ -132,7 +132,7 @@ public class HomeFragment extends Fragment{
                                 type=cards.get(i).getOrDefault("type","");
                                 text=cards.get(i).getOrDefault("text","");
                                 rarity =  cards.get(i).getOrDefault("rarity", "");
-                                manaValue=cardsFloat.get(i).getOrDefault("manaValue", 0f);
+                                manaValue= cardsDouble.get(i).get("manaValue");
                                 identifiers=cartas.get(i).get("identifiers");
                                 imagenId=identifiers.getOrDefault("scryfallId","");
 
