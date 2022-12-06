@@ -24,12 +24,13 @@ public class Card implements Serializable {
     private String cost;
     private String type;
     private String text;
+    private float manaValue;
 
     public Card(){
 
     }
     public Card(ArrayList availability, ArrayList colorIdentity, ArrayList colorIndicator, ArrayList colors, ArrayList finishes, String layout,
-                String rarity, ArrayList subTypes, ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text) {
+                String rarity, ArrayList subTypes, ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text,float manaValue) {
         this.availability = availability;
         this.colorIdentity = colorIdentity;
         this.colorIndicator = colorIndicator;
@@ -47,11 +48,12 @@ public class Card implements Serializable {
         this.cost=cost;
         this.type=type;
         this.text=text;
+        this.manaValue=manaValue;
     }
 
 
     public Card(String name, String setNumber, ArrayList availability, ArrayList colorIdentity, ArrayList colorIndicator, ArrayList colors, ArrayList finishes, String layout, String rarity, ArrayList subTypes,
-                ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text) {
+                ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text,float manaValue) {
         this.name = name;
         this.setNumber = setNumber;
         this.availability = availability;
@@ -71,6 +73,15 @@ public class Card implements Serializable {
         this.cost=cost;
         this.type=type;
         this.text=text;
+        this.manaValue=manaValue;
+    }
+
+    public float getManaValue() {
+        return manaValue;
+    }
+
+    public void setManaValue(float manaValue) {
+        this.manaValue = manaValue;
     }
 
     public String getCost() {

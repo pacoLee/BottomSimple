@@ -110,6 +110,7 @@ public class HomeFragment extends Fragment{
                             Filter cheapFictionFilter = filter(cardswithName);
 
                             List<Map<String, String>> cards = JsonPath.parse(json).read("$..cards[?]",cheapFictionFilter);
+                            List<Map<String, Float>> cardsFloat = JsonPath.parse(json).read("$..cards[?]",cheapFictionFilter);
                             List<Map<String, Map<String, String>>> cartas = JsonPath.parse(json).read("$..cards[?]",cheapFictionFilter);
                             String name = "";
                             String rarity = "";
@@ -118,6 +119,7 @@ public class HomeFragment extends Fragment{
                             String cost="";
                             String type="";
                             String text="";
+                            float manaValue;
                             Map<String, String> identifiers;
                             String imagenId="";
                             for (int i = 0; i < cards.size(); i++) {
@@ -130,6 +132,7 @@ public class HomeFragment extends Fragment{
                                 type=cards.get(i).getOrDefault("type","");
                                 text=cards.get(i).getOrDefault("text","");
                                 rarity =  cards.get(i).getOrDefault("rarity", "");
+                                manaValue=cardsFloat.get(i).getOrDefault("manaValue", 0f);
                                 identifiers=cartas.get(i).get("identifiers");
                                 imagenId=identifiers.getOrDefault("scryfallId","");
 
@@ -142,6 +145,7 @@ public class HomeFragment extends Fragment{
                                 c.setType(type);
                                 c.setText(text);
                                 c.setRarity(rarity);
+                                c.setManaValue(manaValue);
                                 c.setImagenId(imagenId);
                                 listaCards.add(c);
                             }
@@ -155,7 +159,7 @@ public class HomeFragment extends Fragment{
                             //ad = new AdaptadorSmall(getApplicationContext(), listaCards);
                             //lvCards.setAdapter(ad);
                         }else{
-                            Toast.makeText(getActivity(), "No hay cartas con ese nombre",
+                            Toast.makeText(getActivity(), "No hay cartas con ese nombre o texto",
                                     Toast.LENGTH_LONG).show();
                         }
                         }
