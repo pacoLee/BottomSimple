@@ -23,6 +23,9 @@
             android:name=".AdvancedSearch"
             android:exported="true" />
         <activity
+            android:name=".PruebaFragment"
+            android:exported="true" />
+        <activity
             android:name=".SliderDetailed"
             android:exported="true" />
         <activity

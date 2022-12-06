@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,22 @@ public class ListaCartas extends AppCompatActivity {
 
                 tvResultados.setText("Resultados de la busqueda: "+listaCards.size() );
         AdaptadorSmallRecycler ad = new AdaptadorSmallRecycler(getApplicationContext(), listaCards);
-        AdaptadorBigRecycler ad2 = new AdaptadorBigRecycler(getApplicationContext(), listaCards, new AdaptadorBigRecycler.ItemClickListener() {
+        AdaptadorBigRecycler ad2 = new AdaptadorBigRecycler(getApplicationContext(), listaCards, new AdaptadorBigRecycler.LongItemClickListener() {
+            @Override
+            public boolean onItemLongClick(Card card) {
+                Toast.makeText(getApplicationContext(), "Funciona",
+                        Toast.LENGTH_LONG).show();
+                /*AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
+                SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
+                ContentValues valoresCarta = new ContentValues();
+                valoresCarta.put("ID_MAZO", idMazo);
+                valoresCarta.put("ID_CARTA", idCarta);
+                valoresCarta.put("CANTIDAD", cantidad);
+                baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);
+                baseDeDatos.close();*/
+                return true;
+            }
+        }, new AdaptadorBigRecycler.ItemClickListener() {
             @Override
             public void onItemClick(Card card) {
                 Intent intent = new Intent(getApplicationContext(), SliderDetailed.class);

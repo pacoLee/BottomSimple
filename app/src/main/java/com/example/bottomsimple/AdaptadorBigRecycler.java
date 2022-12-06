@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecycler.ViewHolder> {
     private ArrayList<Card> listaCards;
     private ItemClickListener mItemClickListener;
+    private LongItemClickListener lItemClickListener;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private Context miContexto;
@@ -47,9 +48,10 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
         }
     }
 
-    public AdaptadorBigRecycler(Context miContexto, ArrayList<Card> listaCards,ItemClickListener mItemClickListener) {
+    public AdaptadorBigRecycler(Context miContexto, ArrayList<Card> listaCards,LongItemClickListener lItemClickListener,ItemClickListener mItemClickListener) {
         this.listaCards = listaCards;
         this.mItemClickListener=mItemClickListener;
+        this.lItemClickListener=lItemClickListener;
     }
     @NonNull
     @Override
@@ -66,6 +68,9 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
 
         holder.itemView.setOnClickListener(view -> {
             mItemClickListener.onItemClick(listaCards.get(position));
+        });
+        holder.itemView.setOnLongClickListener(view -> {
+          return lItemClickListener.onItemLongClick(listaCards.get(position));
         });
         String scryfallId = listaCards.get(position).getImagenId();
         char primerCaracter = scryfallId.charAt(0);
@@ -121,5 +126,8 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
         void onItemClick(Card card);
     }
 
+    public interface LongItemClickListener{
+        boolean onItemLongClick(Card card);
+    }
 
 }
