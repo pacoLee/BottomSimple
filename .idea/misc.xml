@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/activity_lista_cartas.xml" value="0.25317028985507245" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/activity_main.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/activity_slider_detailed.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/advanced_search.xml" value="0.34739583333333335" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/fragment_detalles.xml" value="0.34739583333333335" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/fragment_home.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/fragment_imagen.xml" value="0.34739583333333335" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/fragment_prueba.xml" value="0.25317028985507245" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/item_deck.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/spinner_item.xml" value="0.25317028985507245" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/layout/toolbar.xml" value="0.17654508611955422" />
+        <entry key="..\:/Users/jcmec/Desktop/BottomSimple/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3138888888888889" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

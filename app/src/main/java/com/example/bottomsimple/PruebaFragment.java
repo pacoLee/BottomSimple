@@ -50,6 +50,7 @@ public class PruebaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        view= inflater.inflate(R.layout.fragment_prueba, container, false);
         builder=new AlertDialog.Builder(view.getContext());
         fab=(FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,11 +60,11 @@ public class PruebaFragment extends Fragment {
                 SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
                 ContentValues valoresMazo = new ContentValues();
                 valoresMazo.put("NOMBRE", idCarta);
-                valoresMazo.put("IMAGEID", "");
+                valoresMazo.put("IMAGEID", );
                 baseDeDatos.insert("MAZOS", null, valoresMazo);
                 baseDeDatos.close();*/
             }
         });
-        return inflater.inflate(R.layout.fragment_prueba, container, false);
+        return view;
     }
 }
