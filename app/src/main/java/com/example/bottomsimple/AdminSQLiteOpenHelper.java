@@ -12,9 +12,9 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase baseDeDatos) {
-        baseDeDatos.execSQL("CREATE TABLE MAZO (ID_MAZO INT NOT NULL PRIMARY KEY AUTOINCREMENT, NOMBRE TEXT,IMAGEID TEXT)");
+        baseDeDatos.execSQL("CREATE TABLE MAZO (ID_MAZO INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, NOMBRE TEXT,IMAGEID TEXT)");
         baseDeDatos.execSQL
-                ("CREATE TABLE MAZO_CARTA (ID_MAZO INT NOT NULL, ID_CARTA TEXT NOT NULL, CANTIDAD INT," +
+                ("CREATE TABLE MAZO_CARTA (ID_MAZO INTEGER NOT NULL, ID_CARTA TEXT NOT NULL, CANTIDAD INT," +
                         " CONSTRAINT PK_MAZO PRIMARY KEY (ID_MAZO, ID_CARTA)," +
                         " FOREIGN KEY (ID_MAZO) REFERENCES MAZO(ID_MAZO))");
     }
