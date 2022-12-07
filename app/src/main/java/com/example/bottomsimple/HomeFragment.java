@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment{
 
                             String json = null;
                             try {
-                                json = Fichero.abrir_fichero("/data/data/com.example.bottomsimple/files/Standard.json");
+                                json = Fichero.abrir_fichero("/data/data/com.example.bottomsimple/files/standard.json");
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
