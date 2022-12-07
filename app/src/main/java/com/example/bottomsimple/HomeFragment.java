@@ -61,7 +61,13 @@ public class HomeFragment extends Fragment{
         buttonBusqueda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                populateTable();
+
+                if (etBusqueda.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(), "La búsqueda no puede ser vacía", Toast.LENGTH_SHORT).show();
+                } else {
+                    populateTable();
+                }
+
             }
         });
         buttonAvanzada.setOnClickListener(new View.OnClickListener() {
