@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ListaCartas extends AppCompatActivity {
@@ -61,6 +62,10 @@ public class ListaCartas extends AppCompatActivity {
             public void onItemClick(Card card) {
                 Intent intent = new Intent(getApplicationContext(), SliderDetailed.class);
                 intent.putExtra("imageId", card.getImagenId());
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+                intent.putExtra("BUNDLE", args);
+                intent.putExtra("uuid", card.getUuid());
                 startActivity(intent);
             }
         });

@@ -1,16 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".FragmentDetalles">
 
     <TextView
-        android:id="@+id/tvDetalles"
+        android:id="@+id/tvName"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Fragment detalles"
+        android:layout_height="wrap_content"
+        android:text="Name"
         android:gravity="center"
-        android:textSize="50sp"/>
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tvRarity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rarity"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tvSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tvCollectorNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Collector Number"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tvMana"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mana"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tvLegality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Legality"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Text"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tvRulings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rulings"
+        android:gravity="center"
+        android:textSize="20sp"/>
 
-</RelativeLayout>
+</LinearLayout>

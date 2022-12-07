@@ -119,8 +119,13 @@ public class HomeFragment extends Fragment{
                             String cost="";
                             String type="";
                             String text="";
+                            String uuid="";
                             Double manaValue;
                             Map<String, String> identifiers;
+                            Map<String, String> legality;
+                            Map<String, String> ruling;
+                            ArrayList<String> legalities=new ArrayList<>();
+                            ArrayList<String> rulings=new ArrayList<>();
                             String imagenId="";
                             for (int i = 0; i < cards.size(); i++) {
                                 //    System.out.println(cards.get(i));
@@ -131,9 +136,17 @@ public class HomeFragment extends Fragment{
                                 cost=cards.get(i).getOrDefault("manaCost","");
                                 type=cards.get(i).getOrDefault("type","");
                                 text=cards.get(i).getOrDefault("text","");
+                                uuid=cards.get(i).getOrDefault("uuid","");
                                 rarity =  cards.get(i).getOrDefault("rarity", "");
                                 manaValue= cardsDouble.get(i).get("manaValue");
                                 identifiers=cartas.get(i).get("identifiers");
+                                legality=cartas.get(i).get("legalities");
+                                for (String key:legality.keySet()
+                                     ) {if(legality.get(key).equals("Legal")&& !legalities.contains(key)){
+                                         legalities.add(key);
+                                }
+                                }
+                                //ruling=cartas.get(i).get("rulings");
                                 imagenId=identifiers.getOrDefault("scryfallId","");
 
 
@@ -144,9 +157,12 @@ public class HomeFragment extends Fragment{
                                 c.setCost(cost);
                                 c.setType(type);
                                 c.setText(text);
+                                c.setUuid(uuid);
                                 c.setRarity(rarity);
                                 c.setManaValue(manaValue);
                                 c.setImagenId(imagenId);
+                                c.setLegality(legalities);
+                                c.setRulings(rulings);
                                 listaCards.add(c);
                             }
                         if(!listaCards.isEmpty()) {

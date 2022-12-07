@@ -55,13 +55,13 @@ public class PruebaFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
+                /*AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
                 SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
                 ContentValues valoresMazo = new ContentValues();
                 valoresMazo.put("NOMBRE", idCarta);
                 valoresMazo.put("IMAGEID", "");
                 baseDeDatos.insert("MAZOS", null, valoresMazo);
-                baseDeDatos.close();
+                baseDeDatos.close();*/
             }
         });
         return inflater.inflate(R.layout.fragment_prueba, container, false);

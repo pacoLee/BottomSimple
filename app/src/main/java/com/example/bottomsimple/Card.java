@@ -25,12 +25,14 @@ public class Card implements Serializable {
     private String type;
     private String text;
     private Double manaValue;
+    private ArrayList legality = new ArrayList();
+    private ArrayList rulings = new ArrayList();
 
     public Card(){
 
     }
     public Card(ArrayList availability, ArrayList colorIdentity, ArrayList colorIndicator, ArrayList colors, ArrayList finishes, String layout,
-                String rarity, ArrayList subTypes, ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text,Double manaValue) {
+                String rarity, ArrayList subTypes, ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text,Double manaValue,ArrayList legality,ArrayList rulings) {
         this.availability = availability;
         this.colorIdentity = colorIdentity;
         this.colorIndicator = colorIndicator;
@@ -49,11 +51,13 @@ public class Card implements Serializable {
         this.type=type;
         this.text=text;
         this.manaValue=manaValue;
+        this.legality=legality;
+        this.rulings=rulings;
     }
 
 
     public Card(String name, String setNumber, ArrayList availability, ArrayList colorIdentity, ArrayList colorIndicator, ArrayList colors, ArrayList finishes, String layout, String rarity, ArrayList subTypes,
-                ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text,Double manaValue) {
+                ArrayList superTypes, ArrayList types, String language, ArrayList keywords,String uuid,String imagenId,String cost,String type,String text,Double manaValue,ArrayList legality,ArrayList rulings) {
         this.name = name;
         this.setNumber = setNumber;
         this.availability = availability;
@@ -74,6 +78,24 @@ public class Card implements Serializable {
         this.type=type;
         this.text=text;
         this.manaValue=manaValue;
+        this.legality=legality;
+        this.rulings=rulings;
+    }
+
+    public ArrayList getLegality() {
+        return legality;
+    }
+
+    public void setLegality(ArrayList legality) {
+        this.legality = legality;
+    }
+
+    public ArrayList getRulings() {
+        return rulings;
+    }
+
+    public void setRulings(ArrayList rulings) {
+        this.rulings = rulings;
     }
 
     public Double getManaValue() {
