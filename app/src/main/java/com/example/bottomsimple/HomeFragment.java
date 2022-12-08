@@ -126,6 +126,8 @@ public class HomeFragment extends Fragment{
                             String type="";
                             String text="";
                             String uuid="";
+                            String power="";
+                            String toughness="";
                             Double manaValue;
                             Map<String, String> identifiers;
                             Map<String, String> legality;
@@ -143,6 +145,8 @@ public class HomeFragment extends Fragment{
                                 type=cards.get(i).getOrDefault("type","");
                                 text=cards.get(i).getOrDefault("text","");
                                 uuid=cards.get(i).getOrDefault("uuid","");
+                                power=cards.get(i).getOrDefault("power","0");
+                                toughness=cards.get(i).getOrDefault("toughness","0");
                                 rarity =  cards.get(i).getOrDefault("rarity", "");
                                 manaValue= cardsDouble.get(i).get("manaValue");
                                 identifiers=cartas.get(i).get("identifiers");
@@ -164,6 +168,8 @@ public class HomeFragment extends Fragment{
                                 c.setType(type);
                                 c.setText(text);
                                 c.setUuid(uuid);
+                                c.setPower(power);
+                                c.setToughness(toughness);
                                 c.setRarity(rarity);
                                 c.setManaValue(manaValue);
                                 c.setImagenId(imagenId);
@@ -172,7 +178,7 @@ public class HomeFragment extends Fragment{
                                 listaCards.add(c);
                             }
                         if(!listaCards.isEmpty()) {
-                            Intent i = new Intent(getActivity(), ListaCartas.class);
+                            Intent i = new Intent(getActivity(), ListSelector.class);
                             //i.putExtra("list",listaCards);
                             Bundle args = new Bundle();
                             args.putSerializable("ARRAYLIST", (Serializable) listaCards);

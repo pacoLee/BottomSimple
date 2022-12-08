@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 public class ListSelector extends AppCompatActivity {
 
     private TextView textViewSmallList;
@@ -19,6 +22,9 @@ public class ListSelector extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_selector);
+        Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        ArrayList<Card> listaCards = (ArrayList<Card>) args.getSerializable("ARRAYLIST");
 
         textViewSmallList=(TextView) findViewById(R.id.textViewSmallList);
         textViewBigList=(TextView) findViewById(R.id.textViewBigList);
@@ -28,7 +34,11 @@ public class ListSelector extends AppCompatActivity {
         imageButtonSmall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListSelector.this, ListaCartas.class);
+                Intent intent = new Intent(getApplicationContext(), ListaCartas.class);
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+                intent.putExtra("BUNDLE", args);
+                intent.putExtra("adapter","small");
                 startActivity(intent);
             }
         });
@@ -36,7 +46,11 @@ public class ListSelector extends AppCompatActivity {
         imageButtonBig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListSelector.this, ListaCartas.class);
+                Intent intent = new Intent(getApplicationContext(), ListaCartas.class);
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+                intent.putExtra("BUNDLE", args);
+                intent.putExtra("adapter","big");
                 startActivity(intent);
             }
         });

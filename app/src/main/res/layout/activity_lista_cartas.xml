@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListaCartas"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/back">
     <include layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,13 +16,14 @@
         android:id="@+id/tvResultados"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Resultados de la busqueda:"
-        tools:ignore="MissingConstraints"
-        android:textSize="25dp"
-        android:paddingBottom="2dp"
-        android:gravity="center"
         android:background="@color/design_default_color_secondary"
-        android:textColor="@color/design_default_color_on_secondary"/>
+        android:fontFamily="@font/beleren"
+        android:gravity="center"
+        android:paddingBottom="2dp"
+        android:text="Resultados de la busqueda:"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textSize="23dp"
+        tools:ignore="MissingConstraints" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

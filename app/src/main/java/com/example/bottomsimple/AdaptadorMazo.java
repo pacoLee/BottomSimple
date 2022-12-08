@@ -50,9 +50,11 @@ public class AdaptadorMazo extends BaseAdapter {
         TextView txtNomMazo = view.findViewById(R.id.txtNomMazo);
 
         //----------IMAGEN------------------
-     //   Picasso.get().load(imagen).into(imgMazo);
-        //------------------------------------
 
+        if (imagen!=0){
+            //   Picasso.get().load(imagen).into(imgMazo);
+        }
+        //------------------------------------
         txtNomMazo.setText(mazos.get(i).getNombreMazo());
         return view;
     }

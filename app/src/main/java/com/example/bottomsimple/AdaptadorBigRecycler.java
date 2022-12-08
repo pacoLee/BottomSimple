@@ -83,6 +83,12 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
         if(carta.getName().length()<15){
             tvName.setTextSize(30);
         }
+        if(carta.getName().length()>=15&&carta.getName().length()<=30){
+            tvName.setTextSize(20);
+        }
+        if(carta.getName().length()>30){
+            tvName.setTextSize(10);
+        }
         TextView tvCost=holder.tvCost;
         SpannableStringBuilder ssb =new SpannableStringBuilder();
         ssb.append("A ");
@@ -92,12 +98,12 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
 
         tvCost.setText(carta.getCost());
 
-
-
         TextView tvType=holder.tvType;
         tvType.setText(carta.getType());
         if(carta.getType().length()>20){
             tvType.setTextSize(15);
+        }else{
+            tvType.setTextSize(25);
         }
         TextView tvSet=holder.tvSet;
         String[] setNumber = carta.getSetNumber().split("/");
@@ -106,6 +112,8 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
         tvText.setText(carta.getText());
         if(carta.getText().length()>100){
             tvText.setTextSize(15);
+        }else {
+            tvText.setTextSize(25);
         }
         TextView tvNumber=holder.tvNumber;
         tvNumber.setText(setNumber[1]);

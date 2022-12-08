@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class PruebaFragment extends Fragment {
 
@@ -33,16 +35,8 @@ public class PruebaFragment extends Fragment {
     SQLiteDatabase baseDeDatos;
     Integer id = 0;
     String nombre = "";
+    Integer imageId= 0;
     Mazo m;
-
-
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public PruebaFragment() {
     }
@@ -57,43 +51,39 @@ public class PruebaFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view= inflater.inflate(R.layout.fragment_prueba, container, false);
         builder=new AlertDialog.Builder(view.getContext());
         fab=(FloatingActionButton) view.findViewById(R.id.fab);
         lvDecks=(ListView) view.findViewById(R.id.lvDecks);
 
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
-         baseDeDatos = admin.getWritableDatabase();
+        baseDeDatos = admin.getWritableDatabase();
 
-        Cursor fila = baseDeDatos.rawQuery("select ID_MAZO , NOMBRE   from MAZO",null);
+        Cursor fila = baseDeDatos.rawQuery("select ID_MAZO , NOMBRE , IMAGEID from MAZO",null);
         if (fila.moveToFirst()) {
             do {
-
                 id = fila.getInt(0);
                 nombre = fila.getString(1);
-                m = new Mazo(id, 0, nombre);
+                imageId = fila.getInt(2);
+                m = new Mazo(id, imageId, nombre);
                 listaMazos.add(m);
                 Toast.makeText(getContext(), "Se ha encontrado un registro", Toast.LENGTH_SHORT).show();
             } while (fila.moveToNext());
         } else {
             Toast.makeText(getContext(), "No existe ningún registro", Toast.LENGTH_SHORT).show();
         }
-        baseDeDatos.close();
-
-
+        //baseDeDatos.close();
+        Collections.sort(listaMazos,new DeckComparator());
         adMazo = new AdaptadorMazo(getContext(), listaMazos);
         lvDecks.setAdapter(adMazo);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 cargarAlertDialogInsercion();
             }
         });
@@ -124,7 +114,7 @@ public class PruebaFragment extends Fragment {
                         id = fila.getInt(0);
                         id++;
                          m = new Mazo(id, 0, etNombre.getText().toString());
-                        Toast.makeText(getContext(), "Se ha encontrado un registro", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Se ha encontrado un registro", Toast.LENGTH_SHORT).show();
                     } while (fila.moveToNext());
                 } else {
                     id= 1;
@@ -142,6 +132,11 @@ public class PruebaFragment extends Fragment {
         });
         alertDialog.setNegativeButton("Cancelar", null);
         alertDialog.show();
+    }
+    class DeckComparator implements Comparator<Mazo> {
+        public int compare(Mazo m1, Mazo m2){
+            return m1.getNombreMazo().compareTo(m2.getNombreMazo());
+        }
     }
 
 }

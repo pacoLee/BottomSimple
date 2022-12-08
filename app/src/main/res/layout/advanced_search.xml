@@ -30,7 +30,7 @@
         android:padding="5sp"
         android:layout_margin="5sp"/>
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name"
@@ -48,7 +48,7 @@
         android:padding="5sp"
         android:layout_margin="5sp"/>
     <EditText
-        android:id="@+id/text"
+        android:id="@+id/etText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Text"
@@ -66,7 +66,7 @@
         android:padding="5sp"
         android:layout_margin="5sp"/>
     <EditText
-        android:id="@+id/manaValue"
+        android:id="@+id/etManaValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ManaValue"
@@ -84,7 +84,7 @@
         android:padding="5sp"
         android:layout_margin="5sp"/>
     <Spinner
-        android:id="@+id/availability"
+        android:id="@+id/spAvailability"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20sp"
@@ -325,7 +325,7 @@
         android:padding="5sp"
         android:layout_margin="5sp"/>
     <EditText
-        android:id="@+id/keywords"
+        android:id="@+id/etKeywords"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5sp"
@@ -342,7 +342,7 @@
         android:padding="5sp"
         android:layout_margin="5sp"/>
     <Spinner
-        android:id="@+id/language"
+        android:id="@+id/spLanguage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20sp"
@@ -360,7 +360,7 @@
         android:padding="5sp"
         android:layout_margin="5sp"/>
     <Spinner
-        android:id="@+id/leadershipSkills"
+        android:id="@+id/spLeadershipSkills"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20sp"
@@ -378,7 +378,7 @@
         android:padding="5sp"
         android:layout_margin="5sp"/>
     <Spinner
-        android:id="@+id/legalities"
+        android:id="@+id/spLegalities"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20sp"
@@ -405,7 +405,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
         <EditText
-            android:id="@+id/power"
+            android:id="@+id/etPower"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="2"/>
@@ -425,7 +425,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
         <EditText
-            android:id="@+id/toughness"
+            android:id="@+id/etToughness"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -515,7 +515,7 @@
         android:padding="5sp"
         android:layout_margin="5sp"/>
     <EditText
-        android:id="@+id/type"
+        android:id="@+id/etType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5sp"
