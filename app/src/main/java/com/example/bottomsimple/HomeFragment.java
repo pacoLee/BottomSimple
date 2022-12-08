@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
     Button buttonBusqueda;
     Button buttonAvanzada;
     View view;
@@ -54,15 +54,16 @@ public class HomeFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_home, container, false);
-        buttonBusqueda=(Button) view.findViewById(R.id.buttonBusqueda);
-        buttonAvanzada=(Button) view.findViewById(R.id.buttonAvanzada);
-        etBusqueda=(EditText) view.findViewById(R.id.etBusqueda);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+        buttonBusqueda = (Button) view.findViewById(R.id.buttonBusqueda);
+        buttonAvanzada = (Button) view.findViewById(R.id.buttonAvanzada);
+        etBusqueda = (EditText) view.findViewById(R.id.etBusqueda);
+
         buttonBusqueda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (etBusqueda.getText().toString().isEmpty()){
+                if (etBusqueda.getText().toString().isEmpty()) {
                     Toast.makeText(getContext(), "La búsqueda no puede ser vacía", Toast.LENGTH_SHORT).show();
                 } else {
                     populateTable();
@@ -79,8 +80,9 @@ public class HomeFragment extends Fragment{
         });
         return view;
     }
+
     private void populateTable() {
-        mProgressDialog = ProgressDialog.show(this.getContext(), "Please wait","Long operation starts...", true);
+        mProgressDialog = ProgressDialog.show(this.getContext(), "Please wait", "Long operation starts...", true);
         new Thread() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -100,13 +102,13 @@ public class HomeFragment extends Fragment{
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            String resultado =  etBusqueda.getText().toString();
+                            String resultado = etBusqueda.getText().toString();
                             //   Filter cheapFictionFilter = filter(where("artist").is(resultado)).or(where("uuid").is(resultado));
 
                             Predicate cardswithName = new Predicate() {
                                 @Override
                                 public boolean apply(PredicateContext ctx) {
-                                    if((ctx.item(Map.class).containsKey("name") && ctx.item(Map.class).get("name").toString().toLowerCase(Locale.ROOT).contains(resultado.toLowerCase(Locale.ROOT)))||((ctx.item(Map.class).containsKey("text")&& ctx.item(Map.class).get("text").toString().toLowerCase(Locale.ROOT).contains(resultado.toLowerCase(Locale.ROOT))))) {
+                                    if ((ctx.item(Map.class).containsKey("name") && ctx.item(Map.class).get("name").toString().toLowerCase(Locale.ROOT).contains(resultado.toLowerCase(Locale.ROOT))) || ((ctx.item(Map.class).containsKey("text") && ctx.item(Map.class).get("text").toString().toLowerCase(Locale.ROOT).contains(resultado.toLowerCase(Locale.ROOT))))) {
                                         return ctx.item(Map.class).containsKey("name");
                                     }
                                     return false;
@@ -115,54 +117,55 @@ public class HomeFragment extends Fragment{
 
                             Filter cheapFictionFilter = filter(cardswithName);
 
-                            List<Map<String, String>> cards = JsonPath.parse(json).read("$..cards[?]",cheapFictionFilter);
-                            List<Map<String, Double>> cardsDouble = JsonPath.parse(json).read("$..cards[?]",cheapFictionFilter);
-                            List<Map<String, Map<String, String>>> cartas = JsonPath.parse(json).read("$..cards[?]",cheapFictionFilter);
+                            List<Map<String, String>> cards = JsonPath.parse(json).read("$..cards[?]", cheapFictionFilter);
+                            List<Map<String, Double>> cardsDouble = JsonPath.parse(json).read("$..cards[?]", cheapFictionFilter);
+                            List<Map<String, Map<String, String>>> cartas = JsonPath.parse(json).read("$..cards[?]", cheapFictionFilter);
                             String name = "";
                             String rarity = "";
-                            String setCode="";
-                            String setNumber="";
-                            String cost="";
-                            String type="";
-                            String text="";
-                            String uuid="";
-                            String power="";
-                            String toughness="";
+                            String setCode = "";
+                            String setNumber = "";
+                            String cost = "";
+                            String type = "";
+                            String text = "";
+                            String uuid = "";
+                            String power = "";
+                            String toughness = "";
                             Double manaValue;
                             Map<String, String> identifiers;
                             Map<String, String> legality;
                             Map<String, String> ruling;
-                            ArrayList<String> legalities=new ArrayList<>();
-                            ArrayList<String> rulings=new ArrayList<>();
-                            String imagenId="";
+                            ArrayList<String> legalities = new ArrayList<>();
+                            ArrayList<String> rulings = new ArrayList<>();
+                            String imagenId = "";
                             for (int i = 0; i < cards.size(); i++) {
                                 //    System.out.println(cards.get(i));
 
-                                name =  cards.get(i).getOrDefault("name", "");
-                                setCode=cards.get(i).getOrDefault("setCode","");
-                                setNumber=cards.get(i).getOrDefault("number","");
-                                cost=cards.get(i).getOrDefault("manaCost","");
-                                type=cards.get(i).getOrDefault("type","");
-                                text=cards.get(i).getOrDefault("text","");
-                                uuid=cards.get(i).getOrDefault("uuid","");
-                                power=cards.get(i).getOrDefault("power","0");
-                                toughness=cards.get(i).getOrDefault("toughness","0");
-                                rarity =  cards.get(i).getOrDefault("rarity", "");
-                                manaValue= cardsDouble.get(i).get("manaValue");
-                                identifiers=cartas.get(i).get("identifiers");
-                                legality=cartas.get(i).get("legalities");
-                                for (String key:legality.keySet()
-                                     ) {if(legality.get(key).equals("Legal")&& !legalities.contains(key)){
-                                         legalities.add(key);
-                                }
+                                name = cards.get(i).getOrDefault("name", "");
+                                setCode = cards.get(i).getOrDefault("setCode", "");
+                                setNumber = cards.get(i).getOrDefault("number", "");
+                                cost = cards.get(i).getOrDefault("manaCost", "");
+                                type = cards.get(i).getOrDefault("type", "");
+                                text = cards.get(i).getOrDefault("text", "");
+                                uuid = cards.get(i).getOrDefault("uuid", "");
+                                power = cards.get(i).getOrDefault("power", "0");
+                                toughness = cards.get(i).getOrDefault("toughness", "0");
+                                rarity = cards.get(i).getOrDefault("rarity", "");
+                                manaValue = cardsDouble.get(i).get("manaValue");
+                                identifiers = cartas.get(i).get("identifiers");
+                                legality = cartas.get(i).get("legalities");
+                                for (String key : legality.keySet()
+                                ) {
+                                    if (legality.get(key).equals("Legal") && !legalities.contains(key)) {
+                                        legalities.add(key);
+                                    }
                                 }
                                 //ruling=cartas.get(i).get("rulings");
-                                imagenId=identifiers.getOrDefault("scryfallId","");
+                                imagenId = identifiers.getOrDefault("scryfallId", "");
 
 
                                 //  listaCards.add(cards.get(i));
                                 Card c = new Card();
-                                c.setSetNumber(setCode+"/"+setNumber);
+                                c.setSetNumber(setCode + "/" + setNumber);
                                 c.setName(name);
                                 c.setCost(cost);
                                 c.setType(type);
@@ -177,23 +180,23 @@ public class HomeFragment extends Fragment{
                                 c.setRulings(rulings);
                                 listaCards.add(c);
                             }
-                        if(!listaCards.isEmpty()) {
-                            Intent i = new Intent(getActivity(), ListSelector.class);
-                            //i.putExtra("list",listaCards);
-                            Bundle args = new Bundle();
-                            args.putSerializable("ARRAYLIST", (Serializable) listaCards);
-                            i.putExtra("BUNDLE", args);
-                            startActivity(i);
-                            //ad = new AdaptadorSmall(getApplicationContext(), listaCards);
-                            //lvCards.setAdapter(ad);
-                        }else{
-                            Toast.makeText(getActivity(), "No hay cartas con ese nombre o texto",
-                                    Toast.LENGTH_LONG).show();
-                        }
+                            if (!listaCards.isEmpty()) {
+                                Intent i = new Intent(getActivity(), ListSelector.class);
+                                //i.putExtra("list",listaCards);
+                                Bundle args = new Bundle();
+                                args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+                                i.putExtra("BUNDLE", args);
+                                startActivity(i);
+                                //ad = new AdaptadorSmall(getApplicationContext(), listaCards);
+                                //lvCards.setAdapter(ad);
+                            } else {
+                                Toast.makeText(getActivity(), "No hay cartas con ese nombre o texto",
+                                        Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
                 } catch (final Exception ex) {
-                    Log.i("---","Exception in thread");
+                    Log.i("---", "Exception in thread");
                 }
             }
         }.start();
