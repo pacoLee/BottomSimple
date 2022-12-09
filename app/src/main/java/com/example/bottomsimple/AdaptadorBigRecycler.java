@@ -204,8 +204,87 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
         TextView tvSet = holder.tvSet;
         String[] setNumber = carta.getSetNumber().split("/");
         tvSet.setText(setNumber[0]);
+
+
+        String text = carta.getText();
+//        int caracteresNumero = 0;
+        SpannableStringBuilder ssb2 = new SpannableStringBuilder();
+        ssb2.append(text);
+        empiezaDesde = 0;
+        int cuentaW = StringUtils.countMatches(ssb2, "{W}");
+        for (int i = 0; i < cuentaW; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{W}", empiezaDesde);
+            if (text.contains("{W}")) {
+                ssb2.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.w), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaU = StringUtils.countMatches(ssb2, "{U}");
+        for (int i = 0; i < cuentaU; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{U}", empiezaDesde);
+            if (text.contains("{U}")) {
+                ssb2.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.u), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaB = StringUtils.countMatches(ssb2, "{B}");
+        for (int i = 0; i < cuentaB; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{B}", empiezaDesde);
+            if (text.contains("{B}")) {
+                ssb2.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.b), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaR = StringUtils.countMatches(ssb2, "{R}");
+        for (int i = 0; i < cuentaR; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{R}", empiezaDesde);
+            if (text.contains("{R}")) {
+                ssb2.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.r), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaG = StringUtils.countMatches(ssb2, "{G}");
+        for (int i = 0; i < cuentaG; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{G}", empiezaDesde);
+            if (text.contains("{G}")) {
+                ssb2.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.g), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaC = StringUtils.countMatches(ssb2, "{C}");
+        for (int i = 0; i < cuentaC; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{C}", empiezaDesde);
+            if (text.contains("{C}")) {
+                ssb2.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.c), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaTap = StringUtils.countMatches(ssb2, "{T}");
+        for (int i = 0; i < cuentaTap; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{T}", empiezaDesde);
+            if (text.contains("{T}")) {
+                ssb2.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.tap), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+
+
+
         TextView tvText = holder.tvText;
-        tvText.setText(carta.getText());
+        tvText.setText(ssb2);
         if (carta.getText().length() > 100) {
             tvText.setTextSize(15);
         } else {
