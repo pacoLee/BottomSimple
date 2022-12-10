@@ -100,10 +100,40 @@ public class ListaCartas extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        AdaptadorBigRecycler ad3 = new AdaptadorBigRecycler(getApplicationContext(), listaCards, new AdaptadorBigRecycler.LongItemClickListener() {
+            @Override
+            public boolean onItemLongClick(Card card) {
+                Toast.makeText(getApplicationContext(), "Funciona",
+                        Toast.LENGTH_LONG).show();
+                /*AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
+                SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
+                ContentValues valoresCarta = new ContentValues();
+                valoresCarta.put("ID_MAZO", idMazo);
+                valoresCarta.put("ID_CARTA", idCarta);
+                valoresCarta.put("CANTIDAD", cantidad);
+                baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);
+                baseDeDatos.close();*/
+                return true;
+            }
+        }, new AdaptadorBigRecycler.ItemClickListener() {
+            @Override
+            public void onItemClick(Card card) {
+                Intent intent = new Intent(getApplicationContext(), SliderDetailed.class);
+                intent.putExtra("imageId", card.getImagenId());
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+                intent.putExtra("BUNDLE", args);
+                intent.putExtra("uuid", card.getUuid());
+                startActivity(intent);
+            }
+        });
+
         if (adapterType.equals("big")) {
             recyclerView.setAdapter(ad2);
-        } else {
+        } else if (adapterType.equals("small")){
             recyclerView.setAdapter(ad);
+        }else{
+            recyclerView.setAdapter(ad3);
         }
         spinnerOrdenar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

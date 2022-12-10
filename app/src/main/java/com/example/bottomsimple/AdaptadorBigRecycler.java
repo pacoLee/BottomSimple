@@ -69,7 +69,6 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         holder.itemView.setOnClickListener(view -> {
             mItemClickListener.onItemClick(listaCards.get(position));
         });

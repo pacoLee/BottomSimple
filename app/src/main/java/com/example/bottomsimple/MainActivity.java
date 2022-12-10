@@ -5,29 +5,34 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.bottomsimple.databinding.ActivityMainBinding;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class MainActivity extends AppCompatActivity {
-
+    String toPath = "/data/data/com.example.bottomsimple/files/";
     ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*String path = String.valueOf();
+         File newFile = new File("/data/data/com.example.bottomsimple/files");
+        if(!newFile.isDirectory()) {
+            newFile.mkdir();}
+        File f = new File("/data/data/com.example.bottomsimple/files/standard.json");
+        if(!f.exists()){
+            copyAssets();
+        }
 
-        File file = new File(path);
-        if (file.isFile()) {
-            Toast.makeText(getContext(), path + "/n exists", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), "Downloading", Toast.LENGTH_SHORT).show();
-            // ...
-        }*/
         binding= ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
@@ -51,5 +56,40 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
+    }
+    private void copyAssets() {
+        AssetManager assetManager = getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list("");
+        } catch (IOException e) {
+            Log.e("tag", "Failed to get asset file list.", e);
+        }
+        for(String filename : files) {
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = assetManager.open(filename);
+                String outDir = toPath;
+                //Environment.getExternalStorageDirectory().getAbsolutePath() + "Android/data/Prueba/" ;
+                File outFile = new File(outDir, filename);
+                out = new FileOutputStream(outFile);
+                copyFile(in, out);
+                in.close();
+                in = null;
+                out.flush();
+                out.close();
+                out = null;
+            } catch(IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + filename, e);
+            }
+        }
+    }
+    private void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
     }
 }
