@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,31 +73,18 @@ public class FragmentImagen extends Fragment {
         imgvShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage);
-                shareIntent.setType("image/jpg");
-                startActivity(Intent.createChooser(shareIntent, null));*/
                 Drawable mDrawable = imgvLarge.getDrawable();
                 Bitmap mBitmap = ((BitmapDrawable) mDrawable).getBitmap();
-                Bitmap icon = mBitmap;
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("image/jpeg");
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                File f = new File(Environment.getExternalStorageDirectory() + File.separator + "temporary_file.jpg");
-                try {
-                    f.createNewFile();
-                    FileOutputStream fo = new FileOutputStream(f);
-                    fo.write(bytes.toByteArray());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                share.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/temporary_file.jpg"));
-                startActivity(Intent.createChooser(share, "Share Image"));
+
+                String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "Image Description", null);
+                Uri uri = Uri.parse(path);
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                startActivity(Intent.createChooser(intent, "Share Image"));
             }
         });
-
         return view;
     }
 
