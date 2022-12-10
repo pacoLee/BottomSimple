@@ -4,6 +4,16 @@ public class Mazo {
     private int idMazo, imagen;
     private String nombreMazo;
 
+    public Mazo() {
+        idMazo = 0;
+        nombreMazo = "";
+    }
+
+    public Mazo(int idMazo, String nombreMazo) {
+        this.idMazo = idMazo;
+        this.nombreMazo = nombreMazo;
+    }
+
     public Mazo(int idMazo, int imagen, String nombreMazo) {
         this.idMazo = idMazo;
         this.imagen = imagen;
