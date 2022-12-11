@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment {
                                 power = cards.get(i).getOrDefault("power", "0");
                                 toughness = cards.get(i).getOrDefault("toughness", "0");
                                 rarity = cards.get(i).getOrDefault("rarity", "");
-                                manaValue = cardsDouble.get(i).getOrDefault("manaValue", 0d);
+                                manaValue = cardsDouble.get(i).get("manaValue");
                                 identifiers = cartas.get(i).get("identifiers");
                                 legality = cartas.get(i).get("legalities");
                                 for (String key : legality.keySet()
@@ -203,3 +203,6 @@ public class HomeFragment extends Fragment {
 
     }
 }
+
+
+

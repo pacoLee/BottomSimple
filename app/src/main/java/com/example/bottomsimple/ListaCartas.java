@@ -54,7 +54,6 @@ public class ListaCartas extends AppCompatActivity {
 
 
         tvResultados.setText("Resultados de la busqueda: " + listaCards.size() + " cartas");
-        //ADAPTADOR BIG RECYCLER EN SMALL RECYCLER
         AdaptadorSmallRecycler ad = new AdaptadorSmallRecycler(getApplicationContext(), listaCards, new AdaptadorBigRecycler.LongItemClickListener() {
             @Override
             public boolean onItemLongClick(Card card) {
@@ -184,25 +183,25 @@ public class ListaCartas extends AppCompatActivity {
                     lsvMazos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                                AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
-                                SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
-                                ContentValues valoresCarta = new ContentValues();
-                                valoresCarta.put("ID_MAZO", mazos.get(pos).getIdMazo());
-                                valoresCarta.put("ID_CARTA", card.getUuid());
-                                valoresCarta.put("CANTIDAD", nupNumero.getValue());
-                                //POR QUÉ NO SALTA LA EXCEPCIÓN¿?
-                                try {
-                                    long result = baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);
+                            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
+                            SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
+                            ContentValues valoresCarta = new ContentValues();
+                            valoresCarta.put("ID_MAZO", mazos.get(pos).getIdMazo());
+                            valoresCarta.put("ID_CARTA", card.getUuid());
+                            valoresCarta.put("CANTIDAD", nupNumero.getValue());
+                            //POR QUÉ NO SALTA LA EXCEPCIÓN¿?
+                            try {
+                                long result = baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);
 
-                                    if (result == -1) {
-                                        Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
-                                    }
-//                                    Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
-                                } catch (SQLiteConstraintException e) {
+                                if (result == -1) {
                                     Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
                                 }
+//                                    Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
+                            } catch (SQLiteConstraintException e) {
+                                Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
+                            }
 
                             baseDeDatos.close();
                         }
@@ -223,40 +222,10 @@ public class ListaCartas extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        AdaptadorBigRecycler ad3 = new AdaptadorBigRecycler(getApplicationContext(), listaCards, new AdaptadorBigRecycler.LongItemClickListener() {
-            @Override
-            public boolean onItemLongClick(Card card) {
-                Toast.makeText(getApplicationContext(), "Funciona",
-                        Toast.LENGTH_LONG).show();
-                /*AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
-                SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
-                ContentValues valoresCarta = new ContentValues();
-                valoresCarta.put("ID_MAZO", idMazo);
-                valoresCarta.put("ID_CARTA", idCarta);
-                valoresCarta.put("CANTIDAD", cantidad);
-                baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);
-                baseDeDatos.close();*/
-                return true;
-            }
-        }, new AdaptadorBigRecycler.ItemClickListener() {
-            @Override
-            public void onItemClick(Card card) {
-                Intent intent = new Intent(getApplicationContext(), SliderDetailed.class);
-                intent.putExtra("imageId", card.getImagenId());
-                Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST", (Serializable) listaCards);
-                intent.putExtra("BUNDLE", args);
-                intent.putExtra("uuid", card.getUuid());
-                startActivity(intent);
-            }
-        });
-
         if (adapterType.equals("big")) {
             recyclerView.setAdapter(ad2);
-        } else if (adapterType.equals("small")){
+        } else {
             recyclerView.setAdapter(ad);
-        }else{
-            recyclerView.setAdapter(ad3);
         }
         spinnerOrdenar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

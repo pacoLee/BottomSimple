@@ -93,7 +93,6 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
             tvName.setTextSize(10);
         }
         TextView tvCost = holder.tvCost;
-
         String coste = carta.getCost();
         int empieza; // caracter desde el que se realiza el span
 //        int caracteresNumero = 0;

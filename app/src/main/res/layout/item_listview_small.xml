@@ -66,16 +66,19 @@
                 android:src="@drawable/common"
                 android:layout_gravity="center"/>
         </LinearLayout>
-        
+
     </LinearLayout>
-    <ImageView
-        android:id="@+id/imgvCartaSmall"
-        android:layout_width="292px"
-        android:layout_height="408px"
-        android:scaleType="centerCrop"
-        />
 
+        <TextView
+            android:id="@+id/tvCantidad"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
 
+        <ImageView
+            android:id="@+id/imgvCartaSmall"
+            android:layout_width="292px"
+            android:layout_height="408px"
+            android:scaleType="centerCrop" />
 
     </LinearLayout>
 

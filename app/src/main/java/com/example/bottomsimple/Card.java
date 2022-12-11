@@ -29,6 +29,7 @@ public class Card implements Serializable {
     private Double manaValue;
     private ArrayList legality = new ArrayList();
     private ArrayList rulings = new ArrayList();
+    private int cantidad;
 
     public Card(){
 
@@ -96,6 +97,15 @@ public class Card implements Serializable {
 
     public void setPower(String power) {
         this.power = power;
+    }
+
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public String getToughness() {

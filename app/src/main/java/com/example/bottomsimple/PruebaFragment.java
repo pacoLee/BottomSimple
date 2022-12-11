@@ -1,28 +1,40 @@
 package com.example.bottomsimple;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jayway.jsonpath.Criteria;
+import com.jayway.jsonpath.Filter;
+import com.jayway.jsonpath.JsonPath;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 public class PruebaFragment extends Fragment {
 
@@ -37,6 +49,12 @@ public class PruebaFragment extends Fragment {
     String nombre = "";
     Integer imageId= 0;
     Mazo m;
+    String idCarta;
+    int cantidad = 0;
+
+    ArrayList<Card> listaCards = new ArrayList<>();
+    ArrayList<String> uuids = new ArrayList<>();
+    ArrayList<Integer> cantidades = new ArrayList<Integer>();
 
     public PruebaFragment() {
     }
@@ -76,6 +94,30 @@ public class PruebaFragment extends Fragment {
         } else {
             Toast.makeText(getContext(), "No existe ningún registro", Toast.LENGTH_SHORT).show();
         }
+
+        lvDecks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                Cursor fila = baseDeDatos.rawQuery("select  ID_CARTA , CANTIDAD from MAZO_CARTA  where ID_MAZO = " + (i + 1), null);
+                if (fila.moveToFirst()) {
+                    do {
+                        idCarta = fila.getString(0);
+                        cantidad = fila.getInt(1);
+                        uuids.add(idCarta);
+                        cantidades.add(cantidad);
+                        Toast.makeText(getContext(), "Se han encontrado " + fila.getCount() + " cartas", Toast.LENGTH_SHORT).show();
+                    } while (fila.moveToNext());
+                } else {
+                    Toast.makeText(getContext(), "No hay ninguna carta añadida", Toast.LENGTH_SHORT).show();
+                }
+                Ingresar();
+
+            }
+        });
+
         //baseDeDatos.close();
         Collections.sort(listaMazos,new DeckComparator());
         adMazo = new AdaptadorMazo(getContext(), listaMazos);
@@ -104,9 +146,6 @@ public class PruebaFragment extends Fragment {
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-
-
                 Cursor fila = baseDeDatos.rawQuery("select MAX(ID_MAZO)  from MAZO",null);
                 if (fila.moveToFirst()) {
                     do {
@@ -139,4 +178,210 @@ public class PruebaFragment extends Fragment {
         }
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void Ingresar(){
+        new Thread() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void run() {
+                try {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @RequiresApi(api = Build.VERSION_CODES.N)
+                        @Override
+                        public void run() {
+                            String json = null;
+                            try {
+                                json = Fichero.abrir_fichero("/data/data/com.example.bottomsimple/files/standard.json");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            for (int j = 0; j < uuids.size(); j++) {
+                                Filter expensiveFilter = Filter.filter(Criteria.where("uuid").eq(uuids.get(j)));
+
+                                List<Map<String, String>> cards = JsonPath.parse(json).read("$..cards[?]", expensiveFilter);
+                                List<Map<String, Double>> cardsDouble = JsonPath.parse(json).read("$..cards[?]", expensiveFilter);
+                                List<Map<String, Map<String, String>>> cartas = JsonPath.parse(json).read("$..cards[?]", expensiveFilter);
+                                String name = "";
+                                String rarity = "";
+                                String setCode = "";
+                                String setNumber = "";
+                                String cost = "";
+                                String type = "";
+                                String text = "";
+                                String uuid = "";
+                                String power = "";
+                                String toughness = "";
+                                Double manaValue;
+                                Map<String, String> identifiers;
+                                Map<String, String> legality;
+                                Map<String, String> ruling;
+                                ArrayList<String> legalities = new ArrayList<>();
+                                ArrayList<String> rulings = new ArrayList<>();
+                                String imagenId = "";
+                                for (int k = 0; k < cards.size(); k++) {
+                                    //    System.out.println(cards.get(i));
+
+                                    name = cards.get(k).getOrDefault("name", "");
+                                    setCode = cards.get(k).getOrDefault("setCode", "");
+                                    setNumber = cards.get(k).getOrDefault("number", "");
+                                    cost = cards.get(k).getOrDefault("manaCost", "");
+                                    type = cards.get(k).getOrDefault("type", "");
+                                    text = cards.get(k).getOrDefault("text", "");
+                                    uuid = cards.get(k).getOrDefault("uuid", "");
+                                    power = cards.get(k).getOrDefault("power", "0");
+                                    toughness = cards.get(k).getOrDefault("toughness", "0");
+                                    rarity = cards.get(k).getOrDefault("rarity", "");
+                                    manaValue = cardsDouble.get(k).get("manaValue");
+                                    identifiers = cartas.get(k).get("identifiers");
+                                    legality = cartas.get(k).get("legalities");
+                                    for (String key : legality.keySet()
+                                    ) {
+                                        if (legality.get(key).equals("Legal") && !legalities.contains(key)) {
+                                            legalities.add(key);
+                                        }
+                                    }
+                                    //ruling=cartas.get(i).get("rulings");
+                                    imagenId = identifiers.getOrDefault("scryfallId", "");
+
+
+                                    //  listaCards.add(cards.get(i));
+                                    Card c = new Card();
+                                    c.setSetNumber(setCode + "/" + setNumber);
+                                    c.setName(name);
+                                    c.setCost(cost);
+                                    c.setType(type);
+                                    c.setText(text);
+                                    c.setUuid(uuid);
+                                    c.setPower(power);
+                                    c.setToughness(toughness);
+                                    c.setRarity(rarity);
+                                    c.setManaValue(manaValue);
+                                    c.setImagenId(imagenId);
+                                    c.setLegality(legalities);
+                                    c.setRulings(rulings);
+                                    c.setCantidad(cantidad);
+                                    listaCards.add(c);
+                                }
+                            }
+
+
+                            if (!listaCards.isEmpty()) {
+                                Intent i = new Intent(getActivity(), ListSelector.class);
+                                //i.putExtra("list",listaCards);
+                                Bundle args = new Bundle();
+                                args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+                                i.putExtra("BUNDLE", args);
+                                startActivity(i);
+                                //ad = new AdaptadorSmall(getApplicationContext(), listaCards);
+                                //lvCards.setAdapter(ad);
+                            } else {
+                                Toast.makeText(getActivity(), "No hay cartas con ese nombre o texto",
+                                        Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                    });
+                } catch (final Exception ex) {
+                    Log.i("---", "Exception in thread");
+                }
+            }
+        }.start();
+
+    }
 }
+
+
+
+/*
+    String json = null;
+                            try {
+        json = Fichero.abrir_fichero("/data/data/com.example.bottomsimple/files/standard.json");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+                            for (int j = 0; j < uuids.size(); j++) {
+        Filter expensiveFilter = Filter.filter(Criteria.where("uuid").gt(uuids.get(j)));
+
+        List<Map<String, String>> cards = JsonPath.parse(json).read("$..cards[?]", expensiveFilter);
+        List<Map<String, Double>> cardsDouble = JsonPath.parse(json).read("$..cards[?]", expensiveFilter);
+        List<Map<String, Map<String, String>>> cartas = JsonPath.parse(json).read("$..cards[?]", expensiveFilter);
+        String name = "";
+        String rarity = "";
+        String setCode = "";
+        String setNumber = "";
+        String cost = "";
+        String type = "";
+        String text = "";
+        String uuid = "";
+        String power = "";
+        String toughness = "";
+        Double manaValue;
+        Map<String, String> identifiers;
+        Map<String, String> legality;
+        Map<String, String> ruling;
+        ArrayList<String> legalities = new ArrayList<>();
+        ArrayList<String> rulings = new ArrayList<>();
+        String imagenId = "";
+        for (int k = 0; k < cards.size(); k++) {
+            //    System.out.println(cards.get(i));
+
+            name = cards.get(k).getOrDefault("name", "");
+            setCode = cards.get(k).getOrDefault("setCode", "");
+            setNumber = cards.get(k).getOrDefault("number", "");
+            cost = cards.get(k).getOrDefault("manaCost", "");
+            type = cards.get(k).getOrDefault("type", "");
+            text = cards.get(k).getOrDefault("text", "");
+            uuid = cards.get(k).getOrDefault("uuid", "");
+            power = cards.get(k).getOrDefault("power", "0");
+            toughness = cards.get(k).getOrDefault("toughness", "0");
+            rarity = cards.get(k).getOrDefault("rarity", "");
+            manaValue = cardsDouble.get(k).get("manaValue");
+            identifiers = cartas.get(k).get("identifiers");
+            legality = cartas.get(k).get("legalities");
+            for (String key : legality.keySet()
+            ) {
+                if (legality.get(key).equals("Legal") && !legalities.contains(key)) {
+                    legalities.add(key);
+                }
+            }
+            //ruling=cartas.get(i).get("rulings");
+            imagenId = identifiers.getOrDefault("scryfallId", "");
+
+
+            //  listaCards.add(cards.get(i));
+            Card c = new Card();
+            c.setSetNumber(setCode + "/" + setNumber);
+            c.setName(name);
+            c.setCost(cost);
+            c.setType(type);
+            c.setText(text);
+            c.setUuid(uuid);
+            c.setPower(power);
+            c.setToughness(toughness);
+            c.setRarity(rarity);
+            c.setManaValue(manaValue);
+            c.setImagenId(imagenId);
+            c.setLegality(legalities);
+            c.setRulings(rulings);
+            c.setCantidad(cantidad);
+            listaCards.add(c);
+        }
+    }
+
+
+                            if (!listaCards.isEmpty()) {
+        Intent i = new Intent(getActivity(), ListSelector.class);
+        //i.putExtra("list",listaCards);
+        Bundle args = new Bundle();
+        args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+        i.putExtra("BUNDLE", args);
+        startActivity(i);
+        //ad = new AdaptadorSmall(getApplicationContext(), listaCards);
+        //lvCards.setAdapter(ad);
+    } else {
+        Toast.makeText(getActivity(), "No hay cartas con ese nombre o texto",
+                Toast.LENGTH_LONG).show();
+    }
+
+ */

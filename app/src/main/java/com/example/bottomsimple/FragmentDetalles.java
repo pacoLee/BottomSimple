@@ -1,12 +1,16 @@
 package com.example.bottomsimple;
 
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 
@@ -85,6 +89,187 @@ public class FragmentDetalles extends Fragment {
         tvText.setText("Oracle Text: "+carta.getText());
         tvRulings=(TextView)view.findViewById(R.id.tvRulings);
         tvRulings.setText("Empty");
+
+
+
+        String coste = carta.getCost();
+        int empieza; // caracter desde el que se realiza el span
+//        int caracteresNumero = 0;
+        SpannableStringBuilder ssb = new SpannableStringBuilder();
+        ssb.append(coste);
+        if (coste.contains("{1}")) {
+            empieza = coste.indexOf("{1}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.one), empieza, empieza + 3, 0);
+//            caracteresNumero = 3;
+        } else if (coste.contains("{2}")) {
+            empieza = coste.indexOf("{2}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.two), empieza, empieza + 3, 0);
+        } else if (coste.contains("{3}")) {
+            empieza = coste.indexOf("{3}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.three), empieza, empieza + 3, 0);
+        } else if (coste.contains("{4}")) {
+            empieza = coste.indexOf("{4}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.four), empieza, empieza + 3, 0);
+        } else if (coste.contains("{5}")) {
+            empieza = coste.indexOf("{5}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.five), empieza, empieza + 3, 0);
+        } else if (coste.contains("{6}")) {
+            empieza = coste.indexOf("{6}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.six), empieza, empieza + 3, 0);
+        } else if (coste.contains("{7}")) {
+            empieza = coste.indexOf("{7}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.seven), empieza, empieza + 3, 0);
+        } else if (coste.contains("{8}")) {
+            empieza = coste.indexOf("{8}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.eight), empieza, empieza + 3, 0);
+        } else if (coste.contains("{9}")) {
+            empieza = coste.indexOf("{9}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.nine), empieza, empieza + 3, 0);
+        } else if (coste.contains("{10}")) {
+            empieza = coste.indexOf("{10}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.ten), empieza, empieza + 3, 0);
+        } else if (coste.contains("{11}")) {
+            empieza = coste.indexOf("{11}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.eleven), empieza, empieza + 3, 0);
+        } else if (coste.contains("{X}")) {
+            empieza = coste.indexOf("{X}");
+            ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.x), empieza, empieza + 3, 0);
+        }
+
+        int empiezaDesde = 0;
+        int cuentaWhite = StringUtils.countMatches(ssb, "{W}");
+        for (int i = 0; i < cuentaWhite; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = coste.indexOf("{W}", empiezaDesde);
+            if (coste.contains("{W}")) {
+                ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.w), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaBlack = StringUtils.countMatches(ssb, "{B}");
+        for (int i = 0; i < cuentaBlack; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = coste.indexOf("{B}", empiezaDesde);
+            if (coste.contains("{B}")) {
+                ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.b), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaBlue = StringUtils.countMatches(ssb, "{U}");
+        for (int i = 0; i < cuentaBlue; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = coste.indexOf("{U}", empiezaDesde);
+            if (coste.contains("{U}")) {
+                ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.u), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaRed = StringUtils.countMatches(ssb, "{R}");
+        for (int i = 0; i < cuentaRed; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = coste.indexOf("{R}", empiezaDesde);
+            if (coste.contains("{R}")) {
+                ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.r), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaGreen = StringUtils.countMatches(ssb, "{G}");
+        for (int i = 0; i < cuentaGreen; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = coste.indexOf("{G}", empiezaDesde);
+            if (coste.contains("{G}")) {
+                ssb.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.g), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+
+        tvMana.setText(ssb);
+
+
+        String text = carta.getText();
+//        int caracteresNumero = 0;
+        SpannableStringBuilder ssb2 = new SpannableStringBuilder();
+        ssb2.append(text);
+        empiezaDesde = 0;
+        int cuentaW = StringUtils.countMatches(ssb2, "{W}");
+        for (int i = 0; i < cuentaW; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{W}", empiezaDesde);
+            if (text.contains("{W}")) {
+                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.w), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaU = StringUtils.countMatches(ssb2, "{U}");
+        for (int i = 0; i < cuentaU; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{U}", empiezaDesde);
+            if (text.contains("{U}")) {
+                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.u), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaB = StringUtils.countMatches(ssb2, "{B}");
+        for (int i = 0; i < cuentaB; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{B}", empiezaDesde);
+            if (text.contains("{B}")) {
+                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.b), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaR = StringUtils.countMatches(ssb2, "{R}");
+        for (int i = 0; i < cuentaR; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{R}", empiezaDesde);
+            if (text.contains("{R}")) {
+                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.r), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaG = StringUtils.countMatches(ssb2, "{G}");
+        for (int i = 0; i < cuentaG; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{G}", empiezaDesde);
+            if (text.contains("{G}")) {
+                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.g), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaC = StringUtils.countMatches(ssb2, "{C}");
+        for (int i = 0; i < cuentaC; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{C}", empiezaDesde);
+            if (text.contains("{C}")) {
+                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.c), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaTap = StringUtils.countMatches(ssb2, "{T}");
+        for (int i = 0; i < cuentaTap; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{T}", empiezaDesde);
+            if (text.contains("{T}")) {
+                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.tap), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+
+
+
+
+
+
         return view;
     }
 }
