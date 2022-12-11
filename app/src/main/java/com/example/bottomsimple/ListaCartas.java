@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,10 +19,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.shawnlin.numberpicker.NumberPicker;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -57,74 +59,7 @@ public class ListaCartas extends AppCompatActivity {
         AdaptadorSmallRecycler ad = new AdaptadorSmallRecycler(getApplicationContext(), listaCards, new AdaptadorBigRecycler.LongItemClickListener() {
             @Override
             public boolean onItemLongClick(Card card) {
-                AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
-                SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
-
-                AlertDialog dialog;
-                NumberPicker nupNumero;
-                ListView lsvMazos;
-                ArrayList<String> nomMazos = new ArrayList<>();
-                ArrayList<Mazo> mazos = new ArrayList<>();
-
-                Cursor fila = baseDeDatos.rawQuery("SELECT ID_MAZO, NOMBRE FROM MAZO", null);
-                while (fila.moveToNext()) {
-                    Mazo m = new Mazo(fila.getInt(0), fila.getString(1));
-                    mazos.add(m);
-                }
-                baseDeDatos.close();
-
-                if (mazos.size() == 0) {
-                    Toast.makeText(ListaCartas.this, "No hay mazos a los que añadir esta carta", Toast.LENGTH_SHORT).show();
-                } else {
-                    for (int i = 0; i < mazos.size(); i++) {
-                        nomMazos.add(mazos.get(i).getNombreMazo());
-                    }
-
-                    AdaptadorAddCar adaptadorMazo = new AdaptadorAddCar(getApplicationContext(), mazos);
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ListaCartas.this);
-                    LayoutInflater inflater = getLayoutInflater();
-                    View view = inflater.inflate(R.layout.dialog_add_carta, null);
-                    builder.setView(view);
-                    dialog = builder.create();
-                    dialog.show();
-
-                    nupNumero = view.findViewById(R.id.nupNumero);
-                    lsvMazos = view.findViewById(R.id.lsvMazos);
-
-                    lsvMazos.setAdapter(adaptadorMazo);
-                    nupNumero.setMaxValue(20);
-                    nupNumero.setMinValue(1);
-
-                    lsvMazos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
-                            SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
-                            ContentValues valoresCarta = new ContentValues();
-                            valoresCarta.put("ID_MAZO", mazos.get(pos).getIdMazo());
-                            valoresCarta.put("ID_CARTA", card.getUuid());
-                            valoresCarta.put("CANTIDAD", nupNumero.getValue());
-                            //POR QUÉ NO SALTA LA EXCEPCIÓN¿?
-                            try {
-                                long result = baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);
-
-                                if (result == -1) {
-                                    Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
-                                }
-//                                    Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
-                            } catch (SQLiteConstraintException e) {
-                                Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
-                            }
-
-                            baseDeDatos.close();
-                        }
-                    });
-                }
-
-                return true;
+                return muestraDialog(card);
             }
         }, new AdaptadorBigRecycler.ItemClickListener() {
             @Override
@@ -141,74 +76,79 @@ public class ListaCartas extends AppCompatActivity {
         AdaptadorBigRecycler ad2 = new AdaptadorBigRecycler(getApplicationContext(), listaCards, new AdaptadorBigRecycler.LongItemClickListener() {
             @Override
             public boolean onItemLongClick(Card card) {
-                AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
-                SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
-
-                AlertDialog dialog;
-                NumberPicker nupNumero;
-                ListView lsvMazos;
-                ArrayList<String> nomMazos = new ArrayList<>();
-                ArrayList<Mazo> mazos = new ArrayList<>();
-
-                Cursor fila = baseDeDatos.rawQuery("SELECT ID_MAZO, NOMBRE FROM MAZO", null);
-                while (fila.moveToNext()) {
-                    Mazo m = new Mazo(fila.getInt(0), fila.getString(1));
-                    mazos.add(m);
-                }
-                baseDeDatos.close();
-
-                if (mazos.size() == 0) {
-                    Toast.makeText(ListaCartas.this, "No hay mazos a los que añadir esta carta", Toast.LENGTH_SHORT).show();
-                } else {
-                    for (int i = 0; i < mazos.size(); i++) {
-                        nomMazos.add(mazos.get(i).getNombreMazo());
-                    }
-
-                    AdaptadorAddCar adaptadorMazo = new AdaptadorAddCar(getApplicationContext(), mazos);
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ListaCartas.this);
-                    LayoutInflater inflater = getLayoutInflater();
-                    View view = inflater.inflate(R.layout.dialog_add_carta, null);
-                    builder.setView(view);
-                    dialog = builder.create();
-                    dialog.show();
-
-                    nupNumero = view.findViewById(R.id.nupNumero);
-                    lsvMazos = view.findViewById(R.id.lsvMazos);
-
-                    lsvMazos.setAdapter(adaptadorMazo);
-                    nupNumero.setMaxValue(20);
-                    nupNumero.setMinValue(1);
-
-                    lsvMazos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
-                            SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
-                            ContentValues valoresCarta = new ContentValues();
-                            valoresCarta.put("ID_MAZO", mazos.get(pos).getIdMazo());
-                            valoresCarta.put("ID_CARTA", card.getUuid());
-                            valoresCarta.put("CANTIDAD", nupNumero.getValue());
-                            //POR QUÉ NO SALTA LA EXCEPCIÓN¿?
-                            try {
-                                long result = baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);
-
-                                if (result == -1) {
-                                    Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
-                                }
-//                                    Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
-                            } catch (SQLiteConstraintException e) {
-                                Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
-                            }
-
-                            baseDeDatos.close();
-                        }
-                    });
-                }
-
-                return true;
+                return muestraDialog(card);
+//                AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
+//                SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
+//
+//                AlertDialog dialog;
+//                NumberPicker nupNumero;
+//                ListView lsvMazos;
+//                ArrayList<String> nomMazos = new ArrayList<>();
+//                ArrayList<Mazo> mazos = new ArrayList<>();
+//
+//                Cursor fila = baseDeDatos.rawQuery("SELECT ID_MAZO, NOMBRE FROM MAZO", null);
+//                while (fila.moveToNext()) {
+//                    Mazo m = new Mazo(fila.getInt(0), fila.getString(1));
+//                    mazos.add(m);
+//                }
+//                baseDeDatos.close();
+//
+//                if (mazos.size() == 0) {
+//                    Toast.makeText(ListaCartas.this, "No hay mazos a los que añadir esta carta", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    for (int i = 0; i < mazos.size(); i++) {
+//                        nomMazos.add(mazos.get(i).getNombreMazo());
+//                    }
+//
+//                    AdaptadorAddCar adaptadorMazo = new AdaptadorAddCar(getApplicationContext(), mazos);
+//
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(ListaCartas.this);
+//                    LayoutInflater inflater = getLayoutInflater();
+//                    View view = inflater.inflate(R.layout.dialog_add_carta, null);
+//                    builder.setView(view);
+//                    dialog = builder.create();
+//                    dialog.show();
+//
+//                    nupNumero = view.findViewById(R.id.nupNumero);
+//                    lsvMazos = view.findViewById(R.id.lsvMazos);
+//
+//                    lsvMazos.setAdapter(adaptadorMazo);
+//                    Typeface typeface = null;
+//                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//                        typeface = getResources().getFont(R.font.belerenitalic);
+//                        nupNumero.setTypeface(typeface);
+//                        nupNumero.setSelectedTypeface(typeface);
+//                    }
+//
+//                    lsvMazos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+//                                AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
+//                                SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
+//                                ContentValues valoresCarta = new ContentValues();
+//                                valoresCarta.put("ID_MAZO", mazos.get(pos).getIdMazo());
+//                                valoresCarta.put("ID_CARTA", card.getUuid());
+//                                valoresCarta.put("CANTIDAD", nupNumero.getValue());
+//                                //POR QUÉ NO SALTA LA EXCEPCIÓN¿?
+//                                try {
+//                                    long result = baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);
+//
+//                                    if (result == -1) {
+//                                        Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
+//                                    } else {
+//                                        Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
+//                                    }
+////                                    Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
+//                                } catch (SQLiteConstraintException e) {
+//                                    Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
+//                                }
+//
+//                            baseDeDatos.close();
+//                        }
+//                    });
+//                }
+//
+//                return true;
             }
         }, new AdaptadorBigRecycler.ItemClickListener() {
             @Override
@@ -314,6 +254,82 @@ public class ListaCartas extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+    }
+
+    public boolean muestraDialog(Card card) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
+        SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
+
+        AlertDialog dialog;
+        NumberPicker nupNumero;
+        ListView lsvMazos;
+        ArrayList<String> nomMazos = new ArrayList<>();
+        ArrayList<Mazo> mazos = new ArrayList<>();
+
+        Cursor fila = baseDeDatos.rawQuery("SELECT ID_MAZO, NOMBRE FROM MAZO", null);
+        while (fila.moveToNext()) {
+            Mazo m = new Mazo(fila.getInt(0), fila.getString(1));
+            mazos.add(m);
+        }
+        baseDeDatos.close();
+
+        if (mazos.size() == 0) {
+            Toast.makeText(ListaCartas.this, "No hay mazos a los que añadir esta carta", Toast.LENGTH_SHORT).show();
+        } else {
+            for (int i = 0; i < mazos.size(); i++) {
+                nomMazos.add(mazos.get(i).getNombreMazo());
+            }
+
+            AdaptadorAddCar adaptadorMazo = new AdaptadorAddCar(getApplicationContext(), mazos);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(ListaCartas.this);
+            LayoutInflater inflater = getLayoutInflater();
+            View view = inflater.inflate(R.layout.dialog_add_carta, null);
+            builder.setView(view);
+            dialog = builder.create();
+            dialog.show();
+
+            nupNumero = view.findViewById(R.id.nupNumero);
+            lsvMazos = view.findViewById(R.id.lsvMazos);
+
+            lsvMazos.setAdapter(adaptadorMazo);
+            Typeface typeface;
+            //CREO QUE LO HACE CUANDO EL MÓVIL ESTA CORRIENDO API26 O +
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                typeface = getResources().getFont(R.font.belerenitalic);
+                nupNumero.setTypeface(typeface);
+                nupNumero.setSelectedTypeface(typeface);
+            }
+
+            lsvMazos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
+                    SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
+                    ContentValues valoresCarta = new ContentValues();
+                    valoresCarta.put("ID_MAZO", mazos.get(pos).getIdMazo());
+                    valoresCarta.put("ID_CARTA", card.getUuid());
+                    valoresCarta.put("CANTIDAD", nupNumero.getValue());
+                    //POR QUÉ NO SALTA LA EXCEPCIÓN¿?
+                    try {
+                        long result = baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);
+
+                        if (result == -1) {
+                            Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
+                        }
+//                                    Toast.makeText(ListaCartas.this, "Insertado a mazo", Toast.LENGTH_SHORT).show();
+                    } catch (SQLiteConstraintException e) {
+                        Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
+                    }
+
+                    baseDeDatos.close();
+                }
+            });
+        }
+
+        return true;
     }
 
     class NameComparator implements Comparator<Card> {

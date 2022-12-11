@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:fontFamily="@font/belerenitalic"
         android:text="Agregar a:"
@@ -15,9 +17,9 @@
 
     <ListView
         android:id="@+id/lsvMazos"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="172dp" />
+        android:layout_height="137dp"
+        android:layout_margin="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,9 +30,16 @@
         android:textColor="@color/black"
         android:textSize="24sp" />
 
-    <NumberPicker
+    <com.shawnlin.numberpicker.NumberPicker
         android:id="@+id/nupNumero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        app:np_dividerColor="@color/black"
+        app:np_dividerThickness="1dp"
+        app:np_max="20"
+        app:np_min="1"
+        app:np_orientation="horizontal"
+        app:np_textColor="@android:color/darker_gray" />
 </LinearLayout>
