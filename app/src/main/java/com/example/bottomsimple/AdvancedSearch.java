@@ -26,6 +26,7 @@ import com.jayway.jsonpath.Predicate;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -36,7 +37,7 @@ public class AdvancedSearch extends AppCompatActivity {
 
 
     private ArrayList<Card> listaCards;
-    protected ProgressDialog mProgressDialog;
+    //protected ProgressDialog mProgressDialog;
     EditText etName;
     EditText etText;
     EditText etManaValue;
@@ -151,17 +152,17 @@ public class AdvancedSearch extends AppCompatActivity {
         });
     }
     private void populateTable() {
-        mProgressDialog = ProgressDialog.show(this, "Please wait","Long operation starts...", true);
-        new Thread() {
-           // @RequiresApi(api = Build.VERSION_CODES.N)
-            //@Override
-            //public void run() {
-                //try {
-                      //runOnUiThread(new Runnable() {
+        //mProgressDialog = ProgressDialog.show(this, "Please wait","Long operation starts...", true);
+        /*new Thread() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void run() {
+                try {*/
+                      runOnUiThread(new Runnable() {
                         @RequiresApi(api = Build.VERSION_CODES.N)
                         @Override
                         public void run() {
-                            mProgressDialog.dismiss();
+                            // mProgressDialog.dismiss();
 
                             listaCards = new ArrayList<>();
 
@@ -176,7 +177,7 @@ public class AdvancedSearch extends AppCompatActivity {
                             Predicate cardswithFullArt = new Predicate() {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
-                                    if(ctx.item(Map.class).containsKey("isFullArt") && ctx.item(Map.class).containsValue(isFullArt.isChecked()) ) {
+                                    if (ctx.item(Map.class).containsKey("isFullArt") && ctx.item(Map.class).containsValue(isFullArt.isChecked())) {
                                         return ctx.item(Map.class).containsKey("isFullArt");
                                     }
                                     return false;
@@ -185,16 +186,16 @@ public class AdvancedSearch extends AppCompatActivity {
                             Predicate cardswithName = new Predicate() {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
-                                    if ((ctx.item(Map.class).containsKey("name") && ctx.item(Map.class).get("name").toString().toLowerCase(Locale.ROOT).contains(etName.getText().toString().toLowerCase(Locale.ROOT)))&& !etName.getText().toString().equals("") ) {
+                                    if ((ctx.item(Map.class).containsKey("name") && ctx.item(Map.class).get("name").toString().toLowerCase(Locale.ROOT).contains(etName.getText().toString().toLowerCase(Locale.ROOT))) && !etName.getText().toString().equals("")) {
                                         return ctx.item(Map.class).containsKey("name");
                                     }
-                                        return false;
+                                    return false;
                                 }
                             };
                             Predicate cardswithText = new Predicate() {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
-                                    if (((ctx.item(Map.class).containsKey("text") && ctx.item(Map.class).get("text").toString().toLowerCase(Locale.ROOT).contains(etText.getText().toString().toLowerCase(Locale.ROOT)))&& !etText.getText().toString().equals(""))) {
+                                    if (((ctx.item(Map.class).containsKey("text") && ctx.item(Map.class).get("text").toString().toLowerCase(Locale.ROOT).contains(etText.getText().toString().toLowerCase(Locale.ROOT))) && !etText.getText().toString().equals(""))) {
                                         return ctx.item(Map.class).containsKey("text");
                                     }
                                     return false;
@@ -203,7 +204,7 @@ public class AdvancedSearch extends AppCompatActivity {
                             Predicate cardswithMana = new Predicate() {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
-                                    if (ctx.item(Map.class).containsKey("manaValue")&& !etManaValue.getText().toString().equals("") && Double.parseDouble(ctx.item(Map.class).get("manaValue").toString())==Double.parseDouble(etManaValue.getText().toString()) ) {
+                                    if (ctx.item(Map.class).containsKey("manaValue") && !etManaValue.getText().toString().equals("") && Double.parseDouble(ctx.item(Map.class).get("manaValue").toString()) == Double.parseDouble(etManaValue.getText().toString())) {
                                         return ctx.item(Map.class).containsKey("manaValue");
                                     }
                                     return false;
@@ -213,23 +214,23 @@ public class AdvancedSearch extends AppCompatActivity {
                             Predicate cardswithRarity = new Predicate() {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
-                                    if(rarityCommon.isChecked()) {
-                                        if(ctx.item(Map.class).containsValue("common") && ctx.item(Map.class).containsKey("rarity")) {
+                                    if (rarityCommon.isChecked()) {
+                                        if (ctx.item(Map.class).containsValue("common") && ctx.item(Map.class).containsKey("rarity")) {
                                             return ctx.item(Map.class).containsKey("rarity");
                                         }
                                     }
-                                    if(rarityUncommon.isChecked()){
-                                        if(ctx.item(Map.class).containsValue("uncommon") && ctx.item(Map.class).containsKey("rarity")) {
+                                    if (rarityUncommon.isChecked()) {
+                                        if (ctx.item(Map.class).containsValue("uncommon") && ctx.item(Map.class).containsKey("rarity")) {
                                             return ctx.item(Map.class).containsKey("rarity");
                                         }
                                     }
-                                    if(rarityRare.isChecked()){
-                                        if(ctx.item(Map.class).containsValue("rare") && ctx.item(Map.class).containsKey("rarity")) {
+                                    if (rarityRare.isChecked()) {
+                                        if (ctx.item(Map.class).containsValue("rare") && ctx.item(Map.class).containsKey("rarity")) {
                                             return ctx.item(Map.class).containsKey("rarity");
                                         }
                                     }
-                                    if(rarityMythic.isChecked()){
-                                        if(ctx.item(Map.class).containsValue("mythic") && ctx.item(Map.class).containsKey("rarity")) {
+                                    if (rarityMythic.isChecked()) {
+                                        if (ctx.item(Map.class).containsValue("mythic") && ctx.item(Map.class).containsKey("rarity")) {
                                             return ctx.item(Map.class).containsKey("rarity");
                                         }
                                     }
@@ -240,10 +241,10 @@ public class AdvancedSearch extends AppCompatActivity {
                             Predicate cardswithColor = new Predicate() {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
-                                    if (ctx.item(Map.class).containsKey("colors")&&(colorWhite.isChecked()||colorBlack.isChecked()||colorBlue.isChecked()||colorGreen.isChecked()||colorRed.isChecked()||colorLess.isChecked())) {
+                                    if (ctx.item(Map.class).containsKey("colors") && (colorWhite.isChecked() || colorBlack.isChecked() || colorBlue.isChecked() || colorGreen.isChecked() || colorRed.isChecked() || colorLess.isChecked())) {
                                         ArrayList<String> listdata = new ArrayList<String>();
                                         net.minidev.json.JSONArray jArray = (net.minidev.json.JSONArray) ctx.item(Map.class).get("colors");
-                                        if (jArray == null&&colorLess.isChecked()) {
+                                        if (jArray == null && colorLess.isChecked()) {
                                             return ctx.item(Map.class).containsKey("colors");
                                         }
                                         if (jArray != null) {
@@ -258,31 +259,31 @@ public class AdvancedSearch extends AppCompatActivity {
                                             String g = null;
                                             String r = null;
                                             int j = 0;
-                                            if(colorWhite.isChecked()){
+                                            if (colorWhite.isChecked()) {
                                                 w = "W";
                                                 j++;
                                             }
-                                            if(colorBlack.isChecked()){
+                                            if (colorBlack.isChecked()) {
                                                 b = "B";
                                                 j++;
                                             }
-                                            if(colorBlue.isChecked()){
+                                            if (colorBlue.isChecked()) {
                                                 u = "U";
                                                 j++;
                                             }
-                                            if(colorGreen.isChecked()){
+                                            if (colorGreen.isChecked()) {
                                                 g = "G";
                                                 j++;
                                             }
-                                            if(colorRed.isChecked()){
+                                            if (colorRed.isChecked()) {
                                                 r = "R";
                                                 j++;
                                             }
                                             //--------------------TODAS-----------------------------------
-                                            if(listdata.contains(w) && listdata.contains(b) &&listdata.contains(u) && listdata.contains(g) && listdata.contains(r)) {
+                                            if (listdata.contains(w) && listdata.contains(b) && listdata.contains(u) && listdata.contains(g) && listdata.contains(r)) {
                                                 return ctx.item(Map.class).containsKey("colors");
                                             }
-                                            if(j == 3) {
+                                            if (j == 3) {
                                                 //--------------------TRES-----------------------------------
                                                 if (listdata.contains(w) && listdata.contains(b) && listdata.contains(u)) {
                                                     return ctx.item(Map.class).containsKey("colors");
@@ -312,7 +313,7 @@ public class AdvancedSearch extends AppCompatActivity {
                                                     return ctx.item(Map.class).containsKey("colors");
                                                 }
                                             }
-                                            if(j == 2) {
+                                            if (j == 2) {
                                                 //--------------------DOS-----------------------------------
                                                 if (listdata.contains(w) && listdata.contains(b)) {
                                                     return ctx.item(Map.class).containsKey("colors");
@@ -354,7 +355,7 @@ public class AdvancedSearch extends AppCompatActivity {
                             Predicate cardswithLanguage = new Predicate() {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
-                                    if (ctx.item(Map.class).containsValue(spLanguage.getSelectedItem().toString()) && ctx.item(Map.class).containsKey("language")&&!spLanguage.getSelectedItem().toString().equals("")) {
+                                    if (ctx.item(Map.class).containsValue(spLanguage.getSelectedItem().toString()) && ctx.item(Map.class).containsKey("language") && !spLanguage.getSelectedItem().toString().equals("")) {
                                         return ctx.item(Map.class).containsKey("language");
                                     }
                                     return false;
@@ -372,7 +373,7 @@ public class AdvancedSearch extends AppCompatActivity {
                                             }
                                         }
                                         for (int i = 0; i < listdata.size(); i++) {
-                                            if (listdata.contains(etKeywords.getText().toString()) ) {
+                                            if (listdata.contains(etKeywords.getText().toString())) {
                                                 return ctx.item(Map.class).containsKey("keywords");
                                             }
                                         }
@@ -384,7 +385,7 @@ public class AdvancedSearch extends AppCompatActivity {
                             Predicate cardswithKeywords = new Predicate() {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
-                                    if (ctx.item(Map.class).containsKey("keywords")&& !etKeywords.getText().toString().equals("")) {
+                                    if (ctx.item(Map.class).containsKey("keywords") && !etKeywords.getText().toString().equals("")) {
                                         ArrayList<String> listdata = new ArrayList<String>();
                                         net.minidev.json.JSONArray jArray = (net.minidev.json.JSONArray) ctx.item(Map.class).get("keywords");
                                         if (jArray != null) {
@@ -393,7 +394,7 @@ public class AdvancedSearch extends AppCompatActivity {
                                             }
                                         }
                                         for (int i = 0; i < listdata.size(); i++) {
-                                            if (listdata.contains(etKeywords.getText().toString()) ) {
+                                            if (listdata.contains(etKeywords.getText().toString())) {
                                                 return ctx.item(Map.class).containsKey("keywords");
                                             }
                                         }
@@ -408,44 +409,44 @@ public class AdvancedSearch extends AppCompatActivity {
                                 public boolean apply(Predicate.PredicateContext ctx) {
                                     //TOUGHNESS
                                     ArrayList<String> listaToughness = new ArrayList<String>();
-                                    if (ctx.item(Map.class).containsKey("toughness")&& !etToughness.getText().toString().equals("")) {
-                                        if(ctx.item(Map.class).getOrDefault("toughness", "").toString().equals("*")&& etToughness.getText().toString().equals("*")){
+                                    if (ctx.item(Map.class).containsKey("toughness") && !etToughness.getText().toString().equals("")) {
+                                        if (ctx.item(Map.class).getOrDefault("toughness", "").toString().equals("*") && etToughness.getText().toString().equals("*")) {
                                             return ctx.item(Map.class).containsKey("toughness");
                                         }
                                         listaToughness = new ArrayList<String>();
-                                        if(!ctx.item(Map.class).getOrDefault("toughness", "").toString().equals("*")){
+                                        if (!ctx.item(Map.class).getOrDefault("toughness", "").toString().equals("*")) {
                                             listaToughness.add(ctx.item(Map.class).getOrDefault("toughness", "").toString());
                                         }
                                     }
                                     try {
                                         for (int i = 0; i < listaToughness.size(); i++) {
                                             // MAYOR O IGUAL QUE
-                                            if(spinnerToughness.getSelectedItem().toString().equals(">=")){
+                                            if (spinnerToughness.getSelectedItem().toString().equals(">=")) {
                                                 if (Integer.parseInt(listaToughness.get(i).toString()) >= Integer.parseInt(etToughness.getText().toString())) {
                                                     return ctx.item(Map.class).containsKey("toughness");
                                                 }
                                             }
                                             // MENOR O IGUAL QUE
-                                            if(spinnerToughness.getSelectedItem().toString().equals("<=")){
+                                            if (spinnerToughness.getSelectedItem().toString().equals("<=")) {
 
                                                 if (Integer.parseInt(listaToughness.get(i).toString()) <= Integer.parseInt(etToughness.getText().toString())) {
                                                     return ctx.item(Map.class).containsKey("toughness");
                                                 }
                                             }
                                             // IGUAL QUE
-                                            if(spinnerToughness.getSelectedItem().toString().equals("=")){
+                                            if (spinnerToughness.getSelectedItem().toString().equals("=")) {
                                                 if (Integer.parseInt(listaToughness.get(i).toString()) == Integer.parseInt(etToughness.getText().toString())) {
                                                     return ctx.item(Map.class).containsKey("toughness");
                                                 }
                                             }
                                             // MAYOR QUE
-                                            if(spinnerToughness.getSelectedItem().toString().equals(">")){
+                                            if (spinnerToughness.getSelectedItem().toString().equals(">")) {
                                                 if (Integer.parseInt(listaToughness.get(i).toString()) > Integer.parseInt(etToughness.getText().toString())) {
                                                     return ctx.item(Map.class).containsKey("toughness");
                                                 }
                                             }
                                             // MAYOR QUE
-                                            if(spinnerToughness.getSelectedItem().toString().equals("<")){
+                                            if (spinnerToughness.getSelectedItem().toString().equals("<")) {
                                                 if (Integer.parseInt(listaToughness.get(i).toString()) < Integer.parseInt(etToughness.getText().toString())) {
                                                     return ctx.item(Map.class).containsKey("toughness");
                                                 }
@@ -463,43 +464,43 @@ public class AdvancedSearch extends AppCompatActivity {
                                 public boolean apply(Predicate.PredicateContext ctx) {
                                     //POWER
                                     ArrayList<String> listaPower = new ArrayList<String>();
-                                    if (ctx.item(Map.class).containsKey("power")&& !etPower.getText().toString().equals("")) {
-                                        if(ctx.item(Map.class).getOrDefault("power", "").toString().equals("*")&& etPower.getText().toString().equals("*")){
+                                    if (ctx.item(Map.class).containsKey("power") && !etPower.getText().toString().equals("")) {
+                                        if (ctx.item(Map.class).getOrDefault("power", "").toString().equals("*") && etPower.getText().toString().equals("*")) {
                                             return ctx.item(Map.class).containsKey("toughness");
                                         }
                                         listaPower = new ArrayList<String>();
-                                        if(!ctx.item(Map.class).getOrDefault("power", "").toString().equals("*")){
+                                        if (!ctx.item(Map.class).getOrDefault("power", "").toString().equals("*")) {
                                             listaPower.add(ctx.item(Map.class).getOrDefault("power", "").toString());
                                         }
                                     }
                                     try {
                                         for (int i = 0; i < listaPower.size(); i++) {
                                             // MAYOR O IGUAL QUE
-                                            if(spinnerPower.getSelectedItem().toString().equals(">=")){
+                                            if (spinnerPower.getSelectedItem().toString().equals(">=")) {
                                                 if (Integer.parseInt(listaPower.get(i).toString()) >= Integer.parseInt(etPower.getText().toString())) {
                                                     return ctx.item(Map.class).containsKey("power");
                                                 }
                                             }
                                             // MENOR O IGUAL QUE
-                                            if(spinnerPower.getSelectedItem().toString().equals("<=")){
+                                            if (spinnerPower.getSelectedItem().toString().equals("<=")) {
                                                 if (Integer.parseInt(listaPower.get(i).toString()) <= Integer.parseInt(etPower.getText().toString())) {
                                                     return ctx.item(Map.class).containsKey("power");
                                                 }
                                             }
                                             // IGUAL QUE
-                                            if(spinnerPower.getSelectedItem().toString().equals("=")){
+                                            if (spinnerPower.getSelectedItem().toString().equals("=")) {
                                                 if (Integer.parseInt(listaPower.get(i).toString()) == Integer.parseInt(etPower.getText().toString())) {
                                                     return ctx.item(Map.class).containsKey("power");
                                                 }
                                             }
                                             // MAYOR QUE
-                                            if(spinnerPower.getSelectedItem().toString().equals(">")){
+                                            if (spinnerPower.getSelectedItem().toString().equals(">")) {
                                                 if (Integer.parseInt(listaPower.get(i).toString()) > Integer.parseInt(etPower.getText().toString())) {
                                                     return ctx.item(Map.class).containsKey("power");
                                                 }
                                             }
                                             // MAYOR QUE
-                                            if(spinnerPower.getSelectedItem().toString().equals("<")){
+                                            if (spinnerPower.getSelectedItem().toString().equals("<")) {
                                                 if (Integer.parseInt(listaPower.get(i).toString()) < Integer.parseInt(etPower.getText().toString())) {
                                                     return ctx.item(Map.class).containsKey("power");
                                                 }
@@ -512,10 +513,19 @@ public class AdvancedSearch extends AppCompatActivity {
                                     return false;
                                 }
                             };
+                            Predicate cardswithType = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    if ((ctx.item(Map.class).containsKey("type") && ctx.item(Map.class).get("type").toString().toLowerCase(Locale.ROOT).contains(etType.getText().toString().toLowerCase(Locale.ROOT))) && !etType.getText().toString().equals("")) {
+                                        return ctx.item(Map.class).containsKey("type");
+                                    }
+                                    return false;
+                                }
+                            };
 
                             Filter nameFilter = filter(cardswithName);
                             Filter textFilter = filter(cardswithText);
-                            Filter manaFilter= filter(cardswithMana);
+                            Filter manaFilter = filter(cardswithMana);
                             Filter fullArtFilter = filter(cardswithFullArt);
                             Filter rarityFilter = filter(cardswithRarity);
                             Filter colorFilter = filter(cardswithColor);
@@ -523,14 +533,71 @@ public class AdvancedSearch extends AppCompatActivity {
                             Filter keywordsFilter = filter(cardswithKeywords);
                             Filter toughnessFilter = filter(cardswithToughness);
                             Filter powerFilter = filter(cardswithPower);
+                            Filter typeFilter = filter(cardswithType);
+
 
                             //List<Map<String, String>> cards = JsonPath.parse(json).read("$..cards[?]",nameFilter,fullArtFilter,rarityFilter,colorFilter,languageFilter,keywordsFilter,toughnessFilter,powerFilter,textFilter);
                             //List<Map<String, Double>> cardsDouble = JsonPath.parse(json).read("$..cards[?]",nameFilter,fullArtFilter,rarityFilter,colorFilter,languageFilter,keywordsFilter,toughnessFilter,powerFilter,textFilter);
                             //List<Map<String, Map<String, String>>> cartas = JsonPath.parse(json).read("$..cards[?]",nameFilter,fullArtFilter,rarityFilter,colorFilter,languageFilter,keywordsFilter,toughnessFilter,powerFilter,textFilter);
+                            ArrayList<List<Map<String, String>>> cardsFilter = new ArrayList<>();
+                            ArrayList<List<Map<String, Double>>> cardsDoubleFilter = new ArrayList<>();
+                            ArrayList<List<Map<String, Map<String, String>>>> cartasFilter = new ArrayList<>();
 
-                            ArrayList<Map<String, String>> cards =new ArrayList<>();
-                            ArrayList<Map<String, Double>> cardsDouble =new ArrayList<>();
-                            ArrayList<Map<String, Map<String, String>>> cartas = new ArrayList<>();
+                            if (!etName.getText().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", nameFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", nameFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", nameFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (!etText.getText().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", textFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", textFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", textFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (!etManaValue.getText().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", manaFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", manaFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", manaFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (!etType.getText().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", typeFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", typeFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", typeFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+
+
+
+                            for (int i = 1; i < cardsFilter.size(); i++) {
+                                cardsFilter.get(0).retainAll(cardsFilter.get(i));
+                                cardsDoubleFilter.get(0).retainAll(cardsDoubleFilter.get(i));
+                                cartasFilter.get(0).retainAll(cartasFilter.get(i));
+                            }
+
+
+                            List<Map<String, String>> cards = new ArrayList<>();
+                            List<Map<String, Double>> cardsDouble = new ArrayList<>();
+                            List<Map<String, Map<String, String>>> cartas = new ArrayList<>();
+
+                            cards = cardsFilter.get(0);
+                            cardsDouble = cardsDoubleFilter.get(0);
+                            cartas = cartasFilter.get(0);
+
+                            if (cards.isEmpty()) {
+                                Toast.makeText(getApplicationContext(), "No hay cartas con esas caracteristicas",
+                                        Toast.LENGTH_LONG).show();
+                            } else {
+                            /*
                             if(!etName.getText().toString().equals("")){
                                 List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]",nameFilter);
                                 List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]",nameFilter);
@@ -558,89 +625,91 @@ public class AdvancedSearch extends AppCompatActivity {
                             //List<Map<String, String>> cards = JsonPath.parse(json).read("$..cards[?]",textFilter,nameFilter);
                             //List<Map<String, Double>> cardsDouble = JsonPath.parse(json).read("$..cards[?]",textFilter,nameFilter);
                             //List<Map<String, Map<String, String>>> cartas = JsonPath.parse(json).read("$..cards[?]",textFilter,nameFilter);
-                            cards=removeDuplicates(cards);
-                            cardsDouble=removeDuplicates(cardsDouble);
-                            cartas=removeDuplicates(cartas);
+                            //cards=removeDuplicates(cards);
+                            //cardsDouble=removeDuplicates(cardsDouble);
+                            //
+                            // cartas=removeDuplicates(cartas);
+                            */
 
-
-                            String name = "";
-                            String rarity = "";
-                            String setCode = "";
-                            String setNumber = "";
-                            String cost = "";
-                            String type = "";
-                            String text = "";
-                            String uuid = "";
-                            String power = "";
-                            String toughness = "";
-                            Double manaValue;
-                            Map<String, String> identifiers;
-                            Map<String, String> legality;
-                            Map<String, String> ruling;
-                            ArrayList<String> legalities = new ArrayList<>();
-                            ArrayList<String> rulings = new ArrayList<>();
-                            String imagenId = "";
-                            for (int i = 0; i < cards.size(); i++) {
-                                //    System.out.println(cards.get(i));
-                                name = cards.get(i).getOrDefault("name", "");
-                                setCode = cards.get(i).getOrDefault("setCode", "");
-                                setNumber = cards.get(i).getOrDefault("number", "");
-                                cost = cards.get(i).getOrDefault("manaCost", "");
-                                type = cards.get(i).getOrDefault("type", "");
-                                text = cards.get(i).getOrDefault("text", "");
-                                uuid = cards.get(i).getOrDefault("uuid", "");
-                                power = cards.get(i).getOrDefault("power", "0");
-                                toughness = cards.get(i).getOrDefault("toughness", "0");
-                                rarity = cards.get(i).getOrDefault("rarity", "");
-                                manaValue = cardsDouble.get(i).getOrDefault("manaValue", 0d);
-                                identifiers = cartas.get(i).get("identifiers");
-                                legality = cartas.get(i).get("legalities");
-                                for (String key : legality.keySet()
-                                ) {
-                                    if (legality.get(key).equals("Legal") && !legalities.contains(key)) {
-                                        legalities.add(key);
+                                String name = "";
+                                String rarity = "";
+                                String setCode = "";
+                                String setNumber = "";
+                                String cost = "";
+                                String type = "";
+                                String text = "";
+                                String uuid = "";
+                                String power = "";
+                                String toughness = "";
+                                Double manaValue;
+                                Map<String, String> identifiers;
+                                Map<String, String> legality;
+                                Map<String, String> ruling;
+                                ArrayList<String> legalities = new ArrayList<>();
+                                ArrayList<String> rulings = new ArrayList<>();
+                                String imagenId = "";
+                                for (int i = 0; i < cards.size(); i++) {
+                                    //    System.out.println(cards.get(i));
+                                    name = cards.get(i).getOrDefault("name", "");
+                                    setCode = cards.get(i).getOrDefault("setCode", "");
+                                    setNumber = cards.get(i).getOrDefault("number", "");
+                                    cost = cards.get(i).getOrDefault("manaCost", "");
+                                    type = cards.get(i).getOrDefault("type", "");
+                                    text = cards.get(i).getOrDefault("text", "");
+                                    uuid = cards.get(i).getOrDefault("uuid", "");
+                                    power = cards.get(i).getOrDefault("power", "0");
+                                    toughness = cards.get(i).getOrDefault("toughness", "0");
+                                    rarity = cards.get(i).getOrDefault("rarity", "");
+                                    manaValue = cardsDouble.get(i).getOrDefault("manaValue", 0d);
+                                    identifiers = cartas.get(i).get("identifiers");
+                                    legality = cartas.get(i).get("legalities");
+                                    for (String key : legality.keySet()
+                                    ) {
+                                        if (legality.get(key).equals("Legal") && !legalities.contains(key)) {
+                                            legalities.add(key);
+                                        }
                                     }
-                                }
-                                //ruling=cartas.get(i).get("rulings");
-                                imagenId = identifiers.getOrDefault("scryfallId", "");
+                                    //ruling=cartas.get(i).get("rulings");
+                                    imagenId = identifiers.getOrDefault("scryfallId", "");
 
-                                //  listaCards.add(cards.get(i));
-                                Card c = new Card();
-                                c.setSetNumber(setCode + "/" + setNumber);
-                                c.setName(name);
-                                c.setCost(cost);
-                                c.setType(type);
-                                c.setText(text);
-                                c.setUuid(uuid);
-                                c.setPower(power);
-                                c.setToughness(toughness);
-                                c.setRarity(rarity);
-                                c.setManaValue(manaValue);
-                                c.setImagenId(imagenId);
-                                c.setLegality(legalities);
-                                c.setRulings(rulings);
-                                listaCards.add(c);
-                            }
-                            if (!listaCards.isEmpty()) {
-                                Intent i = new Intent(getApplicationContext(), ListSelector.class);
-                                //i.putExtra("list",listaCards);
-                                Bundle args = new Bundle();
-                                args.putSerializable("ARRAYLIST", (Serializable) listaCards);
-                                i.putExtra("BUNDLE", args);
-                                startActivity(i);
-                                //ad = new AdaptadorSmall(getApplicationContext(), listaCards);
-                                //lvCards.setAdapter(ad);
-                            } else {
-                                Toast.makeText(getApplicationContext(), "No hay cartas con ese nombre o texto",
-                                        Toast.LENGTH_LONG).show();
+                                    //  listaCards.add(cards.get(i));
+                                    Card c = new Card();
+                                    c.setSetNumber(setCode + "/" + setNumber);
+                                    c.setName(name);
+                                    c.setCost(cost);
+                                    c.setType(type);
+                                    c.setText(text);
+                                    c.setUuid(uuid);
+                                    c.setPower(power);
+                                    c.setToughness(toughness);
+                                    c.setRarity(rarity);
+                                    c.setManaValue(manaValue);
+                                    c.setImagenId(imagenId);
+                                    c.setLegality(legalities);
+                                    c.setRulings(rulings);
+                                    listaCards.add(c);
+                                }
+                                if (!listaCards.isEmpty()) {
+                                    Intent i = new Intent(getApplicationContext(), ListSelector.class);
+                                    //i.putExtra("list",listaCards);
+                                    Bundle args = new Bundle();
+                                    args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+                                    i.putExtra("BUNDLE", args);
+                                    startActivity(i);
+                                    //ad = new AdaptadorSmall(getApplicationContext(), listaCards);
+                                    //lvCards.setAdapter(ad);
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "No hay cartas con ese nombre o texto",
+                                            Toast.LENGTH_LONG).show();
+                                }
                             }
                         }
-                   // });
-                //} catch (final Exception ex) {
-                 //   Log.i("---","Exception in thread");
-                //}
-            //}
-        }.start();
+                    });
+               /* } catch (final Exception ex) {
+                    Log.i("---","Exception in thread");
+                }
+            }
+        }.start();*/
     }
     public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list)
         {
@@ -671,5 +740,63 @@ public class AdvancedSearch extends AppCompatActivity {
         }
         // return the new list
         return newList;
+    }
+    public Card consultaUuid(String uuidCard){
+        String json = null;
+        try {
+            json = Fichero.abrir_fichero("/data/data/com.example.bottomsimple/files/standard.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Map<String, String> carta = JsonPath.parse(json)
+                .read("$..cards[?('"+uuidCard+"' in @['uuid'])]");
+        Map<String, Double> carta2 = JsonPath.parse(json)
+                .read("$..cards[?('"+uuidCard+"' in @['uuid'])]");
+        Map<String, Map<String, String>> carta3 = JsonPath.parse(json)
+                .read("$..cards[?('"+uuidCard+"' in @['uuid'])]");
+
+        Map<String, String> ruling;
+        ArrayList<String> legalities = new ArrayList<>();
+        ArrayList<String> rulings = new ArrayList<>();
+        Card c = new Card();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+        String name = carta.getOrDefault("name", "");
+        String setCode = carta.getOrDefault("setCode", "");
+        String setNumber = carta.getOrDefault("number", "");
+        String cost = carta.getOrDefault("manaCost", "");
+        String type = carta.getOrDefault("type", "");
+        String text = carta.getOrDefault("text", "");
+        String uuid = carta.getOrDefault("uuid", "");
+        String power = carta.getOrDefault("power", "0");
+        String toughness = carta.getOrDefault("toughness", "0");
+        String rarity = carta.getOrDefault("rarity", "");
+        Double manaValue = carta2.getOrDefault("manaValue", 0d);
+        Map<String, String> identifiers = carta3.get("identifiers");
+        Map<String, String> legality = carta3.get("legalities");
+        for (String key : legality.keySet()
+        ) {
+            if (legality.get(key).equals("Legal") && !legalities.contains(key)) {
+                legalities.add(key);
+            }
+        }
+        //ruling=cartas.get(i).get("rulings");
+        String imagenId = identifiers.getOrDefault("scryfallId", "");
+
+        c.setSetNumber(setCode + "/" + setNumber);
+        c.setName(name);
+        c.setCost(cost);
+        c.setType(type);
+        c.setText(text);
+        c.setUuid(uuid);
+        c.setPower(power);
+        c.setToughness(toughness);
+        c.setRarity(rarity);
+        c.setManaValue(manaValue);
+        c.setImagenId(imagenId);
+        c.setLegality(legalities);
+        c.setRulings(rulings);
+        }
+        return c;
     }
 }
