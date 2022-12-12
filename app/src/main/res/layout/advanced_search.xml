@@ -12,22 +12,24 @@
 
 
 <ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="46dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="5sp"
-        android:background="@drawable/bannermagic"
         android:gravity="left"
         android:padding="5sp"
         android:text="Name"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp" />
     <EditText
         android:id="@+id/etName"
@@ -42,8 +44,8 @@
         android:layout_height="wrap_content"
         android:text="Text"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -60,8 +62,8 @@
         android:layout_height="wrap_content"
         android:text="Mana Value"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -78,8 +80,8 @@
         android:layout_height="wrap_content"
         android:text="Availability"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -95,8 +97,8 @@
         android:layout_height="wrap_content"
         android:text="Color"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -170,8 +172,8 @@
         android:layout_height="wrap_content"
         android:text="Color Identity"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -243,8 +245,8 @@
         android:layout_height="wrap_content"
         android:text="Online"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -262,8 +264,8 @@
         android:layout_height="wrap_content"
         android:text="Full Art"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -281,8 +283,8 @@
         android:layout_height="wrap_content"
         android:text="Reprint"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -300,8 +302,8 @@
         android:layout_height="wrap_content"
         android:text="Reserved List"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -319,8 +321,8 @@
         android:layout_height="wrap_content"
         android:text="Keywords"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -336,8 +338,8 @@
         android:layout_height="wrap_content"
         android:text="Language"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -354,8 +356,8 @@
         android:layout_height="wrap_content"
         android:text="Leader"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -372,8 +374,8 @@
         android:layout_height="wrap_content"
         android:text="Legalities"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -395,10 +397,10 @@
             android:layout_margin="5sp"
             android:layout_weight="2"
             android:text="Power"
-            android:background="@android:color/transparent"
             android:gravity="center"
             android:padding="5sp"
-            android:textColor="@color/black"
+            android:background="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="15sp" />
 
         <Spinner
@@ -417,8 +419,8 @@
             android:layout_height="match_parent"
             android:text="Toughness"
             android:gravity="center"
-            android:background="@android:color/transparent"
-            android:textColor="@color/black"
+            android:background="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="15sp"
             android:layout_weight="2"/>
         <Spinner
@@ -439,9 +441,8 @@
         android:layout_height="wrap_content"
         android:text="Rarity"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
-        android:textSize="20sp"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:padding="5sp"
         android:layout_margin="5sp"/>
     <LinearLayout
@@ -494,8 +495,8 @@
         android:layout_height="wrap_content"
         android:text="Set"
         android:gravity="left"
-        android:background="@color/black"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
@@ -511,8 +512,8 @@
         android:layout_height="wrap_content"
         android:text="Type"
         android:gravity="left"
-        android:background="@color/design_default_color_primary"
-        android:textColor="@color/design_default_color_on_primary"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>

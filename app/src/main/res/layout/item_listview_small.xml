@@ -25,8 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nombre"
-            android:textColor="@color/design_default_color_on_primary"
-            android:background="@color/design_default_color_primary"
+            android:background="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"
             android:fontFamily="@font/belerenbold"
             android:textSize="25sp">
         </TextView>
@@ -37,8 +37,8 @@
             android:layout_height="wrap_content"
             android:text="Set/Number"
             android:fontFamily="@font/belerenitalic"
-            android:textColor="@color/design_default_color_on_secondary"
-            android:background="@color/design_default_color_secondary"
+            android:background="?attr/colorSecondary"
+            android:textColor="?attr/colorOnSecondary"
             android:textSize="25sp"
             android:textAlignment="center">
         </TextView>
@@ -53,8 +53,8 @@
                 android:text="Rarity"
                 android:gravity="center"
                 android:fontFamily="@font/beleren"
-                android:textColor="@color/design_default_color_on_primary"
-                android:background="@color/design_default_color_primary"
+                android:background="?attr/colorPrimaryVariant"
+                android:textColor="?attr/colorOnPrimary"
                 android:textSize="25sp"
                 android:layout_weight="5">
             </TextView>
@@ -69,17 +69,25 @@
 
     </LinearLayout>
 
+        <FrameLayout
+            android:id="@+id/framelayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
         <TextView
             android:id="@+id/tvCantidad"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/imgvCartaSmall"
             android:layout_width="292px"
             android:layout_height="408px"
             android:scaleType="centerCrop" />
-
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>

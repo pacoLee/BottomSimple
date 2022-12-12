@@ -18,14 +18,15 @@
         android:id="@+id/tvResultados"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:fontFamily="@font/beleren"
         android:gravity="center"
         android:paddingBottom="2dp"
         android:text="Resultados de la busqueda:"
-        android:textColor="@color/design_default_color_on_secondary"
         android:textSize="23dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:padding="3sp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

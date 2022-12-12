@@ -11,63 +11,93 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name"
+        android:fontFamily="@font/belerenbold"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="25sp"
+        android:padding="5sp"/>
     <TextView
         android:id="@+id/tvRarity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rarity"
+        android:fontFamily="@font/belerenitalic"
+        android:background="?attr/colorSecondary"
+        android:textColor="?attr/colorOnSecondary"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="25sp"
+        android:padding="5sp"/>
     <TextView
         android:id="@+id/tvSet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Set"
+        android:fontFamily="@font/belerenbold"
+        android:background="?attr/colorPrimaryVariant"
+        android:textColor="?attr/colorOnPrimary"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="25sp"
+        android:padding="5sp"/>
     <TextView
         android:id="@+id/tvCollectorNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Collector Number"
+        android:fontFamily="@font/belerenbold"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="25sp"
+        android:padding="5sp"/>
     <TextView
         android:id="@+id/tvMana"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mana"
+        android:background="?attr/colorSecondary"
+        android:textColor="?attr/colorOnSecondary"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="25sp"
+        android:padding="5sp"/>
     <TextView
         android:id="@+id/tvType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Type"
+        android:background="?attr/colorPrimaryVariant"
+        android:textColor="?attr/colorOnPrimary"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:padding="5sp"/>
     <TextView
         android:id="@+id/tvLegality"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Legality"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:padding="5sp"/>
     <TextView
         android:id="@+id/tvText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Text"
+        android:background="?attr/colorSecondary"
+        android:textColor="?attr/colorOnSecondary"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="25sp"
+        android:padding="5sp"/>
     <TextView
+        android:visibility="invisible"
         android:id="@+id/tvRulings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rulings"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:padding="5sp"/>
 
 </LinearLayout>

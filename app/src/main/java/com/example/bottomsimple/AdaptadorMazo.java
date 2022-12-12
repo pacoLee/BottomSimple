@@ -33,7 +33,7 @@ public class AdaptadorMazo extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return mazos.get(i).getIdMazo();
 //                cartas.get(i).;
     }
 

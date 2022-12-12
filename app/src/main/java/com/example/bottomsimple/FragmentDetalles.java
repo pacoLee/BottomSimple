@@ -65,11 +65,11 @@ public class FragmentDetalles extends Fragment {
         tvName=(TextView)view.findViewById(R.id.tvName);
         tvName.setText("Name: "+carta.getName());
         tvRarity=(TextView)view.findViewById(R.id.tvRarity);
-        tvRarity.setText("Rarity: "+carta.getRarity());
+        tvRarity.setText("Rarity: "+Character.toUpperCase(carta.getRarity().charAt(0))+carta.getRarity().substring(1));
         tvCollectorNumber=(TextView)view.findViewById(R.id.tvCollectorNumber);
         tvCollectorNumber.setText("Collector Number: "+carta.getSetNumber().substring(carta.getSetNumber().indexOf("/")+1));
         tvMana=(TextView)view.findViewById(R.id.tvMana);
-        tvMana.setText("Mana Cost: "+carta.getCost());
+        //tvMana.setText("Mana Cost: "+carta.getCost());
         tvSet=(TextView)view.findViewById(R.id.tvSet);
         tvSet.setText("Set: "+carta.getSetNumber().substring(0,carta.getSetNumber().indexOf("/")));
         tvType=(TextView)view.findViewById(R.id.tvType);

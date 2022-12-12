@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".PruebaFragment"
     android:orientation="vertical"
+    android:background="@drawable/back"
     >
 
     <TextView
@@ -17,7 +18,7 @@
         android:textStyle="bold"
         android:fontFamily="@font/belerenbold"
         android:text="Listas"
-        android:textColor="@color/design_default_color_on_secondary"
+        android:textColor="?attr/colorOnSecondary"
         android:padding="10dp"/>
 
     <ListView
@@ -34,7 +35,7 @@
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_baseline_add_24"
         android:contentDescription="Search"
-        android:backgroundTint="@color/design_default_color_primary"
+        android:backgroundTint="?attr/colorSecondary"
         android:layout_margin="16dp"
         tools:ignore="MissingConstraints" />
 

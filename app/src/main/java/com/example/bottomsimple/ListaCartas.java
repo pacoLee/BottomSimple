@@ -279,7 +279,7 @@ public class ListaCartas extends AppCompatActivity {
             for (int i = 0; i < mazos.size(); i++) {
                 nomMazos.add(mazos.get(i).getNombreMazo());
             }
-
+            Collections.sort(mazos,new DeckComparator());
             AdaptadorAddCar adaptadorMazo = new AdaptadorAddCar(getApplicationContext(), mazos);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(ListaCartas.this);
@@ -421,6 +421,11 @@ public class ListaCartas extends AppCompatActivity {
             } else if (Integer.parseInt(c1.getToughness()) < Integer.parseInt(c2.getToughness())) {
                 return 1;
             } else return -1;
+        }
+    }
+    class DeckComparator implements Comparator<Mazo> {
+        public int compare(Mazo m1, Mazo m2){
+            return m1.getNombreMazo().compareTo(m2.getNombreMazo());
         }
     }
 }

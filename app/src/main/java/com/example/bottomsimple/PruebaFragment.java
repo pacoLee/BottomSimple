@@ -53,8 +53,7 @@ public class PruebaFragment extends Fragment {
     int cantidad = 0;
 
     ArrayList<Card> listaCards = new ArrayList<>();
-    ArrayList<String> uuids = new ArrayList<>();
-    ArrayList<Integer> cantidades = new ArrayList<Integer>();
+
 
     public PruebaFragment() {
     }
@@ -74,10 +73,61 @@ public class PruebaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view= inflater.inflate(R.layout.fragment_prueba, container, false);
+        listaMazos.clear();
         builder=new AlertDialog.Builder(view.getContext());
         fab=(FloatingActionButton) view.findViewById(R.id.fab);
         lvDecks=(ListView) view.findViewById(R.id.lvDecks);
+        cargarVista();
 
+
+        lvDecks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ArrayList<String> uuids = new ArrayList<>();
+                ArrayList<Integer> cantidades = new ArrayList<Integer>();
+                listaCards.clear();
+                int idMazo=(int) adMazo.getItemId(i);
+                Cursor fila = baseDeDatos.rawQuery("select  ID_CARTA , CANTIDAD from MAZO_CARTA  where ID_MAZO = " + idMazo, null);
+                if (fila.moveToFirst()) {
+                    do {
+                        idCarta = fila.getString(0);
+                        cantidad = fila.getInt(1);
+                        uuids.add(idCarta);
+                        cantidades.add(cantidad);
+                        Toast.makeText(getContext(), "Se han encontrado " + fila.getCount() + " cartas", Toast.LENGTH_SHORT).show();
+                    } while (fila.moveToNext());
+                    Ingresar(uuids,cantidades);
+
+                } else {
+                    Toast.makeText(getContext(), "No hay ninguna carta añadida", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        lvDecks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                int idMazo=(int)adMazo.getItemId(i);
+                cargarAlertDialogModificarBorrar(idMazo);
+                return true;
+            }
+        });
+
+        //baseDeDatos.close();
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cargarAlertDialogInsercion();
+            }
+        });
+        return view;
+    }
+
+    private void cargarVista(){
+
+        listaMazos.clear();
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
         baseDeDatos = admin.getWritableDatabase();
 
@@ -89,47 +139,14 @@ public class PruebaFragment extends Fragment {
                 imageId = fila.getInt(2);
                 m = new Mazo(id, imageId, nombre);
                 listaMazos.add(m);
-                Toast.makeText(getContext(), "Se ha encontrado un registro", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Se ha encontrado un registro", Toast.LENGTH_SHORT).show();
             } while (fila.moveToNext());
         } else {
             Toast.makeText(getContext(), "No existe ningún registro", Toast.LENGTH_SHORT).show();
         }
-
-        lvDecks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-                Cursor fila = baseDeDatos.rawQuery("select  ID_CARTA , CANTIDAD from MAZO_CARTA  where ID_MAZO = " + (i + 1), null);
-                if (fila.moveToFirst()) {
-                    do {
-                        idCarta = fila.getString(0);
-                        cantidad = fila.getInt(1);
-                        uuids.add(idCarta);
-                        cantidades.add(cantidad);
-                        Toast.makeText(getContext(), "Se han encontrado " + fila.getCount() + " cartas", Toast.LENGTH_SHORT).show();
-                    } while (fila.moveToNext());
-                } else {
-                    Toast.makeText(getContext(), "No hay ninguna carta añadida", Toast.LENGTH_SHORT).show();
-                }
-                Ingresar();
-
-            }
-        });
-
-        //baseDeDatos.close();
         Collections.sort(listaMazos,new DeckComparator());
         adMazo = new AdaptadorMazo(getContext(), listaMazos);
         lvDecks.setAdapter(adMazo);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cargarAlertDialogInsercion();
-            }
-        });
-        return view;
     }
 
 
@@ -172,6 +189,38 @@ public class PruebaFragment extends Fragment {
         alertDialog.setNegativeButton("Cancelar", null);
         alertDialog.show();
     }
+
+    private void cargarAlertDialogModificarBorrar(int pos) {
+        androidx.appcompat.app.AlertDialog.Builder alertDialog = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+        alertDialog.setTitle("Cambiar el nombre del mazo");
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        int posicion=pos+1;
+        final EditText etNombre = new EditText(getContext());
+        layout.addView(etNombre);
+
+        alertDialog.setView(layout);
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                baseDeDatos.execSQL("UPDATE  MAZO SET NOMBRE ='" + etNombre.getText().toString() + "' WHERE ID_MAZO ='" + pos+ "'");
+                Toast.makeText(getContext(), "Nombre de mazo actualizado", Toast.LENGTH_LONG).show();
+                cargarVista();
+            }
+        });
+        alertDialog.setNegativeButton("Cancelar", null);
+        alertDialog.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                baseDeDatos.execSQL("DELETE FROM MAZO WHERE ID_MAZO ='" + pos+ "'");
+                Toast.makeText(getContext(), "Mazo borrado", Toast.LENGTH_LONG).show();
+                cargarVista();
+            }
+        });
+        alertDialog.show();
+    }
+
     class DeckComparator implements Comparator<Mazo> {
         public int compare(Mazo m1, Mazo m2){
             return m1.getNombreMazo().compareTo(m2.getNombreMazo());
@@ -180,7 +229,7 @@ public class PruebaFragment extends Fragment {
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void Ingresar(){
+    public void Ingresar(ArrayList<String> uuids,ArrayList<Integer> cantidades){
         new Thread() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -273,6 +322,7 @@ public class PruebaFragment extends Fragment {
                                 args.putSerializable("ARRAYLIST", (Serializable) listaCards);
                                 i.putExtra("BUNDLE", args);
                                 startActivity(i);
+                                //listaCards.clear();
                                 //ad = new AdaptadorSmall(getApplicationContext(), listaCards);
                                 //lvCards.setAdapter(ad);
                             } else {
