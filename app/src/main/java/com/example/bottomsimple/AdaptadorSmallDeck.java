@@ -9,11 +9,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class AdaptadorSmallRecycler extends RecyclerView.Adapter<AdaptadorSmallRecycler.ViewHolder> {
+public class AdaptadorSmallDeck extends RecyclerView.Adapter<AdaptadorSmallDeck.ViewHolder> {
         private ArrayList<Card> listaCards;
         private AdaptadorBigRecycler.ItemClickListener mItemClickListener;
         private AdaptadorBigRecycler.LongItemClickListener lItemClickListener;
@@ -38,7 +39,7 @@ public class AdaptadorSmallRecycler extends RecyclerView.Adapter<AdaptadorSmallR
         }
     }
 
-    public AdaptadorSmallRecycler(Context miContexto, ArrayList<Card> listaCards, AdaptadorBigRecycler.LongItemClickListener lItemClickListener, AdaptadorBigRecycler.ItemClickListener mItemClickListener) {
+    public AdaptadorSmallDeck(Context miContexto, ArrayList<Card> listaCards, AdaptadorBigRecycler.LongItemClickListener lItemClickListener, AdaptadorBigRecycler.ItemClickListener mItemClickListener) {
         this.listaCards = listaCards;
         this.mItemClickListener=mItemClickListener;
         this.lItemClickListener=lItemClickListener;
@@ -62,14 +63,15 @@ public class AdaptadorSmallRecycler extends RecyclerView.Adapter<AdaptadorSmallR
         holder.itemView.setOnLongClickListener(view -> {
             return lItemClickListener.onItemLongClick(listaCards.get(position));
         });
-        holder.tvCantidad.setVisibility(View.INVISIBLE);
+        String cantidad = Integer.toString(listaCards.get(position).getCantidad());
         String scryfallId = listaCards.get(position).getImagenId();
         char primerCaracter = scryfallId.charAt(0);
         char segundoCaracter = scryfallId.charAt(1);
         Card carta = listaCards.get(position);
         // Set item views based on your views and data model
         TextView tvCantidad = holder.tvCantidad;
-        tvCantidad.setVisibility(View.INVISIBLE);
+        tvCantidad.setVisibility(View.VISIBLE);
+        tvCantidad.setText(cantidad);
         TextView nombre = holder.nombre;
         nombre.setText(carta.getName());
         TextView set=holder.setNumber;

@@ -1,11 +1,7 @@
 package com.example.bottomsimple;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.telecom.Call;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -23,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 
-public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecycler.ViewHolder> {
+public class AdaptadorBigDeck extends RecyclerView.Adapter<AdaptadorBigDeck.ViewHolder> {
     private ArrayList<Card> listaCards;
     private ItemClickListener mItemClickListener;
     private LongItemClickListener lItemClickListener;
@@ -53,7 +48,7 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
         }
     }
 
-    public AdaptadorBigRecycler(Context miContexto, ArrayList<Card> listaCards, LongItemClickListener lItemClickListener, ItemClickListener mItemClickListener) {
+    public AdaptadorBigDeck(Context miContexto, ArrayList<Card> listaCards, LongItemClickListener lItemClickListener, ItemClickListener mItemClickListener) {
         this.listaCards = listaCards;
         this.mItemClickListener = mItemClickListener;
         this.lItemClickListener = lItemClickListener;
@@ -77,12 +72,16 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
         holder.itemView.setOnLongClickListener(view -> {
             return lItemClickListener.onItemLongClick(listaCards.get(position));
         });
+        String cantidad = Integer.toString(listaCards.get(position).getCantidad());
         String scryfallId = listaCards.get(position).getImagenId();
         char primerCaracter = scryfallId.charAt(0);
         char segundoCaracter = scryfallId.charAt(1);
         Card carta = listaCards.get(position);
         // Set item views based on your views and data model
-        holder.tvCantidad.setVisibility(View.INVISIBLE);
+        Picasso.get().load("https://cards.scryfall.io/normal/front/" + primerCaracter + "/" + segundoCaracter + "/" + scryfallId + ".jpg").into(holder.imgvCartaBig);
+        TextView tvCantidad = holder.tvCantidad;
+        tvCantidad.setVisibility(View.VISIBLE);
+        tvCantidad.setText(cantidad);
         TextView tvName = holder.tvName;
         tvName.setText(carta.getName());
         if (carta.getName().length() < 15) {
@@ -206,6 +205,7 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
         tvSet.setText(setNumber[0]);
         TextView tvNumber=holder.tvNumber;
         tvNumber.setText(setNumber[1]);
+
         String text = carta.getText();
 //        int caracteresNumero = 0;
         SpannableStringBuilder ssb2 = new SpannableStringBuilder();
@@ -290,10 +290,8 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
         } else {
             tvText.setTextSize(25);
         }
-        TextView tvCantidad = holder.tvCantidad;
-        tvCantidad.setVisibility(View.INVISIBLE);
-        //tvNumber.setText(setNumber[1]);
-        Picasso.get().load("https://cards.scryfall.io/normal/front/" + primerCaracter + "/" + segundoCaracter + "/" + scryfallId + ".jpg").into(holder.imgvCartaBig);
+
+
     }
 
     @Override

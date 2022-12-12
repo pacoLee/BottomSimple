@@ -3,4 +3,6 @@
     <string name="title_home">Search</string>
     <string name="title_prueba">Decks</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="policy">This is an unofficial Magic The Gathering app covered by their Fan Content Policy. All images and content are
+        property of their copyright owners.\n<a href="https://company.wizards.com/en/legal/fancontentpolicy">Wizards of the Coast\'s Fan Content Policy</a></string>
 </resources>

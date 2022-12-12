@@ -24,6 +24,7 @@ public class ListSelector extends AppCompatActivity {
         setContentView(R.layout.activity_list_selector);
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
+        String source = intent.getStringExtra("source");
         ArrayList<Card> listaCards = (ArrayList<Card>) args.getSerializable("ARRAYLIST");
 
         textViewSmallList=(TextView) findViewById(R.id.textViewSmallList);
@@ -38,7 +39,12 @@ public class ListSelector extends AppCompatActivity {
                 Bundle args = new Bundle();
                 args.putSerializable("ARRAYLIST", (Serializable) listaCards);
                 intent.putExtra("BUNDLE", args);
-                intent.putExtra("adapter","small");
+                if(source.equals("deck")){
+                    intent.putExtra("adapter","smallDeck");
+                }else{
+                    intent.putExtra("adapter","small");
+                }
+
                 startActivity(intent);
             }
         });
@@ -50,7 +56,11 @@ public class ListSelector extends AppCompatActivity {
                 Bundle args = new Bundle();
                 args.putSerializable("ARRAYLIST", (Serializable) listaCards);
                 intent.putExtra("BUNDLE", args);
-                intent.putExtra("adapter","big");
+                if(source.equals("deck")){
+                    intent.putExtra("adapter","bigDeck");
+                }else{
+                    intent.putExtra("adapter","big");
+                }
                 startActivity(intent);
             }
         });

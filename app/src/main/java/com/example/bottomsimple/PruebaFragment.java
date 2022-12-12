@@ -97,7 +97,7 @@ public class PruebaFragment extends Fragment {
                         cantidades.add(cantidad);
                         Toast.makeText(getContext(), "Se han encontrado " + fila.getCount() + " cartas", Toast.LENGTH_SHORT).show();
                     } while (fila.moveToNext());
-                    Ingresar(uuids,cantidades);
+                    Ingresar(uuids,cantidades,idMazo);
 
                 } else {
                     Toast.makeText(getContext(), "No hay ninguna carta añadida", Toast.LENGTH_SHORT).show();
@@ -229,7 +229,7 @@ public class PruebaFragment extends Fragment {
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void Ingresar(ArrayList<String> uuids,ArrayList<Integer> cantidades){
+    public void Ingresar(ArrayList<String> uuids,ArrayList<Integer> cantidades,int idMazo){
         new Thread() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -321,6 +321,8 @@ public class PruebaFragment extends Fragment {
                                 Bundle args = new Bundle();
                                 args.putSerializable("ARRAYLIST", (Serializable) listaCards);
                                 i.putExtra("BUNDLE", args);
+                                i.putExtra("source","deck");
+                                i.putExtra("mazo",idMazo);
                                 startActivity(i);
                                 //listaCards.clear();
                                 //ad = new AdaptadorSmall(getApplicationContext(), listaCards);

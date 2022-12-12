@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
@@ -18,6 +19,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,6 +46,9 @@ public class ListaCartas extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
         String adapterType = intent.getStringExtra("adapter");
+        int idDeck = intent.getIntExtra("deck",0);
+
+
         ArrayList<Card> listaCards = (ArrayList<Card>) args.getSerializable("ARRAYLIST");
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -162,10 +168,50 @@ public class ListaCartas extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        AdaptadorSmallDeck ad3 = new AdaptadorSmallDeck(getApplicationContext(), listaCards, new AdaptadorBigRecycler.LongItemClickListener() {
+            @Override
+            public boolean onItemLongClick(Card card) {
+                return muestraDialog2(card,idDeck);
+            }
+        }, new AdaptadorBigRecycler.ItemClickListener() {
+            @Override
+            public void onItemClick(Card card) {
+                Intent intent = new Intent(getApplicationContext(), SliderDetailed.class);
+                intent.putExtra("imageId", card.getImagenId());
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+                intent.putExtra("BUNDLE", args);
+                intent.putExtra("uuid", card.getUuid());
+                startActivity(intent);
+            }
+        });
+        AdaptadorBigDeck ad4 = new AdaptadorBigDeck(getApplicationContext(), listaCards, new AdaptadorBigDeck.LongItemClickListener() {
+            @Override
+            public boolean onItemLongClick(Card card) {
+                return muestraDialog2(card,idDeck);
+            }
+        }, new AdaptadorBigDeck.ItemClickListener() {
+            @Override
+            public void onItemClick(Card card) {
+                Intent intent = new Intent(getApplicationContext(), SliderDetailed.class);
+                intent.putExtra("imageId", card.getImagenId());
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST", (Serializable) listaCards);
+                intent.putExtra("BUNDLE", args);
+                intent.putExtra("uuid", card.getUuid());
+                startActivity(intent);
+            }
+        });
+
+
         if (adapterType.equals("big")) {
             recyclerView.setAdapter(ad2);
-        } else {
+        } else if(adapterType.equals("small")){
             recyclerView.setAdapter(ad);
+        }else if(adapterType.equals("smallDeck")){
+            recyclerView.setAdapter(ad3);
+        }else {
+            recyclerView.setAdapter(ad4);
         }
         spinnerOrdenar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -175,73 +221,97 @@ public class ListaCartas extends AppCompatActivity {
                         Collections.sort(listaCards, new NameComparator());
                         if (adapterType.equals("big")) {
                             ad2.notifyDataSetChanged();
-                        } else {
+                        } else if(adapterType.equals("small")){
                             ad.notifyDataSetChanged();
+                        }else if(adapterType.equals("smallDeck")){
+                            ad3.notifyDataSetChanged();
+                        }else {
+                            ad4.notifyDataSetChanged();
                         }
-                        ad.notifyDataSetChanged();
                         break;
                     case "Nombre ↑":
                         Collections.sort(listaCards, new NameComparatorReverse());
                         if (adapterType.equals("big")) {
                             ad2.notifyDataSetChanged();
-                        } else {
+                        } else if(adapterType.equals("small")){
                             ad.notifyDataSetChanged();
+                        }else if(adapterType.equals("smallDeck")){
+                            ad3.notifyDataSetChanged();
+                        }else {
+                            ad4.notifyDataSetChanged();
                         }
-                        ad.notifyDataSetChanged();
                         break;
                     case "Mana ↓":
                         Collections.sort(listaCards, new ManaComparator());
                         if (adapterType.equals("big")) {
                             ad2.notifyDataSetChanged();
-                        } else {
+                        } else if(adapterType.equals("small")){
                             ad.notifyDataSetChanged();
+                        }else if(adapterType.equals("smallDeck")){
+                            ad3.notifyDataSetChanged();
+                        }else {
+                            ad4.notifyDataSetChanged();
                         }
-                        ad.notifyDataSetChanged();
                         break;
                     case "Mana ↑":
                         Collections.sort(listaCards, new ManaComparatorReverse());
                         if (adapterType.equals("big")) {
                             ad2.notifyDataSetChanged();
-                        } else {
+                        } else if(adapterType.equals("small")){
                             ad.notifyDataSetChanged();
+                        }else if(adapterType.equals("smallDeck")){
+                            ad3.notifyDataSetChanged();
+                        }else {
+                            ad4.notifyDataSetChanged();
                         }
-                        ad.notifyDataSetChanged();
                         break;
                     case "Power ↓":
                         Collections.sort(listaCards, new PowerComparator());
                         if (adapterType.equals("big")) {
                             ad2.notifyDataSetChanged();
-                        } else {
+                        } else if(adapterType.equals("small")){
                             ad.notifyDataSetChanged();
+                        }else if(adapterType.equals("smallDeck")){
+                            ad3.notifyDataSetChanged();
+                        }else {
+                            ad4.notifyDataSetChanged();
                         }
-                        ad.notifyDataSetChanged();
                         break;
                     case "Power ↑":
                         Collections.sort(listaCards, new PowerComparatorReverse());
                         if (adapterType.equals("big")) {
                             ad2.notifyDataSetChanged();
-                        } else {
+                        } else if(adapterType.equals("small")){
                             ad.notifyDataSetChanged();
+                        }else if(adapterType.equals("smallDeck")){
+                            ad3.notifyDataSetChanged();
+                        }else {
+                            ad4.notifyDataSetChanged();
                         }
-                        ad.notifyDataSetChanged();
                         break;
                     case "Toughness ↓":
                         Collections.sort(listaCards, new ToughnessComparator());
                         if (adapterType.equals("big")) {
                             ad2.notifyDataSetChanged();
-                        } else {
+                        } else if(adapterType.equals("small")){
                             ad.notifyDataSetChanged();
+                        }else if(adapterType.equals("smallDeck")){
+                            ad3.notifyDataSetChanged();
+                        }else {
+                            ad4.notifyDataSetChanged();
                         }
-                        ad.notifyDataSetChanged();
                         break;
                     case "Toughness ↑":
                         Collections.sort(listaCards, new ToughnessComparatorReverse());
                         if (adapterType.equals("big")) {
                             ad2.notifyDataSetChanged();
-                        } else {
+                        } else if(adapterType.equals("small")){
                             ad.notifyDataSetChanged();
+                        }else if(adapterType.equals("smallDeck")){
+                            ad3.notifyDataSetChanged();
+                        }else {
+                            ad4.notifyDataSetChanged();
                         }
-                        ad.notifyDataSetChanged();
                         break;
                 }
             }
@@ -329,6 +399,40 @@ public class ListaCartas extends AppCompatActivity {
             });
         }
 
+        return true;
+    }
+    public boolean muestraDialog2(Card card,int idDeck) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
+        SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
+
+        androidx.appcompat.app.AlertDialog.Builder alertDialog = new androidx.appcompat.app.AlertDialog.Builder(this);
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        final NumberPicker numberPicker = new NumberPicker(this);
+        numberPicker.setMaxValue(100);
+        numberPicker.setMinValue(0);
+        layout.addView(numberPicker);
+        alertDialog.setView(layout);
+        alertDialog.setTitle("Quantity");
+        alertDialog.setMessage("Choose a value: (0 to delete)");
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                int cantidad=numberPicker.getValue();
+                int mazo=idDeck;
+                String idCarta=card.getUuid();
+                String name=card.getName();
+                if(cantidad==0){
+                    baseDeDatos.execSQL("DELETE FROM MAZO_CARTA WHERE ID_CARTA ='" + idCarta+ "'");
+                    Toast.makeText(ListaCartas.this, "Carta "+name+ " borrada", Toast.LENGTH_SHORT).show();
+                }else{
+                    baseDeDatos.execSQL("UPDATE  MAZO_CARTA SET CANTIDAD ='" + cantidad + "' WHERE ID_CARTA ='" + idCarta+ "'");
+                    Toast.makeText(ListaCartas.this, "Carta "+name+ " actualizada", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        alertDialog.setNegativeButton("Cancel",null);
+        alertDialog.show();
         return true;
     }
 

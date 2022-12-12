@@ -186,6 +186,7 @@ public class HomeFragment extends Fragment {
                                 Bundle args = new Bundle();
                                 args.putSerializable("ARRAYLIST", (Serializable) listaCards);
                                 i.putExtra("BUNDLE", args);
+                                i.putExtra("source","search");
                                 startActivity(i);
                                 //ad = new AdaptadorSmall(getApplicationContext(), listaCards);
                                 //lvCards.setAdapter(ad);
