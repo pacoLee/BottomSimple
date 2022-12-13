@@ -56,6 +56,8 @@ public class AdvancedSearch extends AppCompatActivity {
     CheckBox colorIdentityLess;
     Switch isOnline;
     Switch isFullArt;
+    Switch isExtendedArt;
+    Switch isBorderless;
     Switch isReprint;
     Switch isReserved;
     EditText etKeywords;
@@ -106,6 +108,8 @@ public class AdvancedSearch extends AppCompatActivity {
         colorIdentityLess=(CheckBox)findViewById(R.id.colorIdentityLess);
         isOnline=(Switch) findViewById(R.id.isOnline);
         isFullArt=(Switch) findViewById(R.id.isFullArt);
+        isExtendedArt=(Switch) findViewById(R.id.isExtendedArt);
+        isBorderless=(Switch) findViewById(R.id.isBorderless);
         isReprint=(Switch) findViewById(R.id.isReprint);
         isReserved=(Switch) findViewById(R.id.isReserved);
         etKeywords =(EditText) findViewById(R.id.etKeywords);
@@ -215,22 +219,22 @@ public class AdvancedSearch extends AppCompatActivity {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
                                     if (rarityCommon.isChecked()) {
-                                        if (ctx.item(Map.class).containsValue("common") && ctx.item(Map.class).containsKey("rarity")) {
+                                        if (ctx.item(Map.class).containsKey("rarity")&& ctx.item(Map.class).get("rarity").toString().equals("common")) {
                                             return ctx.item(Map.class).containsKey("rarity");
                                         }
                                     }
                                     if (rarityUncommon.isChecked()) {
-                                        if (ctx.item(Map.class).containsValue("uncommon") && ctx.item(Map.class).containsKey("rarity")) {
+                                        if (ctx.item(Map.class).containsKey("rarity")&& ctx.item(Map.class).get("rarity").toString().equals("uncommon")) {
                                             return ctx.item(Map.class).containsKey("rarity");
                                         }
                                     }
                                     if (rarityRare.isChecked()) {
-                                        if (ctx.item(Map.class).containsValue("rare") && ctx.item(Map.class).containsKey("rarity")) {
+                                        if (ctx.item(Map.class).containsKey("rarity")&& ctx.item(Map.class).get("rarity").toString().equals("rare")) {
                                             return ctx.item(Map.class).containsKey("rarity");
                                         }
                                     }
                                     if (rarityMythic.isChecked()) {
-                                        if (ctx.item(Map.class).containsValue("mythic") && ctx.item(Map.class).containsKey("rarity")) {
+                                        if (ctx.item(Map.class).containsKey("rarity")&& ctx.item(Map.class).get("rarity").toString().equals("mythic")) {
                                             return ctx.item(Map.class).containsKey("rarity");
                                         }
                                     }
@@ -251,7 +255,23 @@ public class AdvancedSearch extends AppCompatActivity {
                                             for (int i = 0; i < jArray.size(); i++) {
                                                 listdata.add(jArray.get(i).toString());
                                             }
+                                            if(colorWhite.isChecked()&&listdata.contains("W")){
+                                                return ctx.item(Map.class).containsKey("colors");
+                                            }
+                                            if(colorBlue.isChecked()&&listdata.contains("U")){
+                                                return ctx.item(Map.class).containsKey("colors");
+                                            }
+                                            if(colorBlack.isChecked()&&listdata.contains("B")){
+                                                return ctx.item(Map.class).containsKey("colors");
+                                            }
+                                            if(colorRed.isChecked()&&listdata.contains("R")){
+                                                return ctx.item(Map.class).containsKey("colors");
+                                            }
+                                            if(colorGreen.isChecked()&&listdata.contains("G")){
+                                                return ctx.item(Map.class).containsKey("colors");
+                                            }
                                         }
+                                        /*
                                         for (int i = 0; i < listdata.size(); i++) {
                                             String w = null;
                                             String b = null;
@@ -346,7 +366,7 @@ public class AdvancedSearch extends AppCompatActivity {
                                                     return ctx.item(Map.class).containsKey("colors");
                                                 }
                                             }
-                                        }
+                                        }*/
                                         return false;
                                     }
                                     return false;
@@ -361,7 +381,7 @@ public class AdvancedSearch extends AppCompatActivity {
                                     return false;
                                 }
                             };
-                            Predicate cardswithKeywords2 = new Predicate() {
+                            /*Predicate cardswithKeywords2 = new Predicate() {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
                                     if (ctx.item(Map.class).containsKey("keywords")) {
@@ -381,7 +401,7 @@ public class AdvancedSearch extends AppCompatActivity {
                                     }
                                     return false;
                                 }
-                            };
+                            };*/
                             Predicate cardswithKeywords = new Predicate() {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
@@ -390,11 +410,11 @@ public class AdvancedSearch extends AppCompatActivity {
                                         net.minidev.json.JSONArray jArray = (net.minidev.json.JSONArray) ctx.item(Map.class).get("keywords");
                                         if (jArray != null) {
                                             for (int i = 0; i < jArray.size(); i++) {
-                                                listdata.add(jArray.get(i).toString());
+                                                listdata.add(jArray.get(i).toString().toLowerCase(Locale.ROOT));
                                             }
                                         }
                                         for (int i = 0; i < listdata.size(); i++) {
-                                            if (listdata.contains(etKeywords.getText().toString())) {
+                                            if (listdata.contains(etKeywords.getText().toString().toLowerCase(Locale.ROOT))) {
                                                 return ctx.item(Map.class).containsKey("keywords");
                                             }
                                         }
@@ -522,10 +542,122 @@ public class AdvancedSearch extends AppCompatActivity {
                                     return false;
                                 }
                             };
+                            Predicate cardswithSet = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    if ((ctx.item(Map.class).containsKey("setCode") && ctx.item(Map.class).get("setCode").toString().toLowerCase(Locale.ROOT).contains(setCode.getText().toString().toLowerCase(Locale.ROOT))) && !setCode.getText().toString().equals("")) {
+                                        return ctx.item(Map.class).containsKey("setCode");
+                                    }
+                                    return false;
+                                }
+                            };
+                            Predicate cardswithAvailability = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    if (ctx.item(Map.class).containsKey("availability") && !spAvailability.getSelectedItem().toString().equals("")) {
+                                        ArrayList<String> listdata = new ArrayList<String>();
+                                        net.minidev.json.JSONArray jArray = (net.minidev.json.JSONArray) ctx.item(Map.class).get("availability");
+                                        if (jArray != null) {
+                                            for (int i = 0; i < jArray.size(); i++) {
+                                                listdata.add(jArray.get(i).toString());
+                                            }
+                                        }
+                                        for (int i = 0; i < listdata.size(); i++) {
+                                            if (listdata.contains(spAvailability.getSelectedItem().toString())) {
+                                                return ctx.item(Map.class).containsKey("availability");
+                                            }
+                                        }
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            };
+                            Predicate cardswithOnline = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    if ((ctx.item(Map.class).containsKey("isOnlineOnly") && ctx.item(Map.class).getOrDefault("isOnlineOnly",false).equals(true) && isOnline.isChecked())) {
+                                        return ctx.item(Map.class).containsKey("isOnlineOnly");
+                                    }
+                                    return false;
+                                }
+                            };
+                            Predicate cardswithExtended = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    if (ctx.item(Map.class).containsKey("frameEffects") && isExtendedArt.isChecked()) {
+                                        ArrayList<String> listdata = new ArrayList<String>();
+                                        net.minidev.json.JSONArray jArray = (net.minidev.json.JSONArray) ctx.item(Map.class).get("frameEffects");
+                                        if (jArray != null) {
+                                            for (int i = 0; i < jArray.size(); i++) {
+                                                listdata.add(jArray.get(i).toString());
+                                            }
+                                        }
+                                        for (int i = 0; i < listdata.size(); i++) {
+                                            if (listdata.contains("extendedart")) {
+                                                return ctx.item(Map.class).containsKey("frameEffects");
+                                            }
+                                        }
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                            };
+                            Predicate cardswithBorderless = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    if ((ctx.item(Map.class).containsKey("borderColor") && ctx.item(Map.class).get("borderColor").toString().equals("borderless") && isBorderless.isChecked())) {
+                                        return ctx.item(Map.class).containsKey("borderColor");
+                                    }
+                                    return false;
+                                }
+                            };
+                            Predicate cardswithReprint = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    if ((ctx.item(Map.class).containsKey("isReprint") && ctx.item(Map.class).getOrDefault("isReprint",false).equals(true) && isReprint.isChecked())) {
+                                        return ctx.item(Map.class).containsKey("isReprint");
+                                    }
+                                    return false;
+                                }
+                            };
+                            Predicate cardswithReserved = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    if ((ctx.item(Map.class).containsKey("isReserved") && ctx.item(Map.class).getOrDefault("isReserved",false).equals(true) && isReserved.isChecked())) {
+                                        return ctx.item(Map.class).containsKey("isReserved");
+                                    }
+                                    return false;
+                                }
+                            };
+                            Predicate cardswithLeadership = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    String leadership=spLeadershipSkills.getSelectedItem().toString();
+                                    if (!spLeadershipSkills.getSelectedItem().toString().equals("")&&(ctx.item(Map.class).containsKey(leadership) && ctx.item(Map.class).getOrDefault(leadership,false).equals(true))) {
+                                        return ctx.item(Map.class).containsKey(leadership);
+                                    }
+                                    return false;
+                                }
+                            };
+                            Predicate cardswithLegality = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    String legalities=spLegalities.getSelectedItem().toString();
+                                    if (!spLegalities.getSelectedItem().toString().equals("")&&(ctx.item(Map.class).containsKey(legalities) && ctx.item(Map.class).getOrDefault(legalities,"Illegal").equals("Legal"))) {
+                                        return ctx.item(Map.class).containsKey(legalities);
+                                    }
+                                    return false;
+                                }
+                            };
+
+
+
+
 
                             Filter nameFilter = filter(cardswithName);
                             Filter textFilter = filter(cardswithText);
                             Filter manaFilter = filter(cardswithMana);
+                            Filter availabilityFilter= filter(cardswithAvailability);
                             Filter fullArtFilter = filter(cardswithFullArt);
                             Filter rarityFilter = filter(cardswithRarity);
                             Filter colorFilter = filter(cardswithColor);
@@ -534,6 +666,18 @@ public class AdvancedSearch extends AppCompatActivity {
                             Filter toughnessFilter = filter(cardswithToughness);
                             Filter powerFilter = filter(cardswithPower);
                             Filter typeFilter = filter(cardswithType);
+                            Filter setFilter = filter(cardswithSet);
+                            Filter isOnlineFilter = filter(cardswithOnline);
+                            Filter isExtendedArtFilter=filter(cardswithExtended);
+                            Filter isBorderlessFilter=filter(cardswithBorderless);
+                            Filter isReprintFilter=filter(cardswithReprint);
+                            Filter isReservedFilter=filter(cardswithReserved);
+                            Filter isLeadershipFilter=filter(cardswithLeadership);
+                            Filter legalitiesFilter=filter(cardswithLegality);
+
+
+
+
 
 
                             //List<Map<String, String>> cards = JsonPath.parse(json).read("$..cards[?]",nameFilter,fullArtFilter,rarityFilter,colorFilter,languageFilter,keywordsFilter,toughnessFilter,powerFilter,textFilter);
@@ -575,6 +719,135 @@ public class AdvancedSearch extends AppCompatActivity {
                                 cardsDoubleFilter.add(cardsDoubleAux);
                                 cartasFilter.add(cartasAux);
                             }
+                            if (!setCode.getText().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", setFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", setFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", setFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (!spAvailability.getSelectedItem().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", availabilityFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", availabilityFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", availabilityFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (isOnline.isChecked()) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", isOnlineFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", isOnlineFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", isOnlineFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (rarityCommon.isChecked()||rarityUncommon.isChecked()||rarityRare.isChecked()||rarityMythic.isChecked()) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", rarityFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", rarityFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", rarityFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (colorWhite.isChecked()||colorBlue.isChecked()||colorBlack.isChecked()||colorRed.isChecked()||colorGreen.isChecked()||colorLess.isChecked()) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", colorFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", colorFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", colorFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (isFullArt.isChecked()) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", fullArtFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", fullArtFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", fullArtFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (isExtendedArt.isChecked()) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", isExtendedArtFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", isExtendedArtFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", isExtendedArtFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (isReprint.isChecked()) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", isReprintFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", isReprintFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", isReprintFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (isBorderless.isChecked()) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", isBorderlessFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", isBorderlessFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", isBorderlessFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (isReserved.isChecked()) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", isReservedFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", isReservedFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", isReservedFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (!etKeywords.getText().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", keywordsFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", keywordsFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", keywordsFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (!spLanguage.getSelectedItem().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", languageFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", languageFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", languageFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (!spLeadershipSkills.getSelectedItem().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", isLeadershipFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", isLeadershipFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", isLeadershipFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (!spLegalities.getSelectedItem().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", legalitiesFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", legalitiesFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", legalitiesFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (!etPower.getText().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", powerFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", powerFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", powerFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (!etToughness.getText().toString().equals("")) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", toughnessFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", toughnessFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", toughnessFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+
 
 
 
@@ -592,6 +865,8 @@ public class AdvancedSearch extends AppCompatActivity {
                             cards = cardsFilter.get(0);
                             cardsDouble = cardsDoubleFilter.get(0);
                             cartas = cartasFilter.get(0);
+
+
 
                             if (cards.isEmpty()) {
                                 Toast.makeText(getApplicationContext(), "No hay cartas con esas caracteristicas",
@@ -690,6 +965,9 @@ public class AdvancedSearch extends AppCompatActivity {
                                     listaCards.add(c);
                                 }
                                 if (!listaCards.isEmpty()) {
+                                    cards.clear();
+                                    cardsDouble.clear();
+                                    cartas.clear();
                                     Intent i = new Intent(getApplicationContext(), ListSelector.class);
                                     //i.putExtra("list",listaCards);
                                     Bundle args = new Bundle();

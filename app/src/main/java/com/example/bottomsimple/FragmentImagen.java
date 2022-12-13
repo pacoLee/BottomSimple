@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,6 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 
 public class FragmentImagen extends Fragment {
@@ -30,6 +32,7 @@ public class FragmentImagen extends Fragment {
     ImageView imgvLarge;
     View view;
     ImageButton imgvShare;
+    ImageButton imgvDownload;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -67,6 +70,7 @@ public class FragmentImagen extends Fragment {
         view= inflater.inflate(R.layout.fragment_imagen, container, false);
         imgvLarge=(ImageView) view.findViewById(R.id.imgvLarge);
         imgvShare=(ImageButton) view.findViewById(R.id.imgbShare);
+        imgvDownload=(ImageButton) view.findViewById(R.id.imgbDownload);
         char primerCaracter = imageId.charAt(0);
         char segundoCaracter = imageId.charAt(1);
         Picasso.get().load("https://cards.scryfall.io/large/front/" + primerCaracter + "/" + segundoCaracter + "/" + imageId + ".jpg").into(imgvLarge);
@@ -85,7 +89,27 @@ public class FragmentImagen extends Fragment {
                 startActivity(Intent.createChooser(intent, "Share Image"));
             }
         });
+        imgvDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Drawable mDrawable = imgvLarge.getDrawable();
+                Bitmap mBitmap = ((BitmapDrawable) mDrawable).getBitmap();
+                saveImageToDownloadFolder(imageId+".jpg",mBitmap);
+            }
+        });
+
         return view;
     }
-
+    public void saveImageToDownloadFolder(String imageFile, Bitmap ibitmap){
+        try {
+            File filePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), imageFile);
+            OutputStream outputStream = new FileOutputStream(filePath);
+            ibitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+            Toast.makeText(getContext(), imageFile + "Sucessfully saved in Download Folder", Toast.LENGTH_SHORT).show();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

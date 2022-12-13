@@ -277,6 +277,42 @@
         android:padding="5sp"
         android:layout_margin="5sp"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Extended Art"
+        android:gravity="left"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
+    <Switch
+        android:id="@+id/isExtendedArt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:thumb="@drawable/letters"
+        android:padding="5sp"
+        android:layout_margin="5sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Borderless"
+        android:gravity="left"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
+    <Switch
+        android:id="@+id/isBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:thumb="@drawable/letters"
+        android:padding="5sp"
+        android:layout_margin="5sp"
+        />
 
     <TextView
         android:layout_width="match_parent"

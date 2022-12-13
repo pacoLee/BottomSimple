@@ -133,26 +133,28 @@
                 </LinearLayout>
 
         </LinearLayout>
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/framelayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_gravity="center">
-            <TextView
-                android:id="@+id/tvCantidad"
-                android:background="@color/black"
-                android:textColor="@color/white"
-                android:text="1"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:gravity="center"
-                />
             <ImageView
                 android:id="@+id/imgvCartaBig"
                 android:layout_width="488px"
                 android:layout_height="680px"
                 android:layout_gravity="center"/>
-        </FrameLayout>
+            <TextView
+            android:id="@+id/tvCantidad"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:text="1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+                android:layout_gravity="center"
+            />
+        </LinearLayout>
 
 />
 

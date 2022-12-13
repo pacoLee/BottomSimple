@@ -268,6 +268,7 @@ public class PruebaFragment extends Fragment {
                                 ArrayList<String> legalities = new ArrayList<>();
                                 ArrayList<String> rulings = new ArrayList<>();
                                 String imagenId = "";
+                                int cantidadCarta;
                                 for (int k = 0; k < cards.size(); k++) {
                                     //    System.out.println(cards.get(i));
 
@@ -292,7 +293,7 @@ public class PruebaFragment extends Fragment {
                                     }
                                     //ruling=cartas.get(i).get("rulings");
                                     imagenId = identifiers.getOrDefault("scryfallId", "");
-
+                                    cantidadCarta=cantidades.get(j);
 
                                     //  listaCards.add(cards.get(i));
                                     Card c = new Card();
@@ -309,7 +310,7 @@ public class PruebaFragment extends Fragment {
                                     c.setImagenId(imagenId);
                                     c.setLegality(legalities);
                                     c.setRulings(rulings);
-                                    c.setCantidad(cantidad);
+                                    c.setCantidad(cantidadCarta);
                                     listaCards.add(c);
                                 }
                             }

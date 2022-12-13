@@ -38,6 +38,12 @@ public class ListaCartas extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView tvResultados;
     private Spinner spinnerOrdenar;
+    String adapterType;
+    AdaptadorSmallRecycler ad;
+    AdaptadorBigRecycler ad2;
+    AdaptadorSmallDeck ad3;
+    AdaptadorBigDeck ad4;
+    ArrayList<Card> listaCards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +51,11 @@ public class ListaCartas extends AppCompatActivity {
         setContentView(R.layout.activity_lista_cartas);
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
-        String adapterType = intent.getStringExtra("adapter");
+        adapterType = intent.getStringExtra("adapter");
         int idDeck = intent.getIntExtra("deck",0);
 
 
-        ArrayList<Card> listaCards = (ArrayList<Card>) args.getSerializable("ARRAYLIST");
+        listaCards = (ArrayList<Card>) args.getSerializable("ARRAYLIST");
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         tvResultados = (TextView) findViewById(R.id.tvResultados);
@@ -404,7 +410,7 @@ public class ListaCartas extends AppCompatActivity {
     public boolean muestraDialog2(Card card,int idDeck) {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(getApplicationContext(), "administracion", null, 1);
         SQLiteDatabase baseDeDatos = admin.getWritableDatabase();
-
+        Card cartaNueva=card;
         androidx.appcompat.app.AlertDialog.Builder alertDialog = new androidx.appcompat.app.AlertDialog.Builder(this);
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -424,9 +430,12 @@ public class ListaCartas extends AppCompatActivity {
                 String name=card.getName();
                 if(cantidad==0){
                     baseDeDatos.execSQL("DELETE FROM MAZO_CARTA WHERE ID_CARTA ='" + idCarta+ "'");
+                    listaCards.remove(card);
                     Toast.makeText(ListaCartas.this, "Carta "+name+ " borrada", Toast.LENGTH_SHORT).show();
-                }else{
+                    }else{
                     baseDeDatos.execSQL("UPDATE  MAZO_CARTA SET CANTIDAD ='" + cantidad + "' WHERE ID_CARTA ='" + idCarta+ "'");
+                    cartaNueva.setCantidad(cantidad);
+                    listaCards.set(listaCards.indexOf(card),cartaNueva);
                     Toast.makeText(ListaCartas.this, "Carta "+name+ " actualizada", Toast.LENGTH_SHORT).show();
                 }
             }

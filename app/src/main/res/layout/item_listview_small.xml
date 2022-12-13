@@ -69,12 +69,20 @@
 
     </LinearLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/framelayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
             android:layout_gravity="center">
-        <TextView
+        <ImageView
+            android:id="@+id/imgvCartaSmall"
+            android:layout_width="292px"
+            android:layout_height="408px"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"/>
+            <TextView
             android:id="@+id/tvCantidad"
             android:background="@color/black"
             android:textColor="@color/white"
@@ -82,14 +90,9 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:gravity="center"
-             />
-
-        <ImageView
-            android:id="@+id/imgvCartaSmall"
-            android:layout_width="292px"
-            android:layout_height="408px"
-            android:scaleType="centerCrop" />
-        </FrameLayout>
+            android:layout_gravity="center"
+            />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
