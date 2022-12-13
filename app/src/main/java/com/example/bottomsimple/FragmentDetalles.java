@@ -264,12 +264,6 @@ public class FragmentDetalles extends Fragment {
             }
             empiezaDesde = empieza + 3;
         }
-
-
-
-
-
-
         return view;
     }
 }
