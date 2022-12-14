@@ -43,7 +43,7 @@ public class AdaptadorMazo extends BaseAdapter {
         view = layoutInflater.inflate(R.layout.item_deck, null);
 
         //----------IMAGEN-----------------------------
-        int imagen = mazos.get(i).getImagen();
+        String imagen = mazos.get(i).getImgScryfall();
         ImageView imgMazo = view.findViewById(R.id.imgFondo);
         //----------------------------------------------
 
@@ -51,8 +51,10 @@ public class AdaptadorMazo extends BaseAdapter {
 
         //----------IMAGEN------------------
 
-        if (imagen!=0){
-            //   Picasso.get().load(imagen).into(imgMazo);
+        if (imagen != null){
+            char primerCaracter = imagen.charAt(0);
+            char segundoCaracter = imagen.charAt(1);
+            Picasso.get().load("https://cards.scryfall.io/art_crop/front/" + primerCaracter + "/" + segundoCaracter + "/" + imagen + ".jpg").into(imgMazo);
         }
         //------------------------------------
         txtNomMazo.setText(mazos.get(i).getNombreMazo());

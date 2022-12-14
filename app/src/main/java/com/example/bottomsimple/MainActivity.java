@@ -9,7 +9,6 @@ import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.bottomsimple.databinding.ActivityMainBinding;
 
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new HomeFragment());
                     break;
                 case R.id.navigation_prueba:
-                    replaceFragment(new PruebaFragment());
+                    replaceFragment(new MazosFragment());
                     break;
             }
             return true;

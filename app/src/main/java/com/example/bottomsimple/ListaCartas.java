@@ -386,6 +386,14 @@ public class ListaCartas extends AppCompatActivity {
                     valoresCarta.put("ID_MAZO", mazos.get(pos).getIdMazo());
                     valoresCarta.put("ID_CARTA", card.getUuid());
                     valoresCarta.put("CANTIDAD", nupNumero.getValue());
+
+                    Cursor fila = baseDeDatos.rawQuery("SELECT COUNT(*) FROM MAZO_CARTA WHERE ID_MAZO = " + mazos.get(pos).getIdMazo(), null);
+                    fila.moveToNext();
+                    if (fila.getInt(0) == 0) {
+                        ContentValues valoresImagen = new ContentValues();
+                        valoresImagen.put("IMAGEID", card.getImagenId());
+                        baseDeDatos.update("MAZO", valoresImagen, "ID_MAZO = " + mazos.get(pos).getIdMazo(), null);
+                    }
                     //POR QUÉ NO SALTA LA EXCEPCIÓN¿?
                     try {
                         long result = baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);

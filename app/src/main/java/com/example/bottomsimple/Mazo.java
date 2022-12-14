@@ -2,7 +2,7 @@ package com.example.bottomsimple;
 
 public class Mazo {
     private int idMazo, imagen;
-    private String nombreMazo;
+    private String nombreMazo, imgScryfall;
 
     public Mazo() {
         idMazo = 0;
@@ -17,6 +17,12 @@ public class Mazo {
     public Mazo(int idMazo, int imagen, String nombreMazo) {
         this.idMazo = idMazo;
         this.imagen = imagen;
+        this.nombreMazo = nombreMazo;
+    }
+
+    public Mazo(int idMazo, String imgScryfall, String nombreMazo) {
+        this.idMazo = idMazo;
+        this.imgScryfall = imgScryfall;
         this.nombreMazo = nombreMazo;
     }
 
@@ -42,5 +48,13 @@ public class Mazo {
 
     public void setNombreMazo(String nombreMazo) {
         this.nombreMazo = nombreMazo;
+    }
+
+    public String getImgScryfall() {
+        return imgScryfall;
+    }
+
+    public void setImmgScryfall(String immgScryfall) {
+        this.imgScryfall = immgScryfall;
     }
 }
