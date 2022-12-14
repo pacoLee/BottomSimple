@@ -200,7 +200,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{W}", empiezaDesde);
             if (text.contains("{W}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.w), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.w), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -210,7 +210,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{U}", empiezaDesde);
             if (text.contains("{U}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.u), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.u), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -220,7 +220,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{B}", empiezaDesde);
             if (text.contains("{B}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.b), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.b), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -230,7 +230,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{R}", empiezaDesde);
             if (text.contains("{R}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.r), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.r), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -240,7 +240,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{G}", empiezaDesde);
             if (text.contains("{G}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.g), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.g), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -250,7 +250,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{C}", empiezaDesde);
             if (text.contains("{C}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.c), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.c), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -260,7 +260,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{T}", empiezaDesde);
             if (text.contains("{T}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.tap), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.tap), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -270,7 +270,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{1}", empiezaDesde);
             if (text.contains("{1}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.one), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.one), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -280,7 +280,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{2}", empiezaDesde);
             if (text.contains("{2}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.two), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.two), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -290,7 +290,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{3}", empiezaDesde);
             if (text.contains("{3}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.three), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.three), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -300,7 +300,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{4}", empiezaDesde);
             if (text.contains("{4}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.four), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.four), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -310,7 +310,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{5}", empiezaDesde);
             if (text.contains("{5}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.five), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.five), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -320,7 +320,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{6}", empiezaDesde);
             if (text.contains("{6}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.six), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.six), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -330,7 +330,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{7}", empiezaDesde);
             if (text.contains("{7}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.seven), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.seven), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -340,7 +340,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{8}", empiezaDesde);
             if (text.contains("{8}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.eight), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.eight), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -350,7 +350,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{9}", empiezaDesde);
             if (text.contains("{9}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.nine), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.nine), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -360,7 +360,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{10}", empiezaDesde);
             if (text.contains("{10}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.ten), empieza, empieza + 4, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.ten), empieza, empieza + 4, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -370,7 +370,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{11}", empiezaDesde);
             if (text.contains("{11}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.eleven), empieza, empieza + 4, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.eleven), empieza, empieza + 4, 0);
             }
             empiezaDesde = empieza + 3;
         }
@@ -380,7 +380,7 @@ public class FragmentDetalles extends Fragment {
             // Empieza desde el último caracter del último span
             empieza = text.indexOf("{X}", empiezaDesde);
             if (text.contains("{X}")) {
-                ssb2.setSpan(new ImageSpan(tvMana.getContext(), R.drawable.x), empieza, empieza + 3, 0);
+                ssb2.setSpan(new ImageSpan(tvText.getContext(), R.drawable.x), empieza, empieza + 3, 0);
             }
             empiezaDesde = empieza + 3;
         }
