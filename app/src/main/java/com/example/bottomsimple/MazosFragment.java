@@ -1,8 +1,6 @@
 package com.example.bottomsimple;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -36,7 +34,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class PruebaFragment extends Fragment {
+public class MazosFragment extends Fragment {
 
     FloatingActionButton fab;
     View view;
@@ -47,7 +45,7 @@ public class PruebaFragment extends Fragment {
     SQLiteDatabase baseDeDatos;
     Integer id = 0;
     String nombre = "";
-    Integer imageId= 0;
+    String imageId= "";
     Mazo m;
     String idCarta;
     int cantidad = 0;
@@ -55,11 +53,11 @@ public class PruebaFragment extends Fragment {
     ArrayList<Card> listaCards = new ArrayList<>();
 
 
-    public PruebaFragment() {
+    public MazosFragment() {
     }
 
-    public static PruebaFragment newInstance(String param1, String param2) {
-        PruebaFragment fragment = new PruebaFragment();
+    public static MazosFragment newInstance(String param1, String param2) {
+        MazosFragment fragment = new MazosFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -72,7 +70,7 @@ public class PruebaFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        view= inflater.inflate(R.layout.fragment_prueba, container, false);
+        view= inflater.inflate(R.layout.fragment_mazos, container, false);
         listaMazos.clear();
         builder=new AlertDialog.Builder(view.getContext());
         fab=(FloatingActionButton) view.findViewById(R.id.fab);
@@ -136,7 +134,7 @@ public class PruebaFragment extends Fragment {
             do {
                 id = fila.getInt(0);
                 nombre = fila.getString(1);
-                imageId = fila.getInt(2);
+                imageId = fila.getString(2);
                 m = new Mazo(id, imageId, nombre);
                 listaMazos.add(m);
                 //Toast.makeText(getContext(), "Se ha encontrado un registro", Toast.LENGTH_SHORT).show();
