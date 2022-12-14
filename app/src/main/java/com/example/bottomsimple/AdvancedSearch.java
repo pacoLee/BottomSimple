@@ -122,6 +122,8 @@ public class AdvancedSearch extends AppCompatActivity {
         setCode =(EditText) findViewById(R.id.setCode);
         etType =(EditText) findViewById(R.id.etType);
 
+
+        colorWhite.setButtonDrawable(R.drawable.white_checkbox);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

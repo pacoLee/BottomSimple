@@ -95,10 +95,10 @@ public class PruebaFragment extends Fragment {
                         cantidad = fila.getInt(1);
                         uuids.add(idCarta);
                         cantidades.add(cantidad);
-                        Toast.makeText(getContext(), "Se han encontrado " + fila.getCount() + " cartas", Toast.LENGTH_SHORT).show();
-                    } while (fila.moveToNext());
-                    Ingresar(uuids,cantidades,idMazo);
 
+                    } while (fila.moveToNext());
+                    Toast.makeText(getContext(), "Se han encontrado " + fila.getCount() + " cartas", Toast.LENGTH_SHORT).show();
+                    Ingresar(uuids,cantidades,idMazo);
                 } else {
                     Toast.makeText(getContext(), "No hay ninguna carta añadida", Toast.LENGTH_SHORT).show();
                 }
