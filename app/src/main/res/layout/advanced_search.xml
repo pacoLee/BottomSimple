@@ -72,23 +72,93 @@
 
         android:padding="5sp"
         android:layout_margin="5sp"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Availability"
+        android:text="Set"
         android:gravity="left"
         android:background="?attr/colorPrimary"
         android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
-    <Spinner
-        android:id="@+id/spAvailability"
+    <EditText
+        android:id="@+id/setCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20sp"
+        android:padding="5sp"
         android:layout_margin="5sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:gravity="left"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="20sp"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
+    <EditText
+        android:id="@+id/etType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rarity"
+        android:gravity="left"
+        android:background="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
+        android:padding="5sp"
+        android:layout_margin="5sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="5sp"
+        android:layout_margin="5sp">
+        <CheckBox
+            android:id="@+id/rarityCommon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/common_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Common"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:id="@+id/rarityUncommon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/uncommon_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Uncommon"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:id="@+id/rarityRare"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/rare_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Rare"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:id="@+id/rarityMythic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/mythic_checkbox"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Mythic"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -237,7 +307,56 @@
             android:text="Colorless"
             android:layout_weight="1"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5sp"
+            android:layout_weight="2"
+            android:text="Power"
+            android:gravity="center"
+            android:padding="5sp"
+            android:background="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="15sp" />
+
+        <Spinner
+            android:id="@+id/spinnerPower"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/etPower"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Toughness"
+            android:gravity="center"
+            android:background="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="15sp"
+            android:layout_weight="2"/>
+        <Spinner
+            android:id="@+id/spinnerToughness"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/etToughness"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:padding="5sp"
+            android:layout_margin="5sp"/>
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -420,143 +539,26 @@
         android:padding="20sp"
         android:layout_margin="5sp"
         />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="5sp"
-            android:layout_weight="2"
-            android:text="Power"
-            android:gravity="center"
-            android:padding="5sp"
-            android:background="?attr/colorPrimary"
-            android:textColor="?attr/colorOnPrimary"
-            android:textSize="15sp" />
-
-        <Spinner
-            android:id="@+id/spinnerPower"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <EditText
-            android:id="@+id/etPower"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Toughness"
-            android:gravity="center"
-            android:background="?attr/colorPrimary"
-            android:textColor="?attr/colorOnPrimary"
-            android:textSize="15sp"
-            android:layout_weight="2"/>
-        <Spinner
-            android:id="@+id/spinnerToughness"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <EditText
-            android:id="@+id/etToughness"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:padding="5sp"
-            android:layout_margin="5sp"/>
-    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Rarity"
-        android:gravity="left"
-        android:background="?attr/colorPrimary"
-        android:textColor="?attr/colorOnPrimary"
-        android:padding="5sp"
-        android:layout_margin="5sp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="5sp"
-        android:layout_margin="5sp">
-        <CheckBox
-            android:id="@+id/rarityCommon"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:button="@drawable/common_checkbox"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="Common"
-            android:layout_weight="1"/>
-        <CheckBox
-            android:id="@+id/rarityUncommon"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:button="@drawable/uncommon_checkbox"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="Uncommon"
-            android:layout_weight="1"/>
-        <CheckBox
-            android:id="@+id/rarityRare"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:button="@drawable/rare_checkbox"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="Rare"
-            android:layout_weight="1"/>
-        <CheckBox
-            android:id="@+id/rarityMythic"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:button="@drawable/mythic_checkbox"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="Mythic"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Set"
+        android:text="Availability"
         android:gravity="left"
         android:background="?attr/colorPrimary"
         android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         android:padding="5sp"
         android:layout_margin="5sp"/>
-    <EditText
-        android:id="@+id/setCode"
+    <Spinner
+        android:id="@+id/spAvailability"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5sp"
+        android:padding="20sp"
         android:layout_margin="5sp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Type"
-        android:gravity="left"
-        android:background="?attr/colorPrimary"
-        android:textColor="?attr/colorOnPrimary"
-        android:textSize="20sp"
-        android:padding="5sp"
-        android:layout_margin="5sp"/>
-    <EditText
-        android:id="@+id/etType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5sp"
-        android:layout_margin="5sp"/>
+
+
+
 </LinearLayout>
 
 

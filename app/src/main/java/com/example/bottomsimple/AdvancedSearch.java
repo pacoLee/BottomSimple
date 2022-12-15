@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -153,7 +154,14 @@ public class AdvancedSearch extends AppCompatActivity {
             public void onClick(View view) {
                 //Intent intent = new Intent(AdvancedSearch.this, ListSelector.class);
                 //startActivity(intent);
+                try{
                 populateTable();
+            } catch (OutOfMemoryError oome) {
+                //Log the info
+                System.err.println("Array size too large");
+                System.err.println("Max JVM memory: " + Runtime.getRuntime().maxMemory());
+            }
+                listaCards.clear();
             }
         });
     }
@@ -635,8 +643,11 @@ public class AdvancedSearch extends AppCompatActivity {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
                                     String leadership=spLeadershipSkills.getSelectedItem().toString();
-                                    if (!spLeadershipSkills.getSelectedItem().toString().equals("")&&(ctx.item(Map.class).containsKey(leadership) && ctx.item(Map.class).getOrDefault(leadership,false).equals(true))) {
-                                        return ctx.item(Map.class).containsKey(leadership);
+                                    if (!spLeadershipSkills.getSelectedItem().toString().equals("")&&(ctx.item(Map.class).containsKey("leadershipSkills") )) {
+                                        Map<String,Boolean> result = (Map<String,Boolean>)ctx.item(Map.class).get("leadershipSkills");
+                                        if (result.get(leadership)==true) {
+                                            return ctx.item(Map.class).containsKey("leadershipSkills");
+                                        }
                                     }
                                     return false;
                                 }
@@ -645,9 +656,51 @@ public class AdvancedSearch extends AppCompatActivity {
                                 @Override
                                 public boolean apply(Predicate.PredicateContext ctx) {
                                     String legalities=spLegalities.getSelectedItem().toString();
-                                    if (!spLegalities.getSelectedItem().toString().equals("")&&(ctx.item(Map.class).containsKey(legalities) && ctx.item(Map.class).getOrDefault(legalities,"Illegal").equals("Legal"))) {
-                                        return ctx.item(Map.class).containsKey(legalities);
+                                    if (!spLegalities.getSelectedItem().toString().equals("")&&(ctx.item(Map.class).containsKey("legalities"))) {
+                                        Map<String,String> result = (Map<String,String>)ctx.item(Map.class).get("legalities");
+                                        if (result.getOrDefault(legalities,"").equals("Legal")) {
+                                            return ctx.item(Map.class).containsKey("legalities");
+                                        }
                                     }
+                                    return false;
+                                }
+                            };
+                            Predicate cardswithColorIdentity = new Predicate() {
+                                @Override
+                                public boolean apply(Predicate.PredicateContext ctx) {
+                                    if (ctx.item(Map.class).containsKey("colorIdentity") && (colorIdentityWhite.isChecked() || colorIdentityBlack.isChecked() || colorIdentityBlue.isChecked() || colorIdentityGreen.isChecked() || colorIdentityRed.isChecked() || colorIdentityLess.isChecked())) {
+                                        ArrayList<String> listdata = new ArrayList<String>();
+                                        ArrayList<String> colores = new ArrayList<String>();
+                                        net.minidev.json.JSONArray jArray = (net.minidev.json.JSONArray) ctx.item(Map.class).get("colorIdentity");
+                                        if (jArray == null && colorIdentityLess.isChecked()) {
+                                            return ctx.item(Map.class).containsKey("colorIdentity");
+                                        }
+
+                                        if (jArray != null) {
+                                            for (int i = 0; i < jArray.size(); i++) {
+                                                listdata.add(jArray.get(i).toString());
+                                            }
+                                            if(colorIdentityWhite.isChecked()){
+                                                colores.add("W");
+                                            }
+                                            if(colorIdentityBlue.isChecked()){
+                                                colores.add("U");
+                                            }
+                                            if(colorIdentityBlack.isChecked()){
+                                                colores.add("B");
+                                            }
+                                            if(colorIdentityRed.isChecked()){
+                                                colores.add("R");
+                                            }
+                                            if(colorIdentityGreen.isChecked()){
+                                                colores.add("G");
+                                            }
+                                        }
+                                        listdata.removeAll(colores);
+                                        if(listdata.size()==0){
+                                            return ctx.item(Map.class).containsKey("colorIdentity");
+                                        }
+                                }
                                     return false;
                                 }
                             };
@@ -663,6 +716,7 @@ public class AdvancedSearch extends AppCompatActivity {
                             Filter fullArtFilter = filter(cardswithFullArt);
                             Filter rarityFilter = filter(cardswithRarity);
                             Filter colorFilter = filter(cardswithColor);
+                            Filter colorIdentityFilter = filter(cardswithColorIdentity);
                             Filter languageFilter = filter(cardswithLanguage);
                             Filter keywordsFilter = filter(cardswithKeywords);
                             Filter toughnessFilter = filter(cardswithToughness);
@@ -845,6 +899,14 @@ public class AdvancedSearch extends AppCompatActivity {
                                 List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", toughnessFilter);
                                 List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", toughnessFilter);
                                 List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", toughnessFilter);
+                                cardsFilter.add(cardsAux);
+                                cardsDoubleFilter.add(cardsDoubleAux);
+                                cartasFilter.add(cartasAux);
+                            }
+                            if (colorIdentityWhite.isChecked()||colorIdentityBlue.isChecked()||colorIdentityBlack.isChecked()||colorIdentityRed.isChecked()||colorIdentityGreen.isChecked()||colorIdentityLess.isChecked()) {
+                                List<Map<String, String>> cardsAux = JsonPath.parse(json).read("$..cards[?]", colorIdentityFilter);
+                                List<Map<String, Double>> cardsDoubleAux = JsonPath.parse(json).read("$..cards[?]", colorIdentityFilter);
+                                List<Map<String, Map<String, String>>> cartasAux = JsonPath.parse(json).read("$..cards[?]", colorIdentityFilter);
                                 cardsFilter.add(cardsAux);
                                 cardsDoubleFilter.add(cardsDoubleAux);
                                 cartasFilter.add(cartasAux);

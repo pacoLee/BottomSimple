@@ -133,9 +133,18 @@ public class AdaptadorBigDeck extends RecyclerView.Adapter<AdaptadorBigDeck.View
         } else if (coste.contains("{11}")) {
             empieza = coste.indexOf("{11}");
             ssb.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.eleven), empieza, empieza + 4, 0);
+        }else if (coste.contains("{13}")) {
+            empieza = coste.indexOf("{13}");
+            ssb.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.thirteen), empieza, empieza + 4, 0);
         } else if (coste.contains("{X}")) {
             empieza = coste.indexOf("{X}");
             ssb.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.x), empieza, empieza + 3, 0);
+        }else if (coste.contains("{G/U/P}")) {
+            empieza = coste.indexOf("{G/U/P}");
+            ssb.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.gup), empieza, empieza + 7, 0);
+        }else if (coste.contains("{G/W/P}")) {
+            empieza = coste.indexOf("{G/W/P}");
+            ssb.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.gwp), empieza, empieza + 7, 0);
         }
 
         int empiezaDesde = 0;
@@ -185,6 +194,26 @@ public class AdaptadorBigDeck extends RecyclerView.Adapter<AdaptadorBigDeck.View
             empieza = coste.indexOf("{G}", empiezaDesde);
             if (coste.contains("{G}")) {
                 ssb.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.g), empieza, empieza + 3, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaGWP = StringUtils.countMatches(ssb, "{G/W/P}");
+        for (int i = 0; i < cuentaGWP; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = coste.indexOf("{G/W/P}", empiezaDesde);
+            if (coste.contains("{G/W/P}")) {
+                ssb.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.gwp), empieza, empieza + 7, 0);
+            }
+            empiezaDesde = empieza + 3;
+        }
+        empiezaDesde = 0;
+        int cuentaGUP = StringUtils.countMatches(ssb, "{G/U/P}");
+        for (int i = 0; i < cuentaGUP; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = coste.indexOf("{G/U/P}", empiezaDesde);
+            if (coste.contains("{G/U/P}")) {
+                ssb.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.gup), empieza, empieza + 7, 0);
             }
             empiezaDesde = empieza + 3;
         }

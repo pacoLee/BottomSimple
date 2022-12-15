@@ -10,27 +10,23 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="horizontal">
-
     <TextView
         android:id="@+id/txtNomMazo"
         android:fontFamily="@font/belerenitalic"
-        android:layout_width="wrap_content"
+        android:layout_width="0sp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="40dp"
+        android:layout_weight="3"
         android:layout_gravity="center"/>
     <ImageView
         android:id="@+id/imgFondo"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:scaleType="fitEnd"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        android:layout_weight="1.5"
+        android:layout_gravity="center"/>
     </LinearLayout>
     <View
         android:id="@+id/divider2"
@@ -39,6 +35,4 @@
         android:layout_weight="3"
         android:background="?android:attr/listDivider"
         android:layout_marginTop="5dp"/>
-
-
 </LinearLayout>
