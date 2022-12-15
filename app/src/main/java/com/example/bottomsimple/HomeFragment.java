@@ -63,8 +63,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (etBusqueda.getText().toString().isEmpty()) {
-                    Toast.makeText(getContext(), "La búsqueda no puede ser vacía", Toast.LENGTH_SHORT).show();
+                if (etBusqueda.getText().toString().isEmpty() || etBusqueda.getText().toString().length() < 4) {
+                    Toast.makeText(getContext(), "La búsqueda no puede ser vacía o tan pequeña", Toast.LENGTH_SHORT).show();
                 } else {
                     populateTable();
                 }
