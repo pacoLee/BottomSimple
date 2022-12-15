@@ -284,6 +284,26 @@ public class AdaptadorBigRecycler extends RecyclerView.Adapter<AdaptadorBigRecyc
             empiezaDesde = empieza + 3;
         }
         empiezaDesde = 0;
+        int cuentagwp = StringUtils.countMatches(ssb2, "{G/W/P}");
+        for (int i = 0; i < cuentaGWP; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{G/W/P}", empiezaDesde);
+            if (text.contains("{G/W/P}")) {
+                ssb2.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.gwp), empieza, empieza + 7, 0);
+            }
+            empiezaDesde = empieza + 7;
+        }
+        empiezaDesde = 0;
+        int cuentagup = StringUtils.countMatches(ssb2, "{G/U/P}");
+        for (int i = 0; i < cuentaGUP; i++) {
+            // Empieza desde el último caracter del último span
+            empieza = text.indexOf("{G/U/P}", empiezaDesde);
+            if (text.contains("{G/U/P}")) {
+                ssb2.setSpan(new ImageSpan(holder.tvCost.getContext(), R.drawable.gup), empieza, empieza + 7, 0);
+            }
+            empiezaDesde = empieza + 7;
+        }
+        empiezaDesde = 0;
         int cuentaC = StringUtils.countMatches(ssb2, "{C}");
         for (int i = 0; i < cuentaC; i++) {
             // Empieza desde el último caracter del último span
