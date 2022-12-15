@@ -155,13 +155,22 @@ public class AdvancedSearch extends AppCompatActivity {
                 //Intent intent = new Intent(AdvancedSearch.this, ListSelector.class);
                 //startActivity(intent);
                 try{
+                    if(!etName.getText().toString().equals("")||!etText.getText().toString().equals("")||!etManaValue.getText().toString().equals("")||!setCode.getText().toString().equals("")||!etType.getText().toString().equals("")
+                    ||rarityCommon.isChecked()||rarityUncommon.isChecked()||rarityRare.isChecked()||rarityMythic.isChecked()||colorWhite.isChecked()||colorBlue.isChecked()||colorBlack.isChecked()||colorRed.isChecked()||colorGreen.isChecked()||colorLess.isChecked()
+                            ||colorIdentityWhite.isChecked()||colorIdentityBlue.isChecked()||colorIdentityBlack.isChecked()||colorIdentityRed.isChecked()||colorIdentityGreen.isChecked()||colorIdentityLess.isChecked()
+                            ||!etPower.getText().toString().equals("")||!etToughness.getText().toString().equals("")||isOnline.isChecked()||isFullArt.isChecked()||isExtendedArt.isChecked()||isBorderless.isChecked()||isReprint.isChecked()||isReserved.isChecked()
+                    ||!etKeywords.getText().toString().equals("")||!spLanguage.getSelectedItem().toString().equals("")||!spLeadershipSkills.getSelectedItem().toString().equals("")||!spLegalities.getSelectedItem().toString().equals("")||!spAvailability.getSelectedItem().toString().equals("")){
                 populateTable();
+                listaCards.clear();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Debes seleccionar un item para buscar", Toast.LENGTH_SHORT).show();
+                    }
             } catch (OutOfMemoryError oome) {
                 //Log the info
                 System.err.println("Array size too large");
                 System.err.println("Max JVM memory: " + Runtime.getRuntime().maxMemory());
             }
-                listaCards.clear();
+
             }
         });
     }
