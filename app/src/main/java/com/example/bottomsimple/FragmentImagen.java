@@ -20,6 +20,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -150,7 +151,7 @@ public class FragmentImagen extends Fragment {
 
         Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.parse(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + imageFile+".jpg"), "image/*");
+        intent.setDataAndType(Uri.parse(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + imageFile), "image/*");
         intent.putExtra(Settings.EXTRA_CHANNEL_ID, "foreground_services");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="3"
+        android:background="@drawable/shape2"
         android:padding="5sp"
         >
         <TextView
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="Set/Number"
             android:fontFamily="@font/belerenitalic"
-            android:background="?attr/colorSecondary"
+            android:background="@drawable/shape"
             android:textColor="?attr/colorOnSecondary"
             android:textSize="25sp"
             android:textAlignment="center">
@@ -53,7 +54,7 @@
                 android:text="Rarity"
                 android:gravity="center"
                 android:fontFamily="@font/beleren"
-                android:background="?attr/colorPrimaryVariant"
+                android:background="@drawable/shape3"
                 android:textColor="?attr/colorOnPrimary"
                 android:textSize="25sp"
                 android:layout_weight="5">
