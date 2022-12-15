@@ -11,4 +11,15 @@
         android:visibility="invisible"
         android:theme="@style/Theme.Primero"
         />
+
+    <ImageButton
+        android:id="@+id/shareDeck"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center_horizontal"
+        android:padding="15sp"
+        android:src="@drawable/ic_baseline_share_24"
+        android:background="?android:selectableItemBackground"
+        android:visibility="invisible" />
+
 </Toolbar>

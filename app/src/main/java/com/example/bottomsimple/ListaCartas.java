@@ -12,14 +12,20 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -38,6 +44,7 @@ public class ListaCartas extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView tvResultados;
     private Spinner spinnerOrdenar;
+    private ImageButton shareDeck;
     String adapterType;
     AdaptadorSmallRecycler ad;
     AdaptadorBigRecycler ad2;
@@ -60,13 +67,32 @@ public class ListaCartas extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         tvResultados = (TextView) findViewById(R.id.tvResultados);
         spinnerOrdenar = (Spinner) findViewById(R.id.spinnerOrdenar);
+        shareDeck=(ImageButton) findViewById(R.id.shareDeck);
+
         spinnerOrdenar.setVisibility(View.VISIBLE);
         String[] arraySpinner = new String[]{"Nombre ↓", "Nombre ↑", "Mana ↓", "Mana ↑", "Power ↓", "Power ↑", "Toughness ↓", "Toughness ↑"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOrdenar.setAdapter(adapter);
 
-
+        shareDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<String> listaCompartir =new ArrayList<>();
+                StringBuilder sb=new StringBuilder();
+                for (Card carta:listaCards) {
+                    sb.append(carta.getCantidad());
+                    sb.append(" ");
+                    sb.append(carta.getName());
+                    sb.append("\n");
+                }
+                String mandar=sb.toString();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, mandar);
+                startActivity(Intent.createChooser(intent, "Share Deck"));
+            }
+        });
         tvResultados.setText("Resultados de la busqueda: " + listaCards.size() + " cartas");
         AdaptadorSmallRecycler ad = new AdaptadorSmallRecycler(getApplicationContext(), listaCards, new AdaptadorBigRecycler.LongItemClickListener() {
             @Override
@@ -212,12 +238,16 @@ public class ListaCartas extends AppCompatActivity {
 
         if (adapterType.equals("big")) {
             recyclerView.setAdapter(ad2);
+            shareDeck.setVisibility(View.INVISIBLE);
         } else if(adapterType.equals("small")){
             recyclerView.setAdapter(ad);
+            shareDeck.setVisibility(View.INVISIBLE);
         }else if(adapterType.equals("smallDeck")){
             recyclerView.setAdapter(ad3);
+            shareDeck.setVisibility(View.VISIBLE);
         }else {
             recyclerView.setAdapter(ad4);
+            shareDeck.setVisibility(View.VISIBLE);
         }
         spinnerOrdenar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
