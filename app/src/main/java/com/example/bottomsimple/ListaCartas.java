@@ -391,8 +391,8 @@ public class ListaCartas extends AppCompatActivity {
         numberPicker.setMinValue(0);
         layout.addView(numberPicker);
         alertDialog.setView(layout);
-        alertDialog.setTitle("Quantity");
-        alertDialog.setMessage("Choose a value: (0 to delete)");
+        alertDialog.setTitle("Cantidad");
+        alertDialog.setMessage("Elige un valor: (0 para borrar)");
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
