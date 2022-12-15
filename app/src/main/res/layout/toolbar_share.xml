@@ -8,13 +8,17 @@
         android:id="@+id/imgbShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
         android:src="@drawable/ic_baseline_share_24"
-        android:layout_marginRight="35sp"/>
+        android:layout_marginRight="15sp"
+        android:background="?android:selectableItemBackground"
+        android:padding="15dp"
+        />
     <ImageButton
         android:id="@+id/imgbDownload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:src="@drawable/ic_baseline_file_download_24"/>
+        android:background="?android:selectableItemBackground"
+        android:src="@drawable/ic_baseline_file_download_24"
+        android:padding="15dp"/>
+
 </Toolbar>

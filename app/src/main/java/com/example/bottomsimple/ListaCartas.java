@@ -225,99 +225,35 @@ public class ListaCartas extends AppCompatActivity {
                 switch (adapterView.getItemAtPosition(i).toString()) {
                     case "Nombre ↓":
                         Collections.sort(listaCards, new NameComparator());
-                        if (adapterType.equals("big")) {
-                            ad2.notifyDataSetChanged();
-                        } else if(adapterType.equals("small")){
-                            ad.notifyDataSetChanged();
-                        }else if(adapterType.equals("smallDeck")){
-                            ad3.notifyDataSetChanged();
-                        }else {
-                            ad4.notifyDataSetChanged();
-                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
                         break;
                     case "Nombre ↑":
                         Collections.sort(listaCards, new NameComparatorReverse());
-                        if (adapterType.equals("big")) {
-                            ad2.notifyDataSetChanged();
-                        } else if(adapterType.equals("small")){
-                            ad.notifyDataSetChanged();
-                        }else if(adapterType.equals("smallDeck")){
-                            ad3.notifyDataSetChanged();
-                        }else {
-                            ad4.notifyDataSetChanged();
-                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
                         break;
                     case "Mana ↓":
                         Collections.sort(listaCards, new ManaComparator());
-                        if (adapterType.equals("big")) {
-                            ad2.notifyDataSetChanged();
-                        } else if(adapterType.equals("small")){
-                            ad.notifyDataSetChanged();
-                        }else if(adapterType.equals("smallDeck")){
-                            ad3.notifyDataSetChanged();
-                        }else {
-                            ad4.notifyDataSetChanged();
-                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
                         break;
                     case "Mana ↑":
                         Collections.sort(listaCards, new ManaComparatorReverse());
-                        if (adapterType.equals("big")) {
-                            ad2.notifyDataSetChanged();
-                        } else if(adapterType.equals("small")){
-                            ad.notifyDataSetChanged();
-                        }else if(adapterType.equals("smallDeck")){
-                            ad3.notifyDataSetChanged();
-                        }else {
-                            ad4.notifyDataSetChanged();
-                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
                         break;
                     case "Power ↓":
                         Collections.sort(listaCards, new PowerComparator());
-                        if (adapterType.equals("big")) {
-                            ad2.notifyDataSetChanged();
-                        } else if(adapterType.equals("small")){
-                            ad.notifyDataSetChanged();
-                        }else if(adapterType.equals("smallDeck")){
-                            ad3.notifyDataSetChanged();
-                        }else {
-                            ad4.notifyDataSetChanged();
-                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
                         break;
                     case "Power ↑":
                         Collections.sort(listaCards, new PowerComparatorReverse());
-                        if (adapterType.equals("big")) {
-                            ad2.notifyDataSetChanged();
-                        } else if(adapterType.equals("small")){
-                            ad.notifyDataSetChanged();
-                        }else if(adapterType.equals("smallDeck")){
-                            ad3.notifyDataSetChanged();
-                        }else {
-                            ad4.notifyDataSetChanged();
-                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
                         break;
                     case "Toughness ↓":
                         Collections.sort(listaCards, new ToughnessComparator());
-                        if (adapterType.equals("big")) {
-                            ad2.notifyDataSetChanged();
-                        } else if(adapterType.equals("small")){
-                            ad.notifyDataSetChanged();
-                        }else if(adapterType.equals("smallDeck")){
-                            ad3.notifyDataSetChanged();
-                        }else {
-                            ad4.notifyDataSetChanged();
-                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
                         break;
                     case "Toughness ↑":
                         Collections.sort(listaCards, new ToughnessComparatorReverse());
-                        if (adapterType.equals("big")) {
-                            ad2.notifyDataSetChanged();
-                        } else if(adapterType.equals("small")){
-                            ad.notifyDataSetChanged();
-                        }else if(adapterType.equals("smallDeck")){
-                            ad3.notifyDataSetChanged();
-                        }else {
-                            ad4.notifyDataSetChanged();
-                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
                         break;
                 }
             }
@@ -397,7 +333,6 @@ public class ListaCartas extends AppCompatActivity {
                     //POR QUÉ NO SALTA LA EXCEPCIÓN¿?
                     try {
                         long result = baseDeDatos.insert("MAZO_CARTA", null, valoresCarta);
-
                         if (result == -1) {
                             Toast.makeText(ListaCartas.this, "El mazo ya tiene esta carta", Toast.LENGTH_SHORT).show();
                         } else {
@@ -412,7 +347,6 @@ public class ListaCartas extends AppCompatActivity {
                 }
             });
         }
-
         return true;
     }
     public boolean muestraDialog2(Card card,int idDeck) {
@@ -440,11 +374,13 @@ public class ListaCartas extends AppCompatActivity {
                     baseDeDatos.execSQL("DELETE FROM MAZO_CARTA WHERE ID_CARTA ='" + idCarta+ "'");
                     listaCards.remove(card);
                     Toast.makeText(ListaCartas.this, "Carta "+name+ " borrada", Toast.LENGTH_SHORT).show();
+                    recyclerView.getAdapter().notifyDataSetChanged();
                     }else{
                     baseDeDatos.execSQL("UPDATE  MAZO_CARTA SET CANTIDAD ='" + cantidad + "' WHERE ID_CARTA ='" + idCarta+ "'");
                     cartaNueva.setCantidad(cantidad);
                     listaCards.set(listaCards.indexOf(card),cartaNueva);
                     Toast.makeText(ListaCartas.this, "Carta "+name+ " actualizada", Toast.LENGTH_SHORT).show();
+                        recyclerView.getAdapter().notifyDataSetChanged();
                 }
             }
         });

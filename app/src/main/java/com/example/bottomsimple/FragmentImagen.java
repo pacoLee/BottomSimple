@@ -1,13 +1,22 @@
 package com.example.bottomsimple;
 
+import static org.apache.commons.lang3.ClassUtils.getPackageName;
+
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +25,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
@@ -101,15 +112,69 @@ public class FragmentImagen extends Fragment {
         return view;
     }
     public void saveImageToDownloadFolder(String imageFile, Bitmap ibitmap){
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());
+        String contentTitle = "Start downloading";
+        Intent notifyIntent = new Intent();
+        PendingIntent notifyPendingIntent = PendingIntent.getActivity(getContext(),1, notifyIntent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        //PendingIntent notifyPendingIntent = PendingIntent.getActivity(getContext(), 1, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder notificationBuilder = createNotificationBuilder("downloader_channel");
+        notificationBuilder.setContentIntent(notifyPendingIntent);
+        notificationBuilder.setTicker("Start downloading image");
+        notificationBuilder.setOngoing(true);
+        notificationBuilder.setAutoCancel(false);
+        notificationBuilder.setSmallIcon(android.R.drawable.stat_sys_download);
+        notificationBuilder.setContentTitle(contentTitle);
+        notificationManagerCompat.notify(1, notificationBuilder.build());
+        boolean success;
+
         try {
             File filePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), imageFile);
-            OutputStream outputStream = new FileOutputStream(filePath);
-            ibitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-            outputStream.flush();
-            outputStream.close();
-            Toast.makeText(getContext(), imageFile + "Sucessfully saved in Download Folder", Toast.LENGTH_SHORT).show();
+            if(filePath.exists()){
+                Toast.makeText(getContext(), imageFile + " already exists", Toast.LENGTH_SHORT).show();
+                success=false;
+            }else {
+                OutputStream outputStream = new FileOutputStream(filePath);
+                ibitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                outputStream.flush();
+                outputStream.close();
+                Toast.makeText(getContext(), imageFile + " sucessfully saved in Download Folder", Toast.LENGTH_SHORT).show();
+                success=true;
+            }
         } catch (Exception e){
+            success=false;
             e.printStackTrace();
         }
+        contentTitle = "Downloaded";
+        String statusText = success ? "Image "+imageFile+" downloaded" : "Download failed";
+        int resId = success ? android.R.drawable.stat_sys_download_done : android.R.drawable.stat_notify_error;
+
+        Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.parse(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + imageFile+".jpg"), "image/*");
+        intent.putExtra(Settings.EXTRA_CHANNEL_ID, "foreground_services");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+
+        notificationBuilder.setContentTitle(contentTitle);
+        notificationBuilder.setSmallIcon(resId);
+        notificationBuilder.setOngoing(false);
+        notificationBuilder.setAutoCancel(true);
+        notificationBuilder.setContentText(statusText);
+        notificationBuilder.setProgress(0, 0, false);
+        notificationBuilder.setContentIntent(PendingIntent.getActivity(getContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT| PendingIntent.FLAG_MUTABLE));
+        notificationManagerCompat.notify(1, notificationBuilder.build());
+    }
+    private NotificationCompat.Builder createNotificationBuilder(String channelId) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String channelName = getString(R.string.app_name);
+            NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_LOW);
+            notificationChannel.setLightColor(Color.BLUE);
+            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+        }
+        return new NotificationCompat.Builder(getContext(), channelId);
     }
 }
